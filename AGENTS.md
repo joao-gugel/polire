@@ -15,6 +15,7 @@ The package directory is `usemend`; the product name is **Mend**.
 - **Runtime:** [Electron](https://www.electronjs.org/) (main + renderer processes)
 - **UI:** [React](https://react.dev/) 18 + [TypeScript](https://www.typescriptlang.org/) (strict mode)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) v4 (CSS-first config via `@import "tailwindcss"`, no `tailwind.config.js`)
+- **Icons:** [Phosphor Icons](https://phosphoricons.com/) — `@phosphor-icons/react`. Use only this library; do not introduce other icon sets (lucide, heroicons, etc).
 - **Bundler / dev server:** [Vite](https://vitejs.dev/) 6 with [`vite-plugin-electron`](https://github.com/electron-vite/vite-plugin-electron) (simple preset)
 - **Package manager / runner:** [Bun](https://bun.sh/) — use `bun install`, `bun run <script>`
 - **Formatter / linter:** [Biome](https://biomejs.dev/) — run `bun run format` before committing
