@@ -1,5 +1,3 @@
 export default function App() {
-  return (
-    <div>hello, mend.</div>
-  );
+	return <div>hello, mend.</div>;
 }

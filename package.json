@@ -1,28 +1,30 @@
 {
-  "name": "usemend",
-  "private": true,
-  "version": "0.0.1",
-  "type": "module",
-  "main": "dist-electron/main.js",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.0.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.4",
-    "electron": "^33.2.0",
-    "tailwindcss": "^4.0.0",
-    "typescript": "^5.6.3",
-    "vite": "^6.0.1",
-    "vite-plugin-electron": "^0.29.0",
-    "vite-plugin-electron-renderer": "^0.14.6"
-  }
+	"name": "usemend",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"main": "dist-electron/main.js",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc -b && vite build",
+		"preview": "vite preview",
+		"format": "bunx --bun @biomejs/biome check --write ."
+	},
+	"dependencies": {
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.15",
+		"@tailwindcss/vite": "^4.0.0",
+		"@types/react": "^18.3.12",
+		"@types/react-dom": "^18.3.1",
+		"@vitejs/plugin-react": "^4.3.4",
+		"electron": "^33.2.0",
+		"tailwindcss": "^4.0.0",
+		"typescript": "^5.6.3",
+		"vite": "^6.0.1",
+		"vite-plugin-electron": "^0.29.0",
+		"vite-plugin-electron-renderer": "^0.14.6"
+	}
 }
