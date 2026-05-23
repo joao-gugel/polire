@@ -6,13 +6,13 @@ import {
 	TranslateIcon,
 } from "@phosphor-icons/react";
 import { useEffect, useMemo, useState } from "react";
-import { Footer } from "../components/footer";
-import { OptionList } from "../components/option-list";
-import { SearchInput } from "../components/search-input";
-import { useCorrection } from "../correction";
-import { useNav } from "../nav";
-import { useTranslation } from "../translation";
-import type { CommandOption } from "../types";
+import { OptionList } from "@/components/option-list";
+import { SearchInput } from "@/components/search-input";
+import { Footer } from "@/components/ui/footer";
+import { useCorrection } from "@/providers/correction";
+import { useNav } from "@/providers/nav";
+import { useTranslation } from "@/providers/translation";
+import type { CommandOption } from "@/types";
 
 function buildOptions(
 	push: (view: "settings" | "correction" | "translation") => void,

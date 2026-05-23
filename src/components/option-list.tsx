@@ -1,5 +1,5 @@
-import type { CommandOption } from "../types";
-import { OptionItem, OptionItemIcon } from "./ui/option-item";
+import { OptionItem, OptionItemIcon } from "@/components/ui/option-item";
+import type { CommandOption } from "@/types";
 
 type OptionListProps = {
 	options: CommandOption[];

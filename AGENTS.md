@@ -40,24 +40,30 @@ electron/
 └── preload.ts     # renderer ↔ main bridge (exposes `window.api`)
 src/
 ├── app.tsx                  # shell: wraps NavProvider + AnimatePresence + view renderer
-├── nav.tsx                  # navigation stack (push/pop) + slide direction, via Context
 ├── main.tsx                 # React entry — mounts <App /> into #root
 ├── main.css                 # Tailwind v4 import + dark variant + base styles
 ├── theme.ts                 # theme state: persistence + DOM apply
 ├── types.ts                 # shared types (CommandOption, View, ...)
 ├── global.d.ts              # ambient types (window.api from preload)
+├── providers/
+│   ├── nav.tsx              # navigation stack (push/pop) + slide direction
+│   ├── correction.tsx       # correction request/result state
+│   └── translation.tsx      # translation request/result state
 ├── views/
 │   ├── palette.tsx          # root view: search + command list (no back)
 │   ├── settings.tsx         # settings overview: theme + nav to sub-pages
-│   └── ai-settings.tsx      # AI sub-page: provider list + API key form
+│   ├── ai-settings.tsx      # AI sub-page: provider list + API key form
+│   ├── correction.tsx       # AI correction before/after screen
+│   └── translation.tsx      # AI translation before/after screen
 └── components/
     ├── page-layout.tsx      # header w/ back + content slot + footer (non-root views)
     ├── search-input.tsx     # top text field
     ├── option-list.tsx      # list of selectable commands
+    ├── transformation-result.tsx # shared before/after result layout
     ├── ui/option-item.tsx   # shared selectable row + icon/check/caret adornments
-    ├── footer.tsx           # bottom bar: logo + keyboard hints
-    ├── kbd.tsx              # visual key representation
-    └── noise.tsx            # SVG turbulence overlay (Linux-only glass texture)
+    ├── ui/footer.tsx        # bottom bar: logo + keyboard hints
+    ├── ui/kbd.tsx           # visual key representation
+    └── ui/noise.tsx         # SVG turbulence overlay (Linux-only glass texture)
 index.html         # renderer HTML shell
 vite.config.ts     # Vite + plugins (React, Tailwind, Electron)
 ```
@@ -66,7 +72,7 @@ Module-level state in `electron/` is intentional: `win` and `isQuitting` live as
 
 ### Navigation
 
-The renderer uses a tiny stack-based router exposed through `useNav()` (`src/nav.tsx`):
+The renderer uses a tiny stack-based router exposed through `useNav()` (`src/providers/nav.tsx`):
 
 - `push(view)` / `pop()` — mutate the stack
 - `current` — top of stack
@@ -74,7 +80,7 @@ The renderer uses a tiny stack-based router exposed through `useNav()` (`src/nav
 
 Views that are not the root render inside `<PageLayout title="...">` so they get the back button + footer for free. Views read `current` to know whether they're the active screen — `useEffect` keyboard handlers early-return when `isActive` is false, so the offscreen view (mid-transition) doesn't intercept input.
 
-When adding a new view: extend the `View` union in `src/types.ts`, add a branch in `renderView` (in `app.tsx`), and call `push("your-view")` from wherever it's triggered.
+When adding a new view: extend the `View` union in `src/types.ts`, add a branch in `renderView` (in `app.tsx`), and call `push("your-view")` from wherever it's triggered. Renderer imports may use the configured `@/` alias for `src/` modules.
 
 ## Scripts
 

@@ -1,6 +1,6 @@
 import { ArrowElbowDownLeftIcon, SparkleIcon } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
-import { Kbd } from "./kbd";
+import { Kbd } from "@/components/ui/kbd";
 
 export function Footer() {
 	return (

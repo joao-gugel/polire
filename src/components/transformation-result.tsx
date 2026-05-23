@@ -1,8 +1,8 @@
 import { SpinnerIcon } from "@phosphor-icons/react";
 import { useEffect } from "react";
-import { useNav } from "../nav";
-import type { View } from "../types";
-import { PageLayout } from "./page-layout";
+import { PageLayout } from "@/components/page-layout";
+import { useNav } from "@/providers/nav";
+import type { View } from "@/types";
 
 type Props = {
 	activeView: View;

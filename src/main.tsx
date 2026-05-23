@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./app";
-import "./theme";
+import App from "@/app";
+import "@/theme";
 
 import "@fontsource-variable/geist/wght.css";
-import "./main.css";
+import "@/main.css";
 
 const root = document.getElementById("root");
 

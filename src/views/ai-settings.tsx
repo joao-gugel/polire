@@ -6,14 +6,14 @@ import {
 	SpinnerIcon,
 } from "@phosphor-icons/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import anthropicLogo from "@/assets/providers/anthropic.png";
+import deepseekLogo from "@/assets/providers/deepseek.png";
+import googleLogo from "@/assets/providers/google-gemini.png";
+import openaiLogo from "@/assets/providers/openai.svg";
+import { PageLayout } from "@/components/page-layout";
+import { OptionItem, OptionItemCheck } from "@/components/ui/option-item";
+import { useNav } from "@/providers/nav";
 import type { AiProvider, AiSettingsStatus } from "../../electron/ai/types";
-import anthropicLogo from "../assets/providers/anthropic.png";
-import deepseekLogo from "../assets/providers/deepseek.png";
-import googleLogo from "../assets/providers/google-gemini.png";
-import openaiLogo from "../assets/providers/openai.svg";
-import { PageLayout } from "../components/page-layout";
-import { OptionItem, OptionItemCheck } from "../components/ui/option-item";
-import { useNav } from "../nav";
 
 type ProviderOption = {
 	id: AiProvider;

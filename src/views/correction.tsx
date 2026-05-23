@@ -1,5 +1,5 @@
-import { TransformationResult } from "../components/transformation-result";
-import { useCorrection } from "../correction";
+import { TransformationResult } from "@/components/transformation-result";
+import { useCorrection } from "@/providers/correction";
 
 export function Correction() {
 	const { state } = useCorrection();

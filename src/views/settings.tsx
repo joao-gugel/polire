@@ -6,15 +6,15 @@ import {
 	SunIcon,
 } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import { PageLayout } from "../components/page-layout";
+import { PageLayout } from "@/components/page-layout";
 import {
 	OptionItem,
 	OptionItemCaret,
 	OptionItemCheck,
 	OptionItemIcon,
-} from "../components/ui/option-item";
-import { useNav } from "../nav";
-import { getStoredTheme, setTheme, type Theme } from "../theme";
+} from "@/components/ui/option-item";
+import { useNav } from "@/providers/nav";
+import { getStoredTheme, setTheme, type Theme } from "@/theme";
 
 type ThemeOption = {
 	id: Theme;

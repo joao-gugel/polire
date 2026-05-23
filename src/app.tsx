@@ -1,14 +1,14 @@
 import { AnimatePresence, motion } from "motion/react";
-import { Noise } from "./components/noise";
-import { CorrectionProvider } from "./correction";
-import { NavProvider, useNav } from "./nav";
-import { TranslationProvider } from "./translation";
-import type { View } from "./types";
-import { AiSettings } from "./views/ai-settings";
-import { Correction } from "./views/correction";
-import { Palette } from "./views/palette";
-import { Settings } from "./views/settings";
-import { Translation } from "./views/translation";
+import { Noise } from "@/components/ui/noise";
+import { CorrectionProvider } from "@/providers/correction";
+import { NavProvider, useNav } from "@/providers/nav";
+import { TranslationProvider } from "@/providers/translation";
+import type { View } from "@/types";
+import { AiSettings } from "@/views/ai-settings";
+import { Correction } from "@/views/correction";
+import { Palette } from "@/views/palette";
+import { Settings } from "@/views/settings";
+import { Translation } from "@/views/translation";
 
 const isLinux = window.api.platform === "linux";
 

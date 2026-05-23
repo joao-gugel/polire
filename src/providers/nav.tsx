@@ -13,7 +13,7 @@ import {
 	useContext,
 	useState,
 } from "react";
-import type { View } from "./types";
+import type { View } from "@/types";
 
 type Direction = 1 | -1;
 
