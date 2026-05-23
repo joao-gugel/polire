@@ -8,8 +8,8 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { AiProvider, AiSettingsStatus } from "../../electron/ai/types";
 import anthropicLogo from "../assets/providers/anthropic.png";
-import deepseekLogo from "../assets/providers/DeepSeek-icon.svg.png";
-import googleLogo from "../assets/providers/Google-gemini-icon.svg.png";
+import deepseekLogo from "../assets/providers/deepseek.png";
+import googleLogo from "../assets/providers/google-gemini.png";
 import openaiLogo from "../assets/providers/openai.svg";
 import { PageLayout } from "../components/page-layout";
 import { type ProviderOption, ProviderRow } from "../components/provider-row";
