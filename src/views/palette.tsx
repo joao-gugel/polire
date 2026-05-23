@@ -3,6 +3,7 @@ import {
 	MagicWandIcon,
 	NotebookIcon,
 	NotePencilIcon,
+	TranslateIcon,
 } from "@phosphor-icons/react";
 import { useEffect, useMemo, useState } from "react";
 import { Footer } from "../components/footer";
@@ -10,11 +11,13 @@ import { OptionList } from "../components/option-list";
 import { SearchInput } from "../components/search-input";
 import { useCorrection } from "../correction";
 import { useNav } from "../nav";
+import { useTranslation } from "../translation";
 import type { CommandOption } from "../types";
 
 function buildOptions(
-	push: (view: "settings" | "correction") => void,
+	push: (view: "settings" | "correction" | "translation") => void,
 	correctText: (text: string) => Promise<void>,
+	translateToEnglish: (text: string) => Promise<void>,
 	text: string,
 ): CommandOption[] {
 	return [
@@ -26,6 +29,16 @@ function buildOptions(
 				if (!text.trim()) return;
 				void correctText(text);
 				push("correction");
+			},
+		},
+		{
+			id: "translation",
+			label: "Traduzir para inglês",
+			icon: TranslateIcon,
+			action: () => {
+				if (!text.trim()) return;
+				void translateToEnglish(text);
+				push("translation");
 			},
 		},
 		{
@@ -52,12 +65,13 @@ function buildOptions(
 export function Palette() {
 	const { push, current } = useNav();
 	const { correctText } = useCorrection();
+	const { translateToEnglish } = useTranslation();
 	const isActive = current === "palette";
 	const [query, setQuery] = useState("");
 	const [selected, setSelected] = useState(0);
 	const options = useMemo(
-		() => buildOptions(push, correctText, query),
-		[push, correctText, query],
+		() => buildOptions(push, correctText, translateToEnglish, query),
+		[push, correctText, translateToEnglish, query],
 	);
 
 	useEffect(() => {

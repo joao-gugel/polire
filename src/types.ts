@@ -9,4 +9,9 @@ export type CommandOption = {
 };
 
 /** Top-level views the window can show. */
-export type View = "palette" | "settings" | "ai-settings" | "correction";
+export type View =
+	| "palette"
+	| "settings"
+	| "ai-settings"
+	| "correction"
+	| "translation";
