@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "usemend",
+      "name": "polire",
       "dependencies": {
         "@ai-sdk/anthropic": "^3.0.79",
         "@ai-sdk/deepseek": "^2.0.35",

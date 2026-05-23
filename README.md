@@ -1,17 +1,17 @@
-# Mend
+# Polire
 
 ### Open-source desktop writing assistant for clearer writing, translation, and quick notes.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Status: In development](https://img.shields.io/badge/Status-In%20development-orange.svg)](#status)
 
-Mend is a small desktop app for people who write in a non-native language, or simply want to polish text without breaking their flow. Open it from anywhere with a global shortcut, paste or write text, then correct it, translate it, or save it as a local note.
+Polire is a small desktop app for people who write in a non-native language, or simply want to polish text without breaking their flow. Open it from anywhere with a global shortcut, paste or write text, then correct it, translate it, or save it as a local note.
 
-![Mend screenshot](docs/screenshot.png)
+![Polire screenshot](docs/screenshot.png)
 
 ## Status
 
-Mend is under active development. The app currently runs from source and is not yet distributed as a downloadable installer.
+Polire is under active development. The app currently runs from source and is not yet distributed as a downloadable installer.
 
 ## Features
 
@@ -21,7 +21,7 @@ Mend is under active development. The app currently runs from source and is not 
 - Bring the palette up from anywhere with `Ctrl+Alt+P`.
 - Keep the app out of the way in the system tray.
 - Choose between OpenAI, Anthropic, Google Gemini, and DeepSeek.
-- Configure your own API key locally instead of relying on a hosted Mend account.
+- Configure your own API key locally instead of relying on a hosted Polire account.
 - Use light and dark themes.
 
 ## Local-first AI
@@ -31,7 +31,7 @@ The open-source version uses a bring-your-own-key model:
 - Your provider choice and API key are configured in the app.
 - API keys are encrypted locally using Electron's OS-backed secure storage support.
 - AI requests are executed by the desktop app against the provider you selected.
-- Mend does not currently run a server that receives your text or stores your notes.
+- Polire does not currently run a server that receives your text or stores your notes.
 
 When you use an AI action, the submitted text is sent to the selected AI provider according to that provider's policies.
 
@@ -81,7 +81,7 @@ bun run build
 
 ## Stack
 
-Mend is built with Electron, React, TypeScript, Tailwind CSS, Vite, Bun, and the AI SDK.
+Polire is built with Electron, React, TypeScript, Tailwind CSS, Vite, Bun, and the AI SDK.
 
 ## Contributing
 
@@ -89,4 +89,4 @@ The project is early, but bug reports and focused improvements are welcome throu
 
 ## License
 
-Mend is available under the [MIT License](LICENSE).
+Polire is available under the [MIT License](LICENSE).

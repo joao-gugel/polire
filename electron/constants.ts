@@ -22,7 +22,7 @@ export const DEV_URL = process.env.VITE_DEV_SERVER_URL;
 export const SHORTCUT = "Control+Alt+P";
 
 /** App display name used in tooltips, menus, etc. */
-export const APP_NAME = "usemend";
+export const APP_NAME = "Polire";
 
 /** Main window width in pixels. */
 export const WINDOW_WIDTH = 800;

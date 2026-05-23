@@ -6,7 +6,7 @@
 
 export type Theme = "light" | "dark" | "system";
 
-const STORAGE_KEY = "mend:theme";
+const STORAGE_KEY = "polire:theme";
 
 function isTheme(value: unknown): value is Theme {
 	return value === "light" || value === "dark" || value === "system";

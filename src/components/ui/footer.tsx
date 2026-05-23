@@ -11,7 +11,7 @@ export function Footer({ additionalHint }: { additionalHint?: ReactNode }) {
 					weight="fill"
 					className="text-zinc-700 dark:text-zinc-300"
 				/>
-				<p className="text-base text-zinc-700 dark:text-zinc-300">Mend</p>
+				<p className="text-base text-zinc-700 dark:text-zinc-300">Polire</p>
 			</div>
 			<div className="flex items-center gap-3 text-xs text-zinc-700 dark:text-zinc-300">
 				{additionalHint}

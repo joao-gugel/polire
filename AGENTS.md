@@ -4,11 +4,11 @@ Guidance for AI agents (and humans) contributing to this repository.
 
 ## Project
 
-**Mend** is a desktop typing assistant that helps users write better text — primarily targeted at people writing in a non-native language.
+**Polire** is a desktop typing assistant that helps users write better text — primarily targeted at people writing in a non-native language.
 
 The app is designed to feel ambient: it runs in the system tray, stays out of the way, and is summoned with a global hotkey (`Ctrl+Alt+P`). When dismissed (Esc or hotkey again) it hides back into the tray rather than quitting.
 
-The package directory is `usemend`; the product name is **Mend**.
+The product name is **Polire**.
 
 ## Stack
 
