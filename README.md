@@ -4,6 +4,8 @@ A desktop typing assistant that helps you write better text — built primarily 
 
 Mend runs quietly in the background and is summoned with a global hotkey, so it stays out of your way until you need it.
 
+![Mend screenshot](https://raw.githubusercontent.com/joao-gugel/usemend/main/docs/screenshot.png)
+
 ## Features
 
 - Runs on Windows and Linux
