@@ -1,4 +1,5 @@
-import { contextBridge } from "electron";
+import { contextBridge, ipcRenderer } from "electron";
+import { AI_CHANNELS } from "./ai/channels";
 
 /**
  * Bridge exposed on `window.api` in the renderer. Keep it minimal — anything
@@ -6,4 +7,13 @@ import { contextBridge } from "electron";
  */
 contextBridge.exposeInMainWorld("api", {
 	platform: process.platform,
+	ai: {
+		getSettings: () => ipcRenderer.invoke(AI_CHANNELS.getSettings),
+		saveSettings: (settings: unknown) =>
+			ipcRenderer.invoke(AI_CHANNELS.saveSettings, settings),
+		saveApiKey: (provider: unknown, apiKey: unknown) =>
+			ipcRenderer.invoke(AI_CHANNELS.saveApiKey, { provider, apiKey }),
+		removeApiKey: (provider: unknown) =>
+			ipcRenderer.invoke(AI_CHANNELS.removeApiKey, provider),
+	},
 });

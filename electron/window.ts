@@ -46,7 +46,12 @@ export function quit() {
 /** Create the main window hidden, and wire close-to-tray behavior (closing only hides until `quit()` runs). */
 export function createWindow() {
 	win = new BrowserWindow({
-		webPreferences: { preload: PRELOAD },
+		webPreferences: {
+			preload: PRELOAD,
+			contextIsolation: true,
+			nodeIntegration: false,
+			sandbox: true,
+		},
 		height: WINDOW_HEIGHT,
 		width: WINDOW_WIDTH,
 		show: false,
@@ -65,4 +70,5 @@ export function createWindow() {
 		event.preventDefault();
 		win?.hide();
 	});
+	return win;
 }
