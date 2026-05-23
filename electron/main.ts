@@ -5,6 +5,14 @@ import { registerNotesIpcHandlers } from "./notes/ipc";
 import { createTray } from "./tray";
 import { createWindow, toggleWindow } from "./window";
 
+/** Enable portal-backed global shortcuts for native Wayland sessions on Linux. */
+function enableLinuxGlobalShortcutsPortal() {
+	if (process.platform !== "linux") return;
+	app.commandLine.appendSwitch("enable-features", "GlobalShortcutsPortal");
+}
+
+enableLinuxGlobalShortcutsPortal();
+
 /** Register the global hotkey. Logs an error if the OS refuses the binding (already in use, missing permission, etc). */
 function registerShortcuts() {
 	const ok = globalShortcut.register(SHORTCUT, toggleWindow);
