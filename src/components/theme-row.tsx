@@ -1,18 +1,27 @@
-import type { CommandOption } from "../types";
+import { CheckIcon, type Icon } from "@phosphor-icons/react";
+import type { Theme } from "../theme";
 
-type OptionItemProps = {
-	option: CommandOption;
+export type ThemeOption = {
+	id: Theme;
+	label: string;
+	icon: Icon;
+};
+
+type Props = {
+	option: ThemeOption;
 	selected: boolean;
+	isCurrent: boolean;
 	onHover: () => void;
 	onSelect: () => void;
 };
 
-export function OptionItem({
+export function ThemeRow({
 	option,
 	selected,
+	isCurrent,
 	onHover,
 	onSelect,
-}: OptionItemProps) {
+}: Props) {
 	const Icon = option.icon;
 	return (
 		<button
@@ -33,7 +42,7 @@ export function OptionItem({
 				}
 			/>
 			<span
-				className={`text-base ${
+				className={`flex-1 text-base ${
 					selected
 						? "text-zinc-900 dark:text-zinc-50"
 						: "text-zinc-700 dark:text-zinc-200"
@@ -41,6 +50,13 @@ export function OptionItem({
 			>
 				{option.label}
 			</span>
+			{isCurrent && (
+				<CheckIcon
+					size={16}
+					weight="bold"
+					className="text-zinc-700 dark:text-zinc-300"
+				/>
+			)}
 		</button>
 	);
 }

@@ -37,18 +37,25 @@ electron/
 ├── window.ts      # window lifecycle: create, show, toggle, quit, Esc handler
 ├── tray.ts        # system tray icon + context menu
 ├── main.ts        # entry: whenReady wiring + global shortcuts
-└── preload.ts     # renderer ↔ main bridge (empty for now)
+└── preload.ts     # renderer ↔ main bridge (exposes `window.api`)
 src/
-├── app.tsx                  # root React component, owns palette state
+├── app.tsx                  # router: picks the view (palette / settings)
 ├── main.tsx                 # React entry — mounts <App /> into #root
-├── main.css                 # Tailwind v4 import + base styles
-├── types.ts                 # shared types (CommandOption, ...)
+├── main.css                 # Tailwind v4 import + dark variant + base styles
+├── theme.ts                 # theme state: persistence + DOM apply
+├── types.ts                 # shared types (CommandOption, View, ...)
+├── global.d.ts              # ambient types (window.api from preload)
+├── views/
+│   ├── palette.tsx          # main view: search + command list
+│   └── settings.tsx         # settings view: theme switcher, future sections
 └── components/
     ├── search-input.tsx     # top text field
     ├── option-list.tsx      # list of selectable commands
     ├── option-item.tsx      # single row (hover + click + selected state)
+    ├── theme-row.tsx        # single row in the settings theme switcher
     ├── footer.tsx           # bottom bar: logo + keyboard hints
-    └── kbd.tsx              # visual key representation
+    ├── kbd.tsx              # visual key representation
+    └── noise.tsx            # SVG turbulence overlay (Linux-only glass texture)
 index.html         # renderer HTML shell
 vite.config.ts     # Vite + plugins (React, Tailwind, Electron)
 ```

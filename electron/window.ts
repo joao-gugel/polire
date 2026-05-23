@@ -55,6 +55,8 @@ export function createWindow() {
 		backgroundColor: "#00000000",
 		resizable: false,
 		hasShadow: true,
+		vibrancy: "under-window",
+		backgroundMaterial: "acrylic",
 	});
 	loadRenderer(win);
 	win.webContents.on("before-input-event", hideOnEscape);

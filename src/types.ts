@@ -7,3 +7,6 @@ export type CommandOption = {
 	icon: Icon;
 	action: () => void;
 };
+
+/** Top-level views the window can show. */
+export type View = "palette" | "settings";
