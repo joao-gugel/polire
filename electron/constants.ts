@@ -15,6 +15,12 @@ export const PRELOAD = path.join(__dirname, "preload.mjs");
 /** Built index.html used in production. */
 export const INDEX_HTML = path.join(RENDERER_DIST, "index.html");
 
+/** Source app icon used by the native window on Windows and Linux. */
+export const APP_ICON = path.join(APP_ROOT, "assets", "app", "icon.png");
+
+/** Small status icon used by the system tray, with an adjacent HiDPI variant. */
+export const TRAY_ICON = path.join(APP_ROOT, "assets", "tray", "tray-icon.png");
+
 /** Vite dev server URL — only defined while running `bun run dev`. */
 export const DEV_URL = process.env.VITE_DEV_SERVER_URL;
 

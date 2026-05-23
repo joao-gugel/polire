@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import {
+	APP_ICON,
 	DEV_URL,
 	INDEX_HTML,
 	PRELOAD,
@@ -46,6 +47,7 @@ export function quit() {
 /** Create the main window hidden, and wire close-to-tray behavior (closing only hides until `quit()` runs). */
 export function createWindow() {
 	win = new BrowserWindow({
+		icon: APP_ICON,
 		webPreferences: {
 			preload: PRELOAD,
 			contextIsolation: true,

@@ -32,6 +32,10 @@ All three are gitignored.
 ## Project structure
 
 ```
+assets/
+├── brand/        # vector source mark for Polire branding
+├── app/          # native app icon master + Linux size variants
+└── tray/         # compact status-area icons (1x and 2x)
 electron/
 ├── ai/            # AI prompts, settings, encrypted keys, execution + IPC
 ├── notes/         # Markdown note persistence + IPC
@@ -70,6 +74,8 @@ src/
 index.html         # renderer HTML shell
 vite.config.ts     # Vite + plugins (React, Tailwind, Electron)
 ```
+
+`assets/` contains native runtime resources. Any future packaging configuration must include this directory so window and tray icons remain available outside development.
 
 Module-level state in `electron/` is intentional: `win` and `isQuitting` live as `let` bindings inside `window.ts` and are mutated by exported functions. Don't pull them out into a shared store — the encapsulation is the point.
 

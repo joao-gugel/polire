@@ -1,6 +1,10 @@
-# Polire
+<p align="center">
+  <img src="assets/brand/polire-mark.svg" width="112" alt="Polire logo" />
+</p>
 
-### Open-source desktop writing assistant for clearer writing, translation, and quick notes.
+<h1 align="center">Polire</h1>
+
+<p align="center">Open-source desktop writing assistant for clearer writing, translation, and quick notes.</p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Status: In development](https://img.shields.io/badge/Status-In%20development-orange.svg)](#status)
