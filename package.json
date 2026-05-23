@@ -11,8 +11,13 @@
 		"format": "bunx --bun @biomejs/biome check --write ."
 	},
 	"dependencies": {
+		"@ai-sdk/anthropic": "^3.0.79",
+		"@ai-sdk/deepseek": "^2.0.35",
+		"@ai-sdk/google": "^3.0.79",
+		"@ai-sdk/openai": "^3.0.65",
 		"@fontsource-variable/geist": "^5.2.9",
 		"@phosphor-icons/react": "^2.1.10",
+		"ai": "^6.0.191",
 		"motion": "^12.40.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1"

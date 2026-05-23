@@ -15,5 +15,7 @@ contextBridge.exposeInMainWorld("api", {
 			ipcRenderer.invoke(AI_CHANNELS.saveApiKey, { provider, apiKey }),
 		removeApiKey: (provider: unknown) =>
 			ipcRenderer.invoke(AI_CHANNELS.removeApiKey, provider),
+		transform: (request: unknown) =>
+			ipcRenderer.invoke(AI_CHANNELS.transform, request),
 	},
 });

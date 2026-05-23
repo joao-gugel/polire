@@ -1,11 +1,13 @@
-import { CheckIcon, type Icon } from "@phosphor-icons/react";
+import { CheckIcon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import type { AiProvider } from "../../electron/ai/types";
 
 export type ProviderOption = {
 	id: AiProvider;
 	label: string;
-	icon: Icon;
+	logo: string;
+	invertInDarkMode?: boolean;
+	logoClassName?: string;
 };
 
 type Props = {
@@ -27,7 +29,6 @@ export function ProviderRow({
 	onHover,
 	onSelect,
 }: Props) {
-	const Icon = option.icon;
 	return (
 		<button
 			type="button"
@@ -42,13 +43,11 @@ export function ProviderRow({
 					className="absolute inset-0 rounded-xl bg-zinc-900/5 dark:bg-white/10"
 				/>
 			)}
-			<Icon
-				size={20}
-				weight="regular"
-				className={`relative transition-colors ${
-					selected
-						? "text-zinc-900 dark:text-zinc-50"
-						: "text-zinc-600 dark:text-zinc-300"
+			<img
+				src={option.logo}
+				alt=""
+				className={`relative h-5 w-5 object-contain ${option.logoClassName ?? ""} ${
+					option.invertInDarkMode ? "dark:invert" : ""
 				}`}
 			/>
 			<span

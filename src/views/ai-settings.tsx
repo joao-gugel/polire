@@ -1,16 +1,16 @@
 import {
-	AtomIcon,
-	BrainIcon,
 	CheckCircleIcon,
 	EyeIcon,
 	EyeSlashIcon,
-	GoogleLogoIcon,
 	PaperPlaneRightIcon,
-	SparkleIcon,
 	SpinnerIcon,
 } from "@phosphor-icons/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { AiProvider, AiSettingsStatus } from "../../electron/ai/types";
+import anthropicLogo from "../assets/providers/anthropic.png";
+import deepseekLogo from "../assets/providers/DeepSeek-icon.svg.png";
+import googleLogo from "../assets/providers/Google-gemini-icon.svg.png";
+import openaiLogo from "../assets/providers/openai.svg";
 import { PageLayout } from "../components/page-layout";
 import { type ProviderOption, ProviderRow } from "../components/provider-row";
 import { useNav } from "../nav";
@@ -18,10 +18,15 @@ import { useNav } from "../nav";
 const PROVIDER_LAYOUT_ID = "ai-provider-selection";
 
 const PROVIDERS: ProviderOption[] = [
-	{ id: "openai", label: "OpenAI", icon: SparkleIcon },
-	{ id: "anthropic", label: "Anthropic", icon: BrainIcon },
-	{ id: "google", label: "Google", icon: GoogleLogoIcon },
-	{ id: "deepseek", label: "DeepSeek", icon: AtomIcon },
+	{ id: "openai", label: "OpenAI", logo: openaiLogo, invertInDarkMode: true },
+	{ id: "anthropic", label: "Anthropic", logo: anthropicLogo },
+	{ id: "google", label: "Google", logo: googleLogo },
+	{
+		id: "deepseek",
+		label: "DeepSeek",
+		logo: deepseekLogo,
+		logoClassName: "scale-110",
+	},
 ];
 
 const INPUT_INDEX = PROVIDERS.length;

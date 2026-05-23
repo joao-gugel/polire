@@ -2,6 +2,8 @@ import type {
 	AiProvider,
 	AiSettings,
 	AiSettingsStatus,
+	TransformRequest,
+	TransformResult,
 } from "../electron/ai/types";
 
 /** Operating system identifier exposed by the main process via `process.platform`. */
@@ -30,6 +32,7 @@ declare global {
 					apiKey: string,
 				) => Promise<AiSettingsStatus>;
 				removeApiKey: (provider: AiProvider) => Promise<AiSettingsStatus>;
+				transform: (request: TransformRequest) => Promise<TransformResult>;
 			};
 		};
 	}
