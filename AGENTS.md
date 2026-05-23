@@ -6,7 +6,7 @@ Guidance for AI agents (and humans) contributing to this repository.
 
 **Mend** is a desktop typing assistant that helps users write better text — primarily targeted at people writing in a non-native language.
 
-The app is designed to feel ambient: it runs in the system tray, stays out of the way, and is summoned with a global hotkey (`Ctrl+Alt+P`). When dismissed (Esc or hotkey again) it hides back into the tray rather than quitting.
+The app is designed to feel ambient: it runs in the system tray, stays out of the way, and is summoned with a global hotkey (`Ctrl+Alt+I`). When dismissed (Esc or hotkey again) it hides back into the tray rather than quitting.
 
 The package directory is `usemend`; the product name is **Mend**.
 
@@ -15,7 +15,7 @@ The package directory is `usemend`; the product name is **Mend**.
 - **Runtime:** [Electron](https://www.electronjs.org/) (main + renderer processes)
 - **UI:** [React](https://react.dev/) 18 + [TypeScript](https://www.typescriptlang.org/) (strict mode)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) v4 (CSS-first config via `@import "tailwindcss"`, no `tailwind.config.js`)
-- **Icons:** [Phosphor Icons](https://phosphoricons.com/) — `@phosphor-icons/react`. Use only this library; do not introduce other icon sets (lucide, heroicons, etc).
+- **Icons:** [Phosphor Icons](https://phosphoricons.com/) — `@phosphor-icons/react`. Use only this library; do not introduce other icon sets (lucide, heroicons, etc). Always import with the `Icon` suffix (`GearIcon`, `SparkleIcon`, …) — the unsuffixed exports are deprecated and will trigger warnings.
 - **Bundler / dev server:** [Vite](https://vitejs.dev/) 6 with [`vite-plugin-electron`](https://github.com/electron-vite/vite-plugin-electron) (simple preset)
 - **Package manager / runner:** [Bun](https://bun.sh/) — use `bun install`, `bun run <script>`
 - **Formatter / linter:** [Biome](https://biomejs.dev/) — run `bun run format` before committing
@@ -39,9 +39,16 @@ electron/
 ├── main.ts        # entry: whenReady wiring + global shortcuts
 └── preload.ts     # renderer ↔ main bridge (empty for now)
 src/
-├── App.tsx        # root React component
-├── main.tsx       # React entry — mounts <App /> into #root
-└── main.css       # Tailwind v4 import + base styles
+├── app.tsx                  # root React component, owns palette state
+├── main.tsx                 # React entry — mounts <App /> into #root
+├── main.css                 # Tailwind v4 import + base styles
+├── types.ts                 # shared types (CommandOption, ...)
+└── components/
+    ├── search-input.tsx     # top text field
+    ├── option-list.tsx      # list of selectable commands
+    ├── option-item.tsx      # single row (hover + click + selected state)
+    ├── footer.tsx           # bottom bar: logo + keyboard hints
+    └── kbd.tsx              # visual key representation
 index.html         # renderer HTML shell
 vite.config.ts     # Vite + plugins (React, Tailwind, Electron)
 ```
@@ -102,6 +109,10 @@ Non-negotiable do's and don'ts. These exist to keep the codebase coherent and av
    */
   function registerShortcuts() { /* ... */ }
   ```
+
+  **React components are usually the exception.** Their props are typed and their names describe the rendered output (`SearchInput`, `OptionList`, `Footer`). Don't add JSDoc to a component unless it has non-obvious behavior — render side effects, controlled-vs-uncontrolled trade-offs, focus management, etc. Default to no JSDoc on components.
+
+- **File names are kebab-case.** Always. Even for React components: `search-input.tsx`, `option-list.tsx`, `app.tsx`, `kbd.tsx`. The exported identifier inside still uses PascalCase (`SearchInput`, `OptionList`) — only the filename changes. This keeps imports portable across case-sensitive filesystems (Linux) and case-insensitive ones (macOS, Windows) without surprises.
 
 ### Workflow
 

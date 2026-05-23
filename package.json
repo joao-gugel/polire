@@ -11,6 +11,7 @@
 		"format": "bunx --bun @biomejs/biome check --write ."
 	},
 	"dependencies": {
+		"@fontsource-variable/geist": "^5.2.9",
 		"@phosphor-icons/react": "^2.1.10",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1"

@@ -1,1 +1,1 @@
-{"root":["./src/App.tsx","./src/main.tsx","./electron/constants.ts","./electron/main.ts","./electron/preload.ts","./electron/tray.ts","./electron/window.ts"],"version":"5.9.3"}
+{"root":["./src/app.tsx","./src/main.tsx","./src/types.ts","./src/components/footer.tsx","./src/components/kbd.tsx","./src/components/option-item.tsx","./src/components/option-list.tsx","./src/components/search-input.tsx","./electron/constants.ts","./electron/main.ts","./electron/preload.ts","./electron/tray.ts","./electron/window.ts"],"version":"5.9.3"}
