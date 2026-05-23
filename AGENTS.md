@@ -12,7 +12,7 @@ The product name is **Polire**.
 
 ## Stack
 
-- **Runtime:** [Electron](https://www.electronjs.org/) (main + renderer processes)
+- **Runtime:** [Electron](https://www.electronjs.org/) 42 (main + renderer processes)
 - **UI:** [React](https://react.dev/) 19 + [TypeScript](https://www.typescriptlang.org/) (strict mode)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) v4 (CSS-first config via `@import "tailwindcss"`, no `tailwind.config.js`)
 - **Icons:** [Phosphor Icons](https://phosphoricons.com/) — `@phosphor-icons/react`. Use only this library; do not introduce other icon sets (lucide, heroicons, etc). Always import with the `Icon` suffix (`GearIcon`, `SparkleIcon`, …) — the unsuffixed exports are deprecated and will trigger warnings.
