@@ -1,24 +1,44 @@
-import { GearIcon, NotebookIcon, NotePencilIcon } from "@phosphor-icons/react";
+import {
+	GearIcon,
+	MagicWandIcon,
+	NotebookIcon,
+	NotePencilIcon,
+} from "@phosphor-icons/react";
 import { useEffect, useMemo, useState } from "react";
 import { Footer } from "../components/footer";
 import { OptionList } from "../components/option-list";
 import { SearchInput } from "../components/search-input";
+import { useCorrection } from "../correction";
 import { useNav } from "../nav";
 import type { CommandOption } from "../types";
 
-function buildOptions(push: (view: "settings") => void): CommandOption[] {
+function buildOptions(
+	push: (view: "settings" | "correction") => void,
+	correctText: (text: string) => Promise<void>,
+	text: string,
+): CommandOption[] {
 	return [
 		{
+			id: "correction",
+			label: "Corrigir texto",
+			icon: MagicWandIcon,
+			action: () => {
+				if (!text.trim()) return;
+				void correctText(text);
+				push("correction");
+			},
+		},
+		{
 			id: "quick-note",
-			label: "Nota rápida",
+			label: "Salvar nota",
 			icon: NotePencilIcon,
 			action: () => console.log("quick-note"),
 		},
 		{
-			id: "notebook",
-			label: "Bloco de notas",
+			id: "notes",
+			label: "Abrir notas",
 			icon: NotebookIcon,
-			action: () => console.log("notebook"),
+			action: () => console.log("notes"),
 		},
 		{
 			id: "settings",
@@ -31,10 +51,14 @@ function buildOptions(push: (view: "settings") => void): CommandOption[] {
 
 export function Palette() {
 	const { push, current } = useNav();
+	const { correctText } = useCorrection();
 	const isActive = current === "palette";
 	const [query, setQuery] = useState("");
 	const [selected, setSelected] = useState(0);
-	const options = useMemo(() => buildOptions(push), [push]);
+	const options = useMemo(
+		() => buildOptions(push, correctText, query),
+		[push, correctText, query],
+	);
 
 	useEffect(() => {
 		if (!isActive) return;

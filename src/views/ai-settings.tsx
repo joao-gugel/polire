@@ -161,10 +161,10 @@ export function AiSettings() {
 									? "•••••••• (cole uma nova e aperte enter)"
 									: "Cole sua chave e aperte enter"
 							}
-							className={`h-11 w-full rounded-xl pr-16 pl-12 text-base text-zinc-900 outline-none transition-colors placeholder:text-zinc-500 dark:text-zinc-50 dark:placeholder:text-zinc-400 ${
+							className={`h-11 w-full rounded-xl pr-16 pl-12 text-base text-zinc-900 outline-none transition-colors placeholder:text-zinc-500 dark:text-zinc-50 dark:placeholder:text-zinc-400 border ${
 								selected === INPUT_INDEX
-									? "bg-zinc-900/8 dark:bg-white/15"
-									: "bg-zinc-900/5 dark:bg-white/10"
+									? "border-zinc-900/8 dark:border-white/15"
+									: "border-zinc-900/5 dark:border-white/10"
 							}`}
 						/>
 						<button

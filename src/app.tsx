@@ -1,8 +1,10 @@
 import { AnimatePresence, motion } from "motion/react";
 import { Noise } from "./components/noise";
+import { CorrectionProvider } from "./correction";
 import { NavProvider, useNav } from "./nav";
 import type { View } from "./types";
 import { AiSettings } from "./views/ai-settings";
+import { Correction } from "./views/correction";
 import { Palette } from "./views/palette";
 import { Settings } from "./views/settings";
 
@@ -30,9 +32,11 @@ const slideTransition = { duration: 0.28, ease: [0.32, 0.72, 0, 1] } as const;
 
 export default function App() {
 	return (
-		<NavProvider initial="palette">
-			<Shell />
-		</NavProvider>
+		<CorrectionProvider>
+			<NavProvider initial="palette">
+				<Shell />
+			</NavProvider>
+		</CorrectionProvider>
 	);
 }
 
@@ -65,5 +69,6 @@ function renderView(view: View) {
 	if (view === "palette") return <Palette />;
 	if (view === "settings") return <Settings />;
 	if (view === "ai-settings") return <AiSettings />;
+	if (view === "correction") return <Correction />;
 	return null;
 }
