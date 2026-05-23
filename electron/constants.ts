@@ -19,7 +19,7 @@ export const INDEX_HTML = path.join(RENDERER_DIST, "index.html");
 export const DEV_URL = process.env.VITE_DEV_SERVER_URL;
 
 /** Global hotkey that toggles the main window. */
-export const SHORTCUT = "Control+Alt+I";
+export const SHORTCUT = "Control+Alt+P";
 
 /** App display name used in tooltips, menus, etc. */
 export const APP_NAME = "usemend";

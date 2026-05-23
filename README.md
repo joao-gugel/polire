@@ -8,7 +8,7 @@ Mend runs quietly in the background and is summoned with a global hotkey, so it 
 
 - Runs on Windows and Linux
 - Lives in the system tray — no taskbar clutter
-- Global hotkey `Ctrl+Alt+I` toggles the window from anywhere
+- Global hotkey `Ctrl+Alt+P` toggles the window from anywhere
 - Press `Esc` to dismiss when the window is focused
 
 ## Tech stack
@@ -65,5 +65,5 @@ src/
 
 | Shortcut       | Action                          |
 | -------------- | ------------------------------- |
-| `Ctrl+Alt+I`   | Toggle the window (global)      |
+| `Ctrl+Alt+P`   | Toggle the window (global)      |
 | `Esc`          | Hide the window (when focused)  |
