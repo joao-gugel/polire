@@ -1,8 +1,10 @@
 import { createContext, type ReactNode, useContext, useState } from "react";
+import type { TransformHint } from "../../electron/ai/types";
 
 type CorrectionState = {
 	original: string;
 	corrected: string;
+	hints: TransformHint[];
 	status: "idle" | "loading" | "success" | "error";
 	error: string | null;
 };
@@ -15,6 +17,7 @@ type CorrectionContextValue = {
 const INITIAL_STATE: CorrectionState = {
 	original: "",
 	corrected: "",
+	hints: [],
 	status: "idle",
 	error: null,
 };
@@ -25,7 +28,13 @@ export function CorrectionProvider({ children }: { children: ReactNode }) {
 	const [state, setState] = useState<CorrectionState>(INITIAL_STATE);
 
 	async function correctText(text: string) {
-		setState({ original: text, corrected: "", status: "loading", error: null });
+		setState({
+			original: text,
+			corrected: "",
+			hints: [],
+			status: "loading",
+			error: null,
+		});
 		try {
 			const result = await window.api.ai.transform({
 				kind: "improve",
@@ -35,6 +44,7 @@ export function CorrectionProvider({ children }: { children: ReactNode }) {
 			setState({
 				original: text,
 				corrected: result.text,
+				hints: result.hints ?? [],
 				status: "success",
 				error: null,
 			});
@@ -42,6 +52,7 @@ export function CorrectionProvider({ children }: { children: ReactNode }) {
 			setState({
 				original: text,
 				corrected: "",
+				hints: [],
 				status: "error",
 				error: "Não foi possível corrigir o texto. Verifique sua API key.",
 			});

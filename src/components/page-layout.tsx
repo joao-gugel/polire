@@ -6,6 +6,10 @@ import { useNav } from "@/providers/nav";
 type Props = {
 	title: string;
 	children: ReactNode;
+	/** Optional slot rendered on the right side of the header. */
+	actions?: ReactNode;
+	/** Replaces the default Footer when provided. */
+	footer?: ReactNode;
 };
 
 /**
@@ -13,7 +17,7 @@ type Props = {
  * scrollable content slot, and the shared footer. Back is wired straight to
  * the nav stack so views don't have to thread `onBack` props.
  */
-export function PageLayout({ title, children }: Props) {
+export function PageLayout({ title, children, actions, footer }: Props) {
 	const { pop } = useNav();
 	return (
 		<>
@@ -25,13 +29,14 @@ export function PageLayout({ title, children }: Props) {
 				>
 					<CaretLeftIcon size={16} weight="bold" />
 				</button>
-				<h1 className="font-medium text-base text-zinc-900 dark:text-zinc-50">
+				<h1 className="flex-1 font-medium text-base text-zinc-900 dark:text-zinc-50">
 					{title}
 				</h1>
+				{actions}
 			</header>
 			<div className="h-px bg-zinc-900/8 dark:bg-white/10" />
-			<div className="flex-1 overflow-y-auto">{children}</div>
-			<Footer />
+			<div className="flex-1 overflow-hidden">{children}</div>
+			{footer ?? <Footer />}
 		</>
 	);
 }

@@ -1,6 +1,5 @@
 import { ArrowElbowDownLeftIcon, SparkleIcon } from "@phosphor-icons/react";
-import type { ReactNode } from "react";
-import { Kbd } from "@/components/ui/kbd";
+import { Hint } from "@/components/ui/hint";
 
 export function Footer() {
 	return (
@@ -22,21 +21,5 @@ export function Footer() {
 				/>
 			</div>
 		</footer>
-	);
-}
-
-type HintProps = {
-	label: string;
-	kbd: ReactNode;
-};
-
-function Hint({ label, kbd }: HintProps) {
-	return (
-		<span className="flex items-center gap-1.5">
-			<span className="font-medium text-sm text-zinc-700 dark:text-zinc-300">
-				{label}
-			</span>
-			<Kbd>{kbd}</Kbd>
-		</span>
 	);
 }

@@ -8,6 +8,7 @@ export function Translation() {
 		<TransformationResult
 			activeView="translation"
 			title="Traduzir para inglês"
+			originalLabel="Original"
 			resultLabel="Tradução"
 			original={state.original}
 			result={state.translated}

@@ -20,8 +20,15 @@ export type TranslateTextRequest = {
 	targetLanguage: string;
 };
 
+export type TransformHint = {
+	original: string;
+	corrected: string;
+	explanation: string;
+};
+
 export type TransformResult = {
 	text: string;
+	hints?: TransformHint[];
 };
 
 /** Provider-independent prompt input ready to be passed to a text model. */

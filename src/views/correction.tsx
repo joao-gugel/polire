@@ -8,11 +8,13 @@ export function Correction() {
 		<TransformationResult
 			activeView="correction"
 			title="Corrigir texto"
+			originalLabel="Original"
 			resultLabel="Corrigido"
 			original={state.original}
 			result={state.corrected}
 			status={state.status}
 			error={state.error}
+			hints={state.hints}
 		/>
 	);
 }
