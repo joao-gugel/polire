@@ -6,25 +6,19 @@
  * chain. The `direction` field is exposed so animations know which way to slide.
  */
 
-import {
-	createContext,
-	type ReactNode,
-	useCallback,
-	useContext,
-	useState,
-} from "react";
+import { createContext, type ReactNode, useCallback, useState } from "react";
 import type { View } from "@/types";
 
 type Direction = 1 | -1;
 
-type Nav = {
+export type Nav = {
 	current: View;
 	direction: Direction;
 	push: (view: View) => void;
 	pop: () => void;
 };
 
-const NavContext = createContext<Nav | null>(null);
+export const NavContext = createContext<Nav | null>(null);
 
 type ProviderProps = {
 	initial: View;
@@ -56,11 +50,4 @@ export function NavProvider({ initial, children }: ProviderProps) {
 	};
 
 	return <NavContext.Provider value={value}>{children}</NavContext.Provider>;
-}
-
-/** Consume the navigation stack. Throws when used outside a `NavProvider`. */
-export function useNav(): Nav {
-	const ctx = useContext(NavContext);
-	if (!ctx) throw new Error("useNav must be used within a NavProvider");
-	return ctx;
 }

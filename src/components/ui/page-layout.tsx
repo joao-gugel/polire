@@ -1,7 +1,7 @@
 import { CaretLeftIcon } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/ui/footer";
-import { useNav } from "@/providers/nav";
+import { useNav } from "@/hooks/use-nav";
 
 type Props = {
 	title: string;

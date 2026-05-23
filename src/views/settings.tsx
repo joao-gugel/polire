@@ -1,44 +1,26 @@
-import {
-	type Icon,
-	MonitorIcon,
-	MoonIcon,
-	SparkleIcon,
-	SunIcon,
-} from "@phosphor-icons/react";
+import { SparkleIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import { PageLayout } from "@/components/page-layout";
+import { THEME_OPTIONS, ThemeList } from "@/components/settings/theme-list";
 import {
 	OptionItem,
 	OptionItemCaret,
-	OptionItemCheck,
 	OptionItemIcon,
 } from "@/components/ui/option-item";
-import { useNav } from "@/providers/nav";
+import { PageLayout } from "@/components/ui/page-layout";
+import { SectionHeader } from "@/components/ui/section-header";
+import { useNav } from "@/hooks/use-nav";
 import { getStoredTheme, setTheme, type Theme } from "@/theme";
 
-type ThemeOption = {
-	id: Theme;
-	label: string;
-	icon: Icon;
-};
-
 const SELECTION_LAYOUT_ID = "settings-selection";
-
-const THEMES: ThemeOption[] = [
-	{ id: "light", label: "Light", icon: SunIcon },
-	{ id: "dark", label: "Dark", icon: MoonIcon },
-	{ id: "system", label: "Sistema", icon: MonitorIcon },
-];
-
-const NAV_INDEX_AI = THEMES.length;
-const TOTAL_ITEMS = THEMES.length + 1;
+const NAV_INDEX_AI = THEME_OPTIONS.length;
+const TOTAL_ITEMS = THEME_OPTIONS.length + 1;
 
 export function Settings() {
 	const { current, pop, push } = useNav();
 	const isActive = current === "settings";
 	const [activeTheme, setActiveTheme] = useState<Theme>(getStoredTheme);
 	const [selected, setSelected] = useState(() =>
-		THEMES.findIndex((option) => option.id === getStoredTheme()),
+		THEME_OPTIONS.findIndex((option) => option.id === getStoredTheme()),
 	);
 	const [confirmation, setConfirmation] = useState({ index: -1, sequence: 0 });
 
@@ -70,7 +52,7 @@ export function Settings() {
 					push("ai-settings");
 					return;
 				}
-				const next = THEMES[selected].id;
+				const next = THEME_OPTIONS[selected].id;
 				setTheme(next);
 				setActiveTheme(next);
 				return;
@@ -90,32 +72,13 @@ export function Settings() {
 			<div className="flex flex-col gap-3 px-2 py-3">
 				<section>
 					<SectionHeader label="Tema" />
-					<div className="flex flex-col gap-0.5">
-						{THEMES.map((option, index) => (
-							<OptionItem
-								key={option.id}
-								label={option.label}
-								selected={index === selected}
-								layoutId={SELECTION_LAYOUT_ID}
-								confirmationSequence={
-									confirmation.index === index
-										? confirmation.sequence
-										: undefined
-								}
-								leading={
-									<OptionItemIcon
-										icon={option.icon}
-										selected={index === selected}
-									/>
-								}
-								trailing={
-									option.id === activeTheme ? <OptionItemCheck /> : undefined
-								}
-								onHover={() => setSelected(index)}
-								onSelect={() => applyTheme(option.id)}
-							/>
-						))}
-					</div>
+					<ThemeList
+						activeTheme={activeTheme}
+						selected={selected}
+						confirmation={confirmation}
+						onHover={setSelected}
+						onSelect={applyTheme}
+					/>
 				</section>
 				<section>
 					<SectionHeader label="Geral" />
@@ -141,13 +104,5 @@ export function Settings() {
 				</section>
 			</div>
 		</PageLayout>
-	);
-}
-
-function SectionHeader({ label }: { label: string }) {
-	return (
-		<p className="px-3 pb-2 font-medium text-[11px] text-zinc-600 uppercase tracking-wider dark:text-zinc-400">
-			{label}
-		</p>
 	);
 }

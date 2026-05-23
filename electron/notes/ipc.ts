@@ -1,31 +1,12 @@
-import { pathToFileURL } from "node:url";
-import type { BrowserWindow, IpcMainInvokeEvent } from "electron";
+import type { BrowserWindow } from "electron";
 import { ipcMain } from "electron";
-import { DEV_URL, INDEX_HTML } from "../constants";
+import { assertMainWindowSender } from "../ipc/assert-renderer";
 import { NOTES_CHANNELS } from "./channels";
 import { createNote, listNotes, removeNote, updateNote } from "./store";
 
 const MAX_NOTE_LENGTH = 100_000;
 const UUID_PATTERN =
 	/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-
-function isTrustedRendererUrl(url: string): boolean {
-	if (DEV_URL) return new URL(url).origin === new URL(DEV_URL).origin;
-	return url === pathToFileURL(INDEX_HTML).toString();
-}
-
-function assertMainWindowSender(
-	event: IpcMainInvokeEvent,
-	window: BrowserWindow,
-) {
-	if (event.sender !== window.webContents)
-		throw new Error("Unauthorized IPC sender.");
-	if (event.senderFrame !== window.webContents.mainFrame) {
-		throw new Error("Unauthorized IPC sender.");
-	}
-	if (isTrustedRendererUrl(event.senderFrame.url)) return;
-	throw new Error("Unauthorized IPC sender.");
-}
 
 function parseContent(value: unknown) {
 	if (typeof value !== "string") throw new Error("Invalid note content.");

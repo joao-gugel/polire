@@ -33,6 +33,9 @@ All three are gitignored.
 
 ```
 electron/
+├── ai/            # AI prompts, settings, encrypted keys, execution + IPC
+├── notes/         # Markdown note persistence + IPC
+├── ipc/           # validation shared by main-process IPC handlers
 ├── constants.ts   # paths, window size, hotkey, app name
 ├── window.ts      # window lifecycle: create, show, toggle, quit, Esc handler
 ├── tray.ts        # system tray icon + context menu
@@ -45,25 +48,25 @@ src/
 ├── theme.ts                 # theme state: persistence + DOM apply
 ├── types.ts                 # shared types (CommandOption, View, ...)
 ├── global.d.ts              # ambient types (window.api from preload)
+├── hooks/                   # context consumers + reusable interaction hooks
 ├── providers/
 │   ├── nav.tsx              # navigation stack (push/pop) + slide direction
 │   ├── correction.tsx       # correction request/result state
-│   └── translation.tsx      # translation request/result state
+│   ├── translation.tsx      # translation request/result state
+│   └── notes.tsx            # local notes list/create/update/remove state
 ├── views/
 │   ├── palette.tsx          # root view: search + command list (no back)
 │   ├── settings.tsx         # settings overview: theme + nav to sub-pages
 │   ├── ai-settings.tsx      # AI sub-page: provider list + API key form
 │   ├── correction.tsx       # AI correction before/after screen
-│   └── translation.tsx      # AI translation before/after screen
+│   ├── translation.tsx      # AI translation before/after screen
+│   └── notes.tsx            # notes controller: loading, editing + shortcuts
 └── components/
-    ├── page-layout.tsx      # header w/ back + content slot + footer (non-root views)
-    ├── search-input.tsx     # top text field
-    ├── option-list.tsx      # list of selectable commands
-    ├── transformation-result.tsx # shared before/after result layout
-    ├── ui/option-item.tsx   # shared selectable row + icon/check/caret adornments
-    ├── ui/footer.tsx        # bottom bar: logo + keyboard hints
-    ├── ui/kbd.tsx           # visual key representation
-    └── ui/noise.tsx         # SVG turbulence overlay (Linux-only glass texture)
+    ├── ai-settings/         # provider rows/config + API key field
+    ├── notes/               # note list, editor, relative dates + footer hints
+    ├── palette/             # palette input, commands, list + save feedback
+    ├── settings/            # theme option list
+    └── ui/                  # shared layout, rows, hints, footer + result screens
 index.html         # renderer HTML shell
 vite.config.ts     # Vite + plugins (React, Tailwind, Electron)
 ```
@@ -72,7 +75,7 @@ Module-level state in `electron/` is intentional: `win` and `isQuitting` live as
 
 ### Navigation
 
-The renderer uses a tiny stack-based router exposed through `useNav()` (`src/providers/nav.tsx`):
+The renderer uses a tiny stack-based router exposed through `useNav()` (`src/hooks/use-nav.ts`), backed by `NavProvider` (`src/providers/nav.tsx`):
 
 - `push(view)` / `pop()` — mutate the stack
 - `current` — top of stack

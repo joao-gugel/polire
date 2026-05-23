@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, useContext, useState } from "react";
+import { createContext, type ReactNode, useState } from "react";
 
 type TranslationState = {
 	original: string;
@@ -7,7 +7,7 @@ type TranslationState = {
 	error: string | null;
 };
 
-type TranslationContextValue = {
+export type TranslationContextValue = {
 	state: TranslationState;
 	translateToEnglish: (text: string) => Promise<void>;
 };
@@ -19,7 +19,9 @@ const INITIAL_STATE: TranslationState = {
 	error: null,
 };
 
-const TranslationContext = createContext<TranslationContextValue | null>(null);
+export const TranslationContext = createContext<TranslationContextValue | null>(
+	null,
+);
 
 export function TranslationProvider({ children }: { children: ReactNode }) {
 	const [state, setState] = useState<TranslationState>(INITIAL_STATE);
@@ -58,12 +60,4 @@ export function TranslationProvider({ children }: { children: ReactNode }) {
 			{children}
 		</TranslationContext.Provider>
 	);
-}
-
-export function useTranslation(): TranslationContextValue {
-	const context = useContext(TranslationContext);
-	if (!context) {
-		throw new Error("useTranslation must be used within a TranslationProvider");
-	}
-	return context;
 }

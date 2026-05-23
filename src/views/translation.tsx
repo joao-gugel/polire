@@ -1,5 +1,5 @@
-import { TransformationResult } from "@/components/transformation-result";
-import { useTranslation } from "@/providers/translation";
+import { TransformationResult } from "@/components/ui/transformation-result/transformation-result";
+import { useTranslation } from "@/hooks/use-translation";
 
 export function Translation() {
 	const { state } = useTranslation();

@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from "motion/react";
 import { Noise } from "@/components/ui/noise";
+import { useNav } from "@/hooks/use-nav";
 import { CorrectionProvider } from "@/providers/correction";
-import { NavProvider, useNav } from "@/providers/nav";
+import { NavProvider } from "@/providers/nav";
 import { NotesProvider } from "@/providers/notes";
 import { TranslationProvider } from "@/providers/translation";
 import type { View } from "@/types";

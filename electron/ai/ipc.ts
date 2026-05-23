@@ -1,7 +1,6 @@
-import { pathToFileURL } from "node:url";
-import type { BrowserWindow, IpcMainInvokeEvent } from "electron";
+import type { BrowserWindow } from "electron";
 import { ipcMain } from "electron";
-import { DEV_URL, INDEX_HTML } from "../constants";
+import { assertMainWindowSender } from "../ipc/assert-renderer";
 import { AI_CHANNELS } from "./channels";
 import { hasApiKey, removeApiKey, saveApiKey } from "./secret-store";
 import { isAiProvider, loadAiSettings, saveAiSettings } from "./settings-store";
@@ -62,24 +61,6 @@ function parseTransformRequest(value: unknown): TransformRequest {
 		};
 	}
 	throw new Error("Invalid transformation type.");
-}
-
-function isTrustedRendererUrl(url: string): boolean {
-	if (DEV_URL) return new URL(url).origin === new URL(DEV_URL).origin;
-	return url === pathToFileURL(INDEX_HTML).toString();
-}
-
-function assertMainWindowSender(
-	event: IpcMainInvokeEvent,
-	window: BrowserWindow,
-) {
-	if (event.sender !== window.webContents)
-		throw new Error("Unauthorized IPC sender.");
-	if (event.senderFrame !== window.webContents.mainFrame) {
-		throw new Error("Unauthorized IPC sender.");
-	}
-	if (isTrustedRendererUrl(event.senderFrame.url)) return;
-	throw new Error("Unauthorized IPC sender.");
 }
 
 function parseSaveApiKeyInput(value: unknown): SaveApiKeyInput {
