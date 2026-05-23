@@ -14,10 +14,11 @@ import { Settings } from "@/views/settings";
 import { Translation } from "@/views/translation";
 
 const isLinux = window.api.platform === "linux";
+const isWindows = window.api.platform === "win32";
 
-const SHELL_BG = isLinux
-	? "border-zinc-900/10 bg-white/95 dark:border-white/10 dark:bg-zinc-900/90"
-	: "border-zinc-900/10 bg-white/55 dark:border-white/10 dark:bg-zinc-900/55";
+const SHELL_APPEARANCE = isWindows
+	? "windows-shell border border-zinc-900/15 bg-white/42 dark:border-white/15 dark:bg-zinc-950/72"
+	: "rounded-3xl border border-zinc-900/10 bg-white/95 shadow-2xl backdrop-blur-2xl dark:border-white/10 dark:bg-zinc-900/90";
 
 const slideVariants = {
 	enter: (direction: number) => ({
@@ -53,7 +54,7 @@ function Shell() {
 	const { current, direction } = useNav();
 	return (
 		<div
-			className={`relative h-full w-full overflow-hidden rounded-3xl border shadow-2xl backdrop-blur-2xl ${SHELL_BG}`}
+			className={`relative h-full w-full overflow-hidden ${SHELL_APPEARANCE}`}
 		>
 			{isLinux && <Noise />}
 			<AnimatePresence custom={direction} initial={false}>

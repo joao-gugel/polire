@@ -11,6 +11,15 @@ import {
 let win: BrowserWindow | null = null;
 let isQuitting = false;
 
+const windowsAppearance =
+	process.platform === "win32"
+		? {
+				transparent: false,
+				roundedCorners: true,
+				backgroundMaterial: "acrylic" as const,
+			}
+		: { transparent: true };
+
 /** Load the dev server in development, or the built index.html in production. */
 function loadRenderer(window: BrowserWindow) {
 	if (DEV_URL) return window.loadURL(DEV_URL);
@@ -58,12 +67,10 @@ export function createWindow() {
 		width: WINDOW_WIDTH,
 		show: false,
 		frame: false,
-		transparent: true,
 		backgroundColor: "#00000000",
 		resizable: false,
 		hasShadow: true,
-		vibrancy: "under-window",
-		backgroundMaterial: "acrylic",
+		...windowsAppearance,
 	});
 	loadRenderer(win);
 	win.webContents.on("before-input-event", hideOnEscape);

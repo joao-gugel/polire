@@ -20,6 +20,55 @@ body {
 	user-select: none;
 }
 
+body:has(.windows-shell) {
+	padding: 0;
+}
+
+html:not(.dark) .windows-shell .text-zinc-900,
+html:not(.dark) .windows-shell .text-zinc-800 {
+	color: var(--color-zinc-950);
+}
+
+html:not(.dark) .windows-shell .text-zinc-700 {
+	color: var(--color-zinc-900);
+}
+
+html:not(.dark) .windows-shell .text-zinc-600 {
+	color: var(--color-zinc-800);
+}
+
+html:not(.dark) .windows-shell .text-zinc-500 {
+	color: var(--color-zinc-700);
+}
+
+html:not(.dark) .windows-shell input::placeholder,
+html:not(.dark) .windows-shell textarea::placeholder {
+	color: var(--color-zinc-600);
+}
+
+.dark .windows-shell .dark\:text-zinc-50,
+.dark .windows-shell .dark\:text-zinc-100 {
+	color: var(--color-white);
+}
+
+.dark .windows-shell .dark\:text-zinc-200,
+.dark .windows-shell .dark\:text-zinc-300 {
+	color: var(--color-zinc-100);
+}
+
+.dark .windows-shell .dark\:text-zinc-400 {
+	color: var(--color-zinc-200);
+}
+
+.dark .windows-shell .dark\:text-zinc-500 {
+	color: var(--color-zinc-300);
+}
+
+html.dark .windows-shell input::placeholder,
+html.dark .windows-shell textarea::placeholder {
+	color: var(--color-zinc-300);
+}
+
 input,
 textarea,
 [contenteditable="true"] {
