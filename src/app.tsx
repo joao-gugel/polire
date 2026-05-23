@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Noise } from "./components/noise";
 import { NavProvider, useNav } from "./nav";
 import type { View } from "./types";
+import { AiSettings } from "./views/ai-settings";
 import { Palette } from "./views/palette";
 import { Settings } from "./views/settings";
 
@@ -63,5 +64,6 @@ function Shell() {
 function renderView(view: View) {
 	if (view === "palette") return <Palette />;
 	if (view === "settings") return <Settings />;
+	if (view === "ai-settings") return <AiSettings />;
 	return null;
 }

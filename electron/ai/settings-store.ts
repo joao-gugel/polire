@@ -8,7 +8,7 @@ const MAX_MODEL_LENGTH = 128;
 
 const DEFAULT_SETTINGS: AiSettings = {
 	provider: "openai",
-	model: "gpt-4.1-mini",
+	model: "gpt-5.4",
 };
 
 export function isAiProvider(value: unknown): value is AiProvider {

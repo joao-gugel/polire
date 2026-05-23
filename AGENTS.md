@@ -48,13 +48,16 @@ src/
 ├── global.d.ts              # ambient types (window.api from preload)
 ├── views/
 │   ├── palette.tsx          # root view: search + command list (no back)
-│   └── settings.tsx         # secondary view: theme switcher, future sections
+│   ├── settings.tsx         # settings overview: theme + nav to sub-pages
+│   └── ai-settings.tsx      # AI sub-page: provider list + API key form
 └── components/
     ├── page-layout.tsx      # header w/ back + content slot + footer (non-root views)
     ├── search-input.tsx     # top text field
     ├── option-list.tsx      # list of selectable commands
     ├── option-item.tsx      # single row (hover + click + selected state)
-    ├── theme-row.tsx        # single row in the settings theme switcher
+    ├── theme-row.tsx        # row in theme switcher (icon + label + check)
+    ├── provider-row.tsx     # row in AI provider list (icon + label + check)
+    ├── nav-row.tsx          # row that navigates to a sub-view (icon + label + chevron)
     ├── footer.tsx           # bottom bar: logo + keyboard hints
     ├── kbd.tsx              # visual key representation
     └── noise.tsx            # SVG turbulence overlay (Linux-only glass texture)

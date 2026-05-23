@@ -1,17 +1,10 @@
-import { CheckIcon, type Icon } from "@phosphor-icons/react";
+import { CaretRightIcon, type Icon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
-import type { Theme } from "../theme";
-
-export type ThemeOption = {
-	id: Theme;
-	label: string;
-	icon: Icon;
-};
 
 type Props = {
-	option: ThemeOption;
+	label: string;
+	icon: Icon;
 	selected: boolean;
-	isCurrent: boolean;
 	layoutId: string;
 	onHover: () => void;
 	onSelect: () => void;
@@ -19,15 +12,14 @@ type Props = {
 
 const selectionTransition = { duration: 0.08, ease: "easeOut" } as const;
 
-export function ThemeRow({
-	option,
+export function NavRow({
+	label,
+	icon: Icon,
 	selected,
-	isCurrent,
 	layoutId,
 	onHover,
 	onSelect,
 }: Props) {
-	const Icon = option.icon;
 	return (
 		<button
 			type="button"
@@ -58,15 +50,17 @@ export function ThemeRow({
 						: "text-zinc-700 dark:text-zinc-200"
 				}`}
 			>
-				{option.label}
+				{label}
 			</span>
-			{isCurrent && (
-				<CheckIcon
-					size={16}
-					weight="bold"
-					className="relative text-zinc-700 dark:text-zinc-300"
-				/>
-			)}
+			<CaretRightIcon
+				size={14}
+				weight="bold"
+				className={`relative transition-colors ${
+					selected
+						? "text-zinc-600 dark:text-zinc-300"
+						: "text-zinc-400 dark:text-zinc-500"
+				}`}
+			/>
 		</button>
 	);
 }

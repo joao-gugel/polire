@@ -1,15 +1,15 @@
 import { CheckIcon, type Icon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
-import type { Theme } from "../theme";
+import type { AiProvider } from "../../electron/ai/types";
 
-export type ThemeOption = {
-	id: Theme;
+export type ProviderOption = {
+	id: AiProvider;
 	label: string;
 	icon: Icon;
 };
 
 type Props = {
-	option: ThemeOption;
+	option: ProviderOption;
 	selected: boolean;
 	isCurrent: boolean;
 	layoutId: string;
@@ -19,7 +19,7 @@ type Props = {
 
 const selectionTransition = { duration: 0.08, ease: "easeOut" } as const;
 
-export function ThemeRow({
+export function ProviderRow({
 	option,
 	selected,
 	isCurrent,
