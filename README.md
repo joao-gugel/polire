@@ -1,71 +1,92 @@
 # Mend
 
-A desktop typing assistant that helps you write better text — built primarily for people writing in a non-native language.
+### Open-source desktop writing assistant for clearer writing, translation, and quick notes.
 
-Mend runs quietly in the background and is summoned with a global hotkey, so it stays out of your way until you need it.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Status: In development](https://img.shields.io/badge/Status-In%20development-orange.svg)](#status)
 
-![Mend screenshot](https://raw.githubusercontent.com/joao-gugel/usemend/main/docs/screenshot.png)
+Mend is a small desktop app for people who write in a non-native language, or simply want to polish text without breaking their flow. Open it from anywhere with a global shortcut, paste or write text, then correct it, translate it, or save it as a local note.
+
+![Mend screenshot](docs/screenshot.png)
+
+## Status
+
+Mend is under active development. The app currently runs from source and is not yet distributed as a downloadable installer.
 
 ## Features
 
-- Runs on Windows and Linux
-- Lives in the system tray — no taskbar clutter
-- Global hotkey `Ctrl+Alt+P` toggles the window from anywhere
-- Press `Esc` to dismiss when the window is focused
+- Improve grammar, spelling, and clarity with a before-and-after result view.
+- Translate text to English using your selected AI provider.
+- Save quick notes locally and edit them inside the app.
+- Bring the palette up from anywhere with `Ctrl+Alt+P`.
+- Keep the app out of the way in the system tray.
+- Choose between OpenAI, Anthropic, Google Gemini, and DeepSeek.
+- Configure your own API key locally instead of relying on a hosted Mend account.
+- Use light and dark themes.
 
-## Tech stack
+## Local-first AI
 
-- [Electron](https://www.electronjs.org/) — desktop runtime
-- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) — UI
-- [Tailwind CSS](https://tailwindcss.com/) — styling
-- [Vite](https://vitejs.dev/) — bundler/dev server
-- [Bun](https://bun.sh/) — package manager
+The open-source version uses a bring-your-own-key model:
 
-## Requirements
+- Your provider choice and API key are configured in the app.
+- API keys are encrypted locally using Electron's OS-backed secure storage support.
+- AI requests are executed by the desktop app against the provider you selected.
+- Mend does not currently run a server that receives your text or stores your notes.
+
+When you use an AI action, the submitted text is sent to the selected AI provider according to that provider's policies.
+
+## Notes
+
+Notes are saved locally as Markdown files with stable IDs. This keeps the local format simple and leaves room for optional synchronization features in a future version.
+
+## Development
+
+### Requirements
 
 - [Bun](https://bun.sh/) `>= 1.3`
-- Linux: an X11 session is recommended (global shortcuts have limited support on Wayland).
+- Windows or Linux
+- Linux: an X11 session is recommended because global shortcut support on Wayland is limited.
 
-## Install
+### Run locally
 
 ```bash
 bun install
-```
-
-## Develop
-
-Starts Vite + Electron with hot reload:
-
-```bash
 bun run dev
 ```
 
-## Build
-
-Type-checks and produces a production bundle in `dist/` and `dist-electron/`:
+### Validate a build
 
 ```bash
+bun run format
 bun run build
 ```
 
-## Project layout
+`bun run build` type-checks and creates renderer and Electron bundles in `dist/` and `dist-electron/`. Packaging and downloadable installers are not configured yet.
 
-```
-electron/
-├── constants.ts   # Paths, window size, hotkey, app name
-├── window.ts      # Window lifecycle: create, show, toggle, quit
-├── tray.ts        # System tray icon and menu
-├── main.ts        # Entry point: wires everything together
-└── preload.ts     # Renderer ↔ main bridge (empty for now)
-src/
-├── App.tsx
-├── main.tsx
-└── main.css
-```
+## Default Shortcuts
 
-## Default shortcuts
+| Shortcut     | Action                          |
+| ------------ | ------------------------------- |
+| `Ctrl+Alt+P` | Toggle the palette globally     |
+| `Esc`        | Hide the palette when focused   |
+| `Backspace`  | Go back outside text fields     |
+| `Ctrl+Del`   | Delete the selected local note  |
 
-| Shortcut       | Action                          |
-| -------------- | ------------------------------- |
-| `Ctrl+Alt+P`   | Toggle the window (global)      |
-| `Esc`          | Hide the window (when focused)  |
+## Roadmap
+
+- Package signed desktop releases for supported platforms.
+- Polish AI configuration and error handling.
+- Validate the local-first open-source workflow with early users.
+- Explore optional paid sync and online storage separately from the local app.
+
+## Stack
+
+Mend is built with Electron, React, TypeScript, Tailwind CSS, Vite, Bun, and the AI SDK.
+
+## Contributing
+
+The project is early, but bug reports and focused improvements are welcome through GitHub issues and pull requests.
+
+## License
+
+Mend is available under the [MIT License](LICENSE).
