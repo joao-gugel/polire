@@ -52,6 +52,7 @@ export function AiSettings() {
 	const isActive = current === "ai-settings";
 	const [settings, setSettings] = useState<AiSettingsStatus | null>(null);
 	const [selected, setSelected] = useState(0);
+	const [confirmation, setConfirmation] = useState({ index: -1, sequence: 0 });
 	const [apiKey, setApiKey] = useState("");
 	const [showKey, setShowKey] = useState(false);
 	const [saving, setSaving] = useState(false);
@@ -128,6 +129,10 @@ export function AiSettings() {
 					saveKey();
 					return;
 				}
+				setConfirmation((current) => ({
+					index: selected,
+					sequence: current.sequence + 1,
+				}));
 				selectProvider(PROVIDERS[selected].id);
 			}
 		};
@@ -147,6 +152,11 @@ export function AiSettings() {
 								label={option.label}
 								selected={index === selected}
 								layoutId={PROVIDER_LAYOUT_ID}
+								confirmationSequence={
+									confirmation.index === index
+										? confirmation.sequence
+										: undefined
+								}
 								leading={
 									<img
 										src={option.logo}

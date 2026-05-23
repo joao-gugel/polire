@@ -152,7 +152,7 @@ export function TransformationResult({
 									transition={{ duration: 0.16, ease: "easeOut" }}
 									className="absolute inset-0 overflow-y-auto px-5 pt-1 pb-12"
 								>
-									<p className="whitespace-pre-wrap break-words text-[15px] text-zinc-800 leading-relaxed dark:text-zinc-100">
+									<p className="whitespace-pre-wrap wrap-break-word text-[15px] text-zinc-800 leading-relaxed dark:text-zinc-100">
 										{visibleText}
 									</p>
 								</motion.div>
@@ -236,7 +236,7 @@ function PaneToggleOption({
 
 function CopyLeading({ copied }: { copied: boolean }) {
 	return (
-		<span className="relative flex h-[13px] w-[13px] items-center justify-center">
+		<span className="relative flex h-3.25 w-3.25 items-center justify-center">
 			<AnimatePresence mode="wait" initial={false}>
 				{copied ? (
 					<motion.span
@@ -359,7 +359,7 @@ function HintsScroll({ hints }: { hints: TransformHint[] }) {
 		<div className="border-zinc-900/8 border-b px-3 py-3 dark:border-white/10">
 			<div
 				ref={ref}
-				className="-mx-1 flex cursor-grab gap-2 overflow-x-auto px-1 select-none active:cursor-grabbing [mask-image:linear-gradient(to_right,transparent,black_16px,black_calc(100%-16px),transparent)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+				className="-mx-1 flex cursor-grab gap-2 overflow-x-auto px-1 select-none active:cursor-grabbing mask-[linear-gradient(to_right,transparent,black_16px,black_calc(100%-16px),transparent)] [&::-webkit-scrollbar]:hidden"
 			>
 				{hints.map((hint) => (
 					<HintCard

@@ -5,6 +5,7 @@ import type {
 	TransformRequest,
 	TransformResult,
 } from "../electron/ai/types";
+import type { Note } from "../electron/notes/types";
 
 /** Operating system identifier exposed by the main process via `process.platform`. */
 type Platform =
@@ -33,6 +34,11 @@ declare global {
 				) => Promise<AiSettingsStatus>;
 				removeApiKey: (provider: AiProvider) => Promise<AiSettingsStatus>;
 				transform: (request: TransformRequest) => Promise<TransformResult>;
+			};
+			notes: {
+				list: () => Promise<Note[]>;
+				create: (content: string) => Promise<Note>;
+				update: (id: string, content: string) => Promise<Note>;
 			};
 		};
 	}

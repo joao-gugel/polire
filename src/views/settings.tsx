@@ -40,6 +40,7 @@ export function Settings() {
 	const [selected, setSelected] = useState(() =>
 		THEMES.findIndex((option) => option.id === getStoredTheme()),
 	);
+	const [confirmation, setConfirmation] = useState({ index: -1, sequence: 0 });
 
 	function applyTheme(next: Theme) {
 		setTheme(next);
@@ -61,6 +62,10 @@ export function Settings() {
 			}
 			if (event.key === "Enter") {
 				event.preventDefault();
+				setConfirmation((current) => ({
+					index: selected,
+					sequence: current.sequence + 1,
+				}));
 				if (selected === NAV_INDEX_AI) {
 					push("ai-settings");
 					return;
@@ -92,6 +97,11 @@ export function Settings() {
 								label={option.label}
 								selected={index === selected}
 								layoutId={SELECTION_LAYOUT_ID}
+								confirmationSequence={
+									confirmation.index === index
+										? confirmation.sequence
+										: undefined
+								}
 								leading={
 									<OptionItemIcon
 										icon={option.icon}
@@ -113,6 +123,11 @@ export function Settings() {
 						label="IA"
 						selected={selected === NAV_INDEX_AI}
 						layoutId={SELECTION_LAYOUT_ID}
+						confirmationSequence={
+							confirmation.index === NAV_INDEX_AI
+								? confirmation.sequence
+								: undefined
+						}
 						leading={
 							<OptionItemIcon
 								icon={SparkleIcon}

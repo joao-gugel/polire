@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { AI_CHANNELS } from "./ai/channels";
+import { NOTES_CHANNELS } from "./notes/channels";
 
 /**
  * Bridge exposed on `window.api` in the renderer. Keep it minimal — anything
@@ -17,5 +18,12 @@ contextBridge.exposeInMainWorld("api", {
 			ipcRenderer.invoke(AI_CHANNELS.removeApiKey, provider),
 		transform: (request: unknown) =>
 			ipcRenderer.invoke(AI_CHANNELS.transform, request),
+	},
+	notes: {
+		list: () => ipcRenderer.invoke(NOTES_CHANNELS.list),
+		create: (content: unknown) =>
+			ipcRenderer.invoke(NOTES_CHANNELS.create, content),
+		update: (id: unknown, content: unknown) =>
+			ipcRenderer.invoke(NOTES_CHANNELS.update, { id, content }),
 	},
 });

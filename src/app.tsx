@@ -2,10 +2,12 @@ import { AnimatePresence, motion } from "motion/react";
 import { Noise } from "@/components/ui/noise";
 import { CorrectionProvider } from "@/providers/correction";
 import { NavProvider, useNav } from "@/providers/nav";
+import { NotesProvider } from "@/providers/notes";
 import { TranslationProvider } from "@/providers/translation";
 import type { View } from "@/types";
 import { AiSettings } from "@/views/ai-settings";
 import { Correction } from "@/views/correction";
+import { Notes } from "@/views/notes";
 import { Palette } from "@/views/palette";
 import { Settings } from "@/views/settings";
 import { Translation } from "@/views/translation";
@@ -34,13 +36,15 @@ const slideTransition = { duration: 0.28, ease: [0.32, 0.72, 0, 1] } as const;
 
 export default function App() {
 	return (
-		<TranslationProvider>
-			<CorrectionProvider>
-				<NavProvider initial="palette">
-					<Shell />
-				</NavProvider>
-			</CorrectionProvider>
-		</TranslationProvider>
+		<NotesProvider>
+			<TranslationProvider>
+				<CorrectionProvider>
+					<NavProvider initial="palette">
+						<Shell />
+					</NavProvider>
+				</CorrectionProvider>
+			</TranslationProvider>
+		</NotesProvider>
 	);
 }
 
@@ -75,5 +79,6 @@ function renderView(view: View) {
 	if (view === "ai-settings") return <AiSettings />;
 	if (view === "correction") return <Correction />;
 	if (view === "translation") return <Translation />;
+	if (view === "notes") return <Notes />;
 	return null;
 }

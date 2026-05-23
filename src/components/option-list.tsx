@@ -6,6 +6,7 @@ type OptionListProps = {
 	selectedIndex: number;
 	onHover: (index: number) => void;
 	onSelect: (index: number) => void;
+	confirmation?: { index: number; sequence: number };
 };
 
 export function OptionList({
@@ -13,6 +14,7 @@ export function OptionList({
 	selectedIndex,
 	onHover,
 	onSelect,
+	confirmation,
 }: OptionListProps) {
 	return (
 		<div className="flex flex-col gap-0.5 px-2 py-2">
@@ -22,6 +24,9 @@ export function OptionList({
 					label={option.label}
 					selected={index === selectedIndex}
 					layoutId="palette-selection"
+					confirmationSequence={
+						confirmation?.index === index ? confirmation.sequence : undefined
+					}
 					leading={
 						<OptionItemIcon
 							icon={option.icon}

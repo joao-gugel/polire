@@ -14,4 +14,5 @@ export type View =
 	| "settings"
 	| "ai-settings"
 	| "correction"
-	| "translation";
+	| "translation"
+	| "notes";
