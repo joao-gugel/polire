@@ -54,10 +54,7 @@ src/
     ├── page-layout.tsx      # header w/ back + content slot + footer (non-root views)
     ├── search-input.tsx     # top text field
     ├── option-list.tsx      # list of selectable commands
-    ├── option-item.tsx      # single row (hover + click + selected state)
-    ├── theme-row.tsx        # row in theme switcher (icon + label + check)
-    ├── provider-row.tsx     # row in AI provider list (icon + label + check)
-    ├── nav-row.tsx          # row that navigates to a sub-view (icon + label + chevron)
+    ├── ui/option-item.tsx   # shared selectable row + icon/check/caret adornments
     ├── footer.tsx           # bottom bar: logo + keyboard hints
     ├── kbd.tsx              # visual key representation
     └── noise.tsx            # SVG turbulence overlay (Linux-only glass texture)

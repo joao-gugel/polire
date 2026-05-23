@@ -1,15 +1,26 @@
 import {
+	type Icon,
 	MonitorIcon,
 	MoonIcon,
 	SparkleIcon,
 	SunIcon,
 } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import { NavRow } from "../components/nav-row";
 import { PageLayout } from "../components/page-layout";
-import { type ThemeOption, ThemeRow } from "../components/theme-row";
+import {
+	OptionItem,
+	OptionItemCaret,
+	OptionItemCheck,
+	OptionItemIcon,
+} from "../components/ui/option-item";
 import { useNav } from "../nav";
 import { getStoredTheme, setTheme, type Theme } from "../theme";
+
+type ThemeOption = {
+	id: Theme;
+	label: string;
+	icon: Icon;
+};
 
 const SELECTION_LAYOUT_ID = "settings-selection";
 
@@ -76,12 +87,20 @@ export function Settings() {
 					<SectionHeader label="Tema" />
 					<div className="flex flex-col gap-0.5">
 						{THEMES.map((option, index) => (
-							<ThemeRow
+							<OptionItem
 								key={option.id}
-								option={option}
+								label={option.label}
 								selected={index === selected}
-								isCurrent={option.id === activeTheme}
 								layoutId={SELECTION_LAYOUT_ID}
+								leading={
+									<OptionItemIcon
+										icon={option.icon}
+										selected={index === selected}
+									/>
+								}
+								trailing={
+									option.id === activeTheme ? <OptionItemCheck /> : undefined
+								}
 								onHover={() => setSelected(index)}
 								onSelect={() => applyTheme(option.id)}
 							/>
@@ -90,11 +109,17 @@ export function Settings() {
 				</section>
 				<section>
 					<SectionHeader label="Geral" />
-					<NavRow
+					<OptionItem
 						label="IA"
-						icon={SparkleIcon}
 						selected={selected === NAV_INDEX_AI}
 						layoutId={SELECTION_LAYOUT_ID}
+						leading={
+							<OptionItemIcon
+								icon={SparkleIcon}
+								selected={selected === NAV_INDEX_AI}
+							/>
+						}
+						trailing={<OptionItemCaret selected={selected === NAV_INDEX_AI} />}
 						onHover={() => setSelected(NAV_INDEX_AI)}
 						onSelect={() => push("ai-settings")}
 					/>

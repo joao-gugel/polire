@@ -12,8 +12,16 @@ import deepseekLogo from "../assets/providers/deepseek.png";
 import googleLogo from "../assets/providers/google-gemini.png";
 import openaiLogo from "../assets/providers/openai.svg";
 import { PageLayout } from "../components/page-layout";
-import { type ProviderOption, ProviderRow } from "../components/provider-row";
+import { OptionItem, OptionItemCheck } from "../components/ui/option-item";
 import { useNav } from "../nav";
+
+type ProviderOption = {
+	id: AiProvider;
+	label: string;
+	logo: string;
+	invertInDarkMode?: boolean;
+	logoClassName?: string;
+};
 
 const PROVIDER_LAYOUT_ID = "ai-provider-selection";
 
@@ -134,12 +142,25 @@ export function AiSettings() {
 					<SectionHeader label="Provider" />
 					<div className="flex flex-col gap-0.5">
 						{PROVIDERS.map((option, index) => (
-							<ProviderRow
+							<OptionItem
 								key={option.id}
-								option={option}
+								label={option.label}
 								selected={index === selected}
-								isCurrent={option.id === settings?.provider}
 								layoutId={PROVIDER_LAYOUT_ID}
+								leading={
+									<img
+										src={option.logo}
+										alt=""
+										className={`relative h-5 w-5 object-contain ${option.logoClassName ?? ""} ${
+											option.invertInDarkMode ? "dark:invert" : ""
+										}`}
+									/>
+								}
+								trailing={
+									option.id === settings?.provider ? (
+										<OptionItemCheck />
+									) : undefined
+								}
 								onHover={() => setSelected(index)}
 								onSelect={() => selectProvider(option.id)}
 							/>

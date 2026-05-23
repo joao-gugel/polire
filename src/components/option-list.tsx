@@ -1,5 +1,5 @@
 import type { CommandOption } from "../types";
-import { OptionItem } from "./option-item";
+import { OptionItem, OptionItemIcon } from "./ui/option-item";
 
 type OptionListProps = {
 	options: CommandOption[];
@@ -19,8 +19,15 @@ export function OptionList({
 			{options.map((option, index) => (
 				<OptionItem
 					key={option.id}
-					option={option}
+					label={option.label}
 					selected={index === selectedIndex}
+					layoutId="palette-selection"
+					leading={
+						<OptionItemIcon
+							icon={option.icon}
+							selected={index === selectedIndex}
+						/>
+					}
 					onHover={() => onHover(index)}
 					onSelect={() => onSelect(index)}
 				/>
