@@ -4,7 +4,7 @@ import type { Note } from "../../../electron/notes/types";
 
 type Props = {
 	note: Note | null;
-	textareaRef: RefObject<HTMLTextAreaElement>;
+	textareaRef: RefObject<HTMLTextAreaElement | null>;
 	onChange: (content: string) => void;
 	onBlur: (content: string) => void;
 	onKeyDown: (event: ReactKeyboardEvent<HTMLTextAreaElement>) => void;

@@ -13,7 +13,7 @@ type Props = {
 	selected: boolean;
 	visible: boolean;
 	saving: boolean;
-	inputRef: RefObject<HTMLInputElement>;
+	inputRef: RefObject<HTMLInputElement | null>;
 	onChange: (value: string) => void;
 	onFocus: () => void;
 	onToggleVisibility: () => void;
