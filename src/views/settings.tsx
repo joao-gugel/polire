@@ -1,18 +1,9 @@
-import {
-	ArrowLeftIcon,
-	MonitorIcon,
-	MoonIcon,
-	SunIcon,
-} from "@phosphor-icons/react";
+import { MonitorIcon, MoonIcon, SunIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import { Footer } from "../components/footer";
+import { PageLayout } from "../components/page-layout";
 import { type ThemeOption, ThemeRow } from "../components/theme-row";
+import { useNav } from "../nav";
 import { getStoredTheme, setTheme, type Theme } from "../theme";
-import type { View } from "../types";
-
-type Props = {
-	onNavigate: (view: View) => void;
-};
 
 const THEMES: ThemeOption[] = [
 	{ id: "light", label: "Light", icon: SunIcon },
@@ -20,18 +11,21 @@ const THEMES: ThemeOption[] = [
 	{ id: "system", label: "Sistema", icon: MonitorIcon },
 ];
 
-export function Settings({ onNavigate }: Props) {
-	const [current, setCurrent] = useState<Theme>(getStoredTheme);
+export function Settings() {
+	const { current, pop } = useNav();
+	const isActive = current === "settings";
+	const [activeTheme, setActiveTheme] = useState<Theme>(getStoredTheme);
 	const [selected, setSelected] = useState(() =>
 		THEMES.findIndex((option) => option.id === getStoredTheme()),
 	);
 
 	function applyTheme(next: Theme) {
 		setTheme(next);
-		setCurrent(next);
+		setActiveTheme(next);
 	}
 
 	useEffect(() => {
+		if (!isActive) return;
 		const handleKeyDown = (event: KeyboardEvent) => {
 			if (event.key === "ArrowDown") {
 				event.preventDefault();
@@ -47,35 +41,22 @@ export function Settings({ onNavigate }: Props) {
 				event.preventDefault();
 				const next = THEMES[selected].id;
 				setTheme(next);
-				setCurrent(next);
+				setActiveTheme(next);
 				return;
 			}
 			if (event.key === "Backspace") {
 				event.preventDefault();
-				onNavigate("palette");
+				pop();
 				return;
 			}
 		};
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [selected, onNavigate]);
+	}, [isActive, selected, pop]);
 
 	return (
-		<>
-			<header className="flex items-center gap-3 px-4 py-4">
-				<button
-					type="button"
-					onClick={() => onNavigate("palette")}
-					className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-zinc-700 outline-none transition-colors hover:bg-zinc-900/5 focus:outline-none focus-visible:outline-none dark:text-zinc-300 dark:hover:bg-white/10"
-				>
-					<ArrowLeftIcon size={16} weight="regular" />
-				</button>
-				<h1 className="font-medium text-base text-zinc-900 dark:text-zinc-50">
-					Configurações
-				</h1>
-			</header>
-			<div className="h-px bg-zinc-900/8 dark:bg-white/10" />
-			<div className="flex-1 overflow-y-auto px-2 py-3">
+		<PageLayout title="Configurações">
+			<div className="px-2 py-3">
 				<p className="px-3 pb-2 font-medium text-[11px] text-zinc-600 uppercase tracking-wider dark:text-zinc-400">
 					Tema
 				</p>
@@ -85,14 +66,13 @@ export function Settings({ onNavigate }: Props) {
 							key={option.id}
 							option={option}
 							selected={index === selected}
-							isCurrent={option.id === current}
+							isCurrent={option.id === activeTheme}
 							onHover={() => setSelected(index)}
 							onSelect={() => applyTheme(option.id)}
 						/>
 					))}
 				</div>
 			</div>
-			<Footer />
-		</>
+		</PageLayout>
 	);
 }

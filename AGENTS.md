@@ -39,16 +39,18 @@ electron/
 ├── main.ts        # entry: whenReady wiring + global shortcuts
 └── preload.ts     # renderer ↔ main bridge (exposes `window.api`)
 src/
-├── app.tsx                  # router: picks the view (palette / settings)
+├── app.tsx                  # shell: wraps NavProvider + AnimatePresence + view renderer
+├── nav.tsx                  # navigation stack (push/pop) + slide direction, via Context
 ├── main.tsx                 # React entry — mounts <App /> into #root
 ├── main.css                 # Tailwind v4 import + dark variant + base styles
 ├── theme.ts                 # theme state: persistence + DOM apply
 ├── types.ts                 # shared types (CommandOption, View, ...)
 ├── global.d.ts              # ambient types (window.api from preload)
 ├── views/
-│   ├── palette.tsx          # main view: search + command list
-│   └── settings.tsx         # settings view: theme switcher, future sections
+│   ├── palette.tsx          # root view: search + command list (no back)
+│   └── settings.tsx         # secondary view: theme switcher, future sections
 └── components/
+    ├── page-layout.tsx      # header w/ back + content slot + footer (non-root views)
     ├── search-input.tsx     # top text field
     ├── option-list.tsx      # list of selectable commands
     ├── option-item.tsx      # single row (hover + click + selected state)
@@ -61,6 +63,18 @@ vite.config.ts     # Vite + plugins (React, Tailwind, Electron)
 ```
 
 Module-level state in `electron/` is intentional: `win` and `isQuitting` live as `let` bindings inside `window.ts` and are mutated by exported functions. Don't pull them out into a shared store — the encapsulation is the point.
+
+### Navigation
+
+The renderer uses a tiny stack-based router exposed through `useNav()` (`src/nav.tsx`):
+
+- `push(view)` / `pop()` — mutate the stack
+- `current` — top of stack
+- `direction` — `1` (forward) or `-1` (back), drives the slide animation in `app.tsx`
+
+Views that are not the root render inside `<PageLayout title="...">` so they get the back button + footer for free. Views read `current` to know whether they're the active screen — `useEffect` keyboard handlers early-return when `isActive` is false, so the offscreen view (mid-transition) doesn't intercept input.
+
+When adding a new view: extend the `View` union in `src/types.ts`, add a branch in `renderView` (in `app.tsx`), and call `push("your-view")` from wherever it's triggered.
 
 ## Scripts
 

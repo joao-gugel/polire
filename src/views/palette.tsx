@@ -3,13 +3,10 @@ import { useEffect, useMemo, useState } from "react";
 import { Footer } from "../components/footer";
 import { OptionList } from "../components/option-list";
 import { SearchInput } from "../components/search-input";
-import type { CommandOption, View } from "../types";
+import { useNav } from "../nav";
+import type { CommandOption } from "../types";
 
-type Props = {
-	onNavigate: (view: View) => void;
-};
-
-function buildOptions(onNavigate: (view: View) => void): CommandOption[] {
+function buildOptions(push: (view: "settings") => void): CommandOption[] {
 	return [
 		{
 			id: "quick-note",
@@ -27,17 +24,20 @@ function buildOptions(onNavigate: (view: View) => void): CommandOption[] {
 			id: "settings",
 			label: "Configurações",
 			icon: GearIcon,
-			action: () => onNavigate("settings"),
+			action: () => push("settings"),
 		},
 	];
 }
 
-export function Palette({ onNavigate }: Props) {
+export function Palette() {
+	const { push, current } = useNav();
+	const isActive = current === "palette";
 	const [query, setQuery] = useState("");
 	const [selected, setSelected] = useState(0);
-	const options = useMemo(() => buildOptions(onNavigate), [onNavigate]);
+	const options = useMemo(() => buildOptions(push), [push]);
 
 	useEffect(() => {
+		if (!isActive) return;
 		const handleKeyDown = (event: KeyboardEvent) => {
 			if (event.key === "ArrowDown") {
 				event.preventDefault();
@@ -57,7 +57,7 @@ export function Palette({ onNavigate }: Props) {
 		};
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [selected, options]);
+	}, [isActive, selected, options]);
 
 	return (
 		<>
