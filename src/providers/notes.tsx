@@ -12,6 +12,7 @@ type NotesContextValue = {
 	loadNotes: () => Promise<void>;
 	createNote: (content: string) => Promise<Note>;
 	updateNote: (id: string, content: string) => Promise<Note>;
+	removeNote: (id: string) => Promise<void>;
 };
 
 const NotesContext = createContext<NotesContextValue | null>(null);
@@ -37,8 +38,15 @@ export function NotesProvider({ children }: { children: ReactNode }) {
 		return updated;
 	}, []);
 
+	const removeNote = useCallback(async (id: string) => {
+		await window.api.notes.remove(id);
+		setNotes((current) => current.filter((note) => note.id !== id));
+	}, []);
+
 	return (
-		<NotesContext.Provider value={{ notes, loadNotes, createNote, updateNote }}>
+		<NotesContext.Provider
+			value={{ notes, loadNotes, createNote, updateNote, removeNote }}
+		>
 			{children}
 		</NotesContext.Provider>
 	);

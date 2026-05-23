@@ -39,6 +39,7 @@ declare global {
 				list: () => Promise<Note[]>;
 				create: (content: string) => Promise<Note>;
 				update: (id: string, content: string) => Promise<Note>;
+				remove: (id: string) => Promise<void>;
 			};
 		};
 	}

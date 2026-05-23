@@ -1,5 +1,12 @@
 import { randomUUID } from "node:crypto";
-import { mkdir, readdir, readFile, rename, writeFile } from "node:fs/promises";
+import {
+	mkdir,
+	readdir,
+	readFile,
+	rename,
+	unlink,
+	writeFile,
+} from "node:fs/promises";
 import path from "node:path";
 import { app } from "electron";
 import type { Note } from "./types";
@@ -110,4 +117,9 @@ export async function updateNote(id: string, content: string): Promise<Note> {
 	const note = { ...existing, content, updatedAt: new Date().toISOString() };
 	await persistNote(note);
 	return note;
+}
+
+/** Permanently removes one local note file. */
+export async function removeNote(id: string): Promise<void> {
+	await unlink(getNotePath(id));
 }

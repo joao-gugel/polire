@@ -3,7 +3,7 @@ import type { BrowserWindow, IpcMainInvokeEvent } from "electron";
 import { ipcMain } from "electron";
 import { DEV_URL, INDEX_HTML } from "../constants";
 import { NOTES_CHANNELS } from "./channels";
-import { createNote, listNotes, updateNote } from "./store";
+import { createNote, listNotes, removeNote, updateNote } from "./store";
 
 const MAX_NOTE_LENGTH = 100_000;
 const UUID_PATTERN =
@@ -54,6 +54,13 @@ function parseUpdateInput(value: unknown) {
 	return { id: value.id, content: parseContent(value.content) };
 }
 
+function parseNoteId(value: unknown) {
+	if (typeof value !== "string" || !UUID_PATTERN.test(value)) {
+		throw new Error("Invalid note id.");
+	}
+	return value;
+}
+
 /** Registers renderer access to local Markdown notes through validated operations. */
 export function registerNotesIpcHandlers(window: BrowserWindow) {
 	ipcMain.handle(NOTES_CHANNELS.list, async (event) => {
@@ -68,5 +75,9 @@ export function registerNotesIpcHandlers(window: BrowserWindow) {
 		assertMainWindowSender(event, window);
 		const note = parseUpdateInput(input);
 		return updateNote(note.id, note.content);
+	});
+	ipcMain.handle(NOTES_CHANNELS.remove, async (event, id: unknown) => {
+		assertMainWindowSender(event, window);
+		await removeNote(parseNoteId(id));
 	});
 }

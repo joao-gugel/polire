@@ -25,5 +25,6 @@ contextBridge.exposeInMainWorld("api", {
 			ipcRenderer.invoke(NOTES_CHANNELS.create, content),
 		update: (id: unknown, content: unknown) =>
 			ipcRenderer.invoke(NOTES_CHANNELS.update, { id, content }),
+		remove: (id: unknown) => ipcRenderer.invoke(NOTES_CHANNELS.remove, id),
 	},
 });

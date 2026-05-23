@@ -1,6 +1,6 @@
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import {
 	type KeyboardEvent as ReactKeyboardEvent,
 	useCallback,
@@ -10,6 +10,8 @@ import {
 	useState,
 } from "react";
 import { PageLayout } from "@/components/page-layout";
+import { Footer } from "@/components/ui/footer";
+import { Kbd } from "@/components/ui/kbd";
 import { useNav } from "@/providers/nav";
 import { useNotes } from "@/providers/notes";
 import type { Note } from "../../electron/notes/types";
@@ -19,7 +21,7 @@ const SAVE_DELAY_MS = 300;
 
 export function Notes() {
 	const { current, pop } = useNav();
-	const { notes, loadNotes, updateNote } = useNotes();
+	const { notes, loadNotes, updateNote, removeNote } = useNotes();
 	const isActive = current === "notes";
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const selected =
@@ -28,6 +30,7 @@ export function Notes() {
 		? notes.findIndex((note) => note.id === selected.id)
 		: -1;
 	const [draft, setDraft] = useState("");
+	const [removing, setRemoving] = useState(false);
 	const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 	const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -69,6 +72,39 @@ export function Notes() {
 		void updateNote(selected.id, draft);
 	}, [selected, draft, updateNote]);
 
+	const removeSelectedNote = useCallback(async () => {
+		if (!selected || removing) return;
+		setRemoving(true);
+		try {
+			await removeNote(selected.id);
+		} finally {
+			setRemoving(false);
+		}
+	}, [selected, removing, removeNote]);
+
+	useEffect(() => {
+		if (!isActive || !selected) return;
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key !== "Delete" || !event.ctrlKey) return;
+			event.preventDefault();
+			void removeSelectedNote();
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, [isActive, selected, removeSelectedNote]);
+
+	useEffect(() => {
+		if (!isActive) return;
+		const handleBackspace = (event: KeyboardEvent) => {
+			if (event.key !== "Backspace") return;
+			if (event.target === textareaRef.current) return;
+			event.preventDefault();
+			pop();
+		};
+		window.addEventListener("keydown", handleBackspace);
+		return () => window.removeEventListener("keydown", handleBackspace);
+	}, [isActive, pop]);
+
 	const selectNote = useCallback(
 		(id: string) => {
 			saveDraft();
@@ -88,11 +124,6 @@ export function Notes() {
 	);
 
 	function handleItemKeyDown(event: ReactKeyboardEvent<HTMLButtonElement>) {
-		if (event.key === "Backspace") {
-			event.preventDefault();
-			pop();
-			return;
-		}
 		if (event.key === "ArrowDown") {
 			event.preventDefault();
 			moveSelection(1);
@@ -116,22 +147,42 @@ export function Notes() {
 	}
 
 	return (
-		<PageLayout title="Notas">
+		<PageLayout
+			title="Notas"
+			footer={
+				<Footer
+					additionalHint={
+						selected ? (
+							<span className="flex items-center gap-1.5">
+								<span className="font-medium text-sm text-zinc-700 dark:text-zinc-300">
+									Apagar
+								</span>
+								<Kbd>ctrl</Kbd>
+								<span className="text-zinc-400 dark:text-zinc-500">+</span>
+								<Kbd>del</Kbd>
+							</span>
+						) : undefined
+					}
+				/>
+			}
+		>
 			<div className="flex h-full w-full">
 				<div className="flex w-56 shrink-0 flex-col gap-0.5 overflow-y-auto px-2 py-2">
-					{notes.map((note, index) => (
-						<NoteListItem
-							key={note.id}
-							innerRef={(element) => {
-								itemRefs.current[index] = element;
-							}}
-							note={note}
-							selected={note.id === selected?.id}
-							tabbable={note.id === selected?.id}
-							onSelect={() => selectNote(note.id)}
-							onKeyDown={handleItemKeyDown}
-						/>
-					))}
+					<AnimatePresence initial={false}>
+						{notes.map((note, index) => (
+							<NoteListItem
+								key={note.id}
+								innerRef={(element) => {
+									itemRefs.current[index] = element;
+								}}
+								note={note}
+								selected={note.id === selected?.id}
+								tabbable={note.id === selected?.id}
+								onSelect={() => selectNote(note.id)}
+								onKeyDown={handleItemKeyDown}
+							/>
+						))}
+					</AnimatePresence>
 					{notes.length === 0 && (
 						<p className="px-3 py-4 text-xs text-zinc-500 dark:text-zinc-400">
 							Nenhuma nota salva.
@@ -185,14 +236,17 @@ function NoteListItem({
 	const preview = useMemo(() => extractPreview(note.content), [note.content]);
 	const date = useRelativeDate(new Date(note.updatedAt));
 	return (
-		<button
+		<motion.button
+			layout
 			ref={innerRef}
 			type="button"
 			onClick={onSelect}
 			onKeyDown={onKeyDown}
 			tabIndex={tabbable ? 0 : -1}
 			data-selected={selected || undefined}
-			className="relative w-full cursor-pointer rounded-xl px-3 py-2.5 text-left outline-none focus:outline-none focus-visible:outline-none"
+			exit={{ opacity: 0, x: -12, height: 0, paddingTop: 0, paddingBottom: 0 }}
+			transition={{ duration: 0.18, ease: "easeOut" }}
+			className="relative w-full cursor-pointer overflow-hidden rounded-xl px-3 py-2.5 text-left outline-none focus:outline-none focus-visible:outline-none"
 		>
 			{selected && (
 				<motion.div
@@ -215,7 +269,7 @@ function NoteListItem({
 					{date}
 				</p>
 			</div>
-		</button>
+		</motion.button>
 	);
 }
 
