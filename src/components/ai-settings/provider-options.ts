@@ -27,6 +27,6 @@ export const PROVIDER_OPTIONS: ProviderOption[] = [
 export const DEFAULT_MODELS: Record<AiProvider, string> = {
 	openai: "gpt-5.4",
 	anthropic: "claude-haiku-4-5",
-	google: "gemini-2.0-flash",
+	google: "gemini-2.5-flash",
 	deepseek: "deepseek-v4-flash",
 };
