@@ -12,15 +12,18 @@ import { useNav } from "@/hooks/use-nav";
 import { getStoredTheme, setTheme, type Theme } from "@/theme";
 
 const SELECTION_LAYOUT_ID = "settings-selection";
-const NAV_INDEX_AI = THEME_OPTIONS.length;
+const NAV_INDEX_AI = 0;
+const THEME_INDEX_OFFSET = 1;
 const TOTAL_ITEMS = THEME_OPTIONS.length + 1;
 
 export function Settings() {
 	const { current, pop, push } = useNav();
 	const isActive = current === "settings";
 	const [activeTheme, setActiveTheme] = useState<Theme>(getStoredTheme);
-	const [selected, setSelected] = useState(() =>
-		THEME_OPTIONS.findIndex((option) => option.id === getStoredTheme()),
+	const [selected, setSelected] = useState(
+		() =>
+			THEME_OPTIONS.findIndex((option) => option.id === getStoredTheme()) +
+			THEME_INDEX_OFFSET,
 	);
 	const [confirmation, setConfirmation] = useState({ index: -1, sequence: 0 });
 
@@ -52,7 +55,7 @@ export function Settings() {
 					push("ai-settings");
 					return;
 				}
-				const next = THEME_OPTIONS[selected].id;
+				const next = THEME_OPTIONS[selected - THEME_INDEX_OFFSET].id;
 				setTheme(next);
 				setActiveTheme(next);
 				return;
@@ -70,16 +73,6 @@ export function Settings() {
 	return (
 		<PageLayout title="Configurações">
 			<div className="flex flex-col gap-3 px-2 py-3">
-				<section>
-					<SectionHeader label="Tema" />
-					<ThemeList
-						activeTheme={activeTheme}
-						selected={selected}
-						confirmation={confirmation}
-						onHover={setSelected}
-						onSelect={applyTheme}
-					/>
-				</section>
 				<section>
 					<SectionHeader label="Geral" />
 					<OptionItem
@@ -100,6 +93,17 @@ export function Settings() {
 						trailing={<OptionItemCaret selected={selected === NAV_INDEX_AI} />}
 						onHover={() => setSelected(NAV_INDEX_AI)}
 						onSelect={() => push("ai-settings")}
+					/>
+				</section>
+				<section>
+					<SectionHeader label="Tema" />
+					<ThemeList
+						activeTheme={activeTheme}
+						selected={selected}
+						confirmation={confirmation}
+						navigationIndexOffset={THEME_INDEX_OFFSET}
+						onHover={setSelected}
+						onSelect={applyTheme}
 					/>
 				</section>
 			</div>
