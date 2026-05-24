@@ -1,12 +1,22 @@
 import { ArrowElbowDownLeftIcon } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
-import { Hint } from "@/components/ui/hint";
+import { HintButton } from "@/components/ui/hint";
 import { useI18n } from "@/hooks/use-i18n";
 import polireMark from "../../../assets/brand/polire-mark.svg";
 
 type FooterProps = {
 	additionalHint?: ReactNode;
 };
+
+function dispatchEnter() {
+	window.dispatchEvent(
+		new KeyboardEvent("keydown", {
+			key: "Enter",
+			bubbles: true,
+			cancelable: true,
+		}),
+	);
+}
 
 export function Footer({ additionalHint }: FooterProps) {
 	const { t } = useI18n();
@@ -16,14 +26,19 @@ export function Footer({ additionalHint }: FooterProps) {
 				<img src={polireMark} alt="" className="h-5 w-5" />
 				<p className="text-base text-zinc-700 dark:text-zinc-300">Polire</p>
 			</div>
-			<div className="flex items-center gap-3 text-xs text-zinc-700 dark:text-zinc-300">
+			<div className="flex items-center gap-1 text-xs text-zinc-700 dark:text-zinc-300">
 				{additionalHint}
 				{additionalHint && (
-					<span className="text-zinc-300 dark:text-zinc-600">|</span>
+					<span className="px-1 text-zinc-300 dark:text-zinc-600">|</span>
 				)}
-				<Hint label={t("common.close")} kbd="esc" />
-				<span className="text-zinc-300 dark:text-zinc-600">|</span>
-				<Hint
+				<HintButton
+					onClick={() => void window.api.hide()}
+					label={t("common.close")}
+					kbd="esc"
+				/>
+				<span className="px-1 text-zinc-300 dark:text-zinc-600">|</span>
+				<HintButton
+					onClick={dispatchEnter}
 					label={t("common.send")}
 					kbd={<ArrowElbowDownLeftIcon size={11} weight="bold" />}
 				/>

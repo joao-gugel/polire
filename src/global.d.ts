@@ -25,6 +25,7 @@ declare global {
 	interface Window {
 		api: {
 			platform: Platform;
+			hide: () => Promise<void>;
 			ai: {
 				getSettings: () => Promise<AiSettingsStatus>;
 				saveSettings: (settings: AiSettings) => Promise<AiSettingsStatus>;

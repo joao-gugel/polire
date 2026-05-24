@@ -8,6 +8,7 @@ import { NOTES_CHANNELS } from "./notes/channels";
  */
 contextBridge.exposeInMainWorld("api", {
 	platform: process.platform,
+	hide: () => ipcRenderer.invoke("window:hide"),
 	ai: {
 		getSettings: () => ipcRenderer.invoke(AI_CHANNELS.getSettings),
 		saveSettings: (settings: unknown) =>

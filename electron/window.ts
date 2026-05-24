@@ -40,6 +40,11 @@ export function showWindow() {
 	win.focus();
 }
 
+/** Hide the window without quitting the app. No-op if it hasn't been created yet. */
+export function hideWindow() {
+	win?.hide();
+}
+
 /** Hide the window if it is visible and focused; otherwise show and focus it. No-op if it hasn't been created yet. */
 export function toggleWindow() {
 	if (!win) return;

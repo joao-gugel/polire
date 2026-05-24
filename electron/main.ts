@@ -1,9 +1,9 @@
-import { app, globalShortcut, Menu } from "electron";
+import { app, globalShortcut, ipcMain, Menu } from "electron";
 import { registerAiIpcHandlers } from "./ai/ipc";
 import { SHORTCUT } from "./constants";
 import { registerNotesIpcHandlers } from "./notes/ipc";
 import { createTray } from "./tray";
-import { createWindow, toggleWindow } from "./window";
+import { createWindow, hideWindow, toggleWindow } from "./window";
 
 /** Enable portal-backed global shortcuts for native Wayland sessions on Linux. */
 function enableLinuxGlobalShortcutsPortal() {
@@ -24,6 +24,7 @@ app.whenReady().then(() => {
 	const mainWindow = createWindow();
 	registerAiIpcHandlers(mainWindow);
 	registerNotesIpcHandlers(mainWindow);
+	ipcMain.handle("window:hide", () => hideWindow());
 	createTray();
 	registerShortcuts();
 });

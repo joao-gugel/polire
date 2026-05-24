@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
-import { Hint, HintButton } from "@/components/ui/hint";
+import { HintButton } from "@/components/ui/hint";
 import { HintsScroll } from "@/components/ui/transformation-result/hints-scroll";
 import { useI18n } from "@/hooks/use-i18n";
 import type { TransformHint } from "../../../../electron/ai/types";
@@ -49,7 +49,11 @@ export function ResultFooter({
 					)}
 				</div>
 				<div className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300">
-					<Hint label={t("common.close")} kbd="esc" />
+					<HintButton
+						onClick={() => void window.api.hide()}
+						label={t("common.close")}
+						kbd="esc"
+					/>
 				</div>
 			</div>
 		</div>
