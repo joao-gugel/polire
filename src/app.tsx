@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from "motion/react";
+import { Suspense } from "react";
 import { Noise } from "@/components/ui/noise";
 import { useNav } from "@/hooks/use-nav";
+import { AiStatusProvider } from "@/providers/ai-status";
 import { CorrectionProvider } from "@/providers/correction";
 import { I18nProvider } from "@/providers/i18n";
 import { NavProvider } from "@/providers/nav";
@@ -10,6 +12,7 @@ import type { View } from "@/types";
 import { AiSettings } from "@/views/ai-settings";
 import { Correction } from "@/views/correction";
 import { Notes } from "@/views/notes";
+import { Onboarding } from "@/views/onboarding";
 import { Palette } from "@/views/palette";
 import { Settings } from "@/views/settings";
 import { Translation } from "@/views/translation";
@@ -41,15 +44,19 @@ const slideTransition = { duration: 0.28, ease: [0.32, 0.72, 0, 1] } as const;
 export default function App() {
 	return (
 		<I18nProvider>
-			<NotesProvider>
-				<TranslationProvider>
-					<CorrectionProvider>
-						<NavProvider initial="palette">
-							<Shell />
-						</NavProvider>
-					</CorrectionProvider>
-				</TranslationProvider>
-			</NotesProvider>
+			<Suspense fallback={null}>
+				<AiStatusProvider>
+					<NotesProvider>
+						<TranslationProvider>
+							<CorrectionProvider>
+								<NavProvider initial="palette">
+									<Shell />
+								</NavProvider>
+							</CorrectionProvider>
+						</TranslationProvider>
+					</NotesProvider>
+				</AiStatusProvider>
+			</Suspense>
 		</I18nProvider>
 	);
 }
@@ -82,6 +89,7 @@ function Shell() {
 function renderView(view: View) {
 	if (view === "palette") return <Palette />;
 	if (view === "settings") return <Settings />;
+	if (view === "onboarding") return <Onboarding />;
 	if (view === "ai-settings") return <AiSettings />;
 	if (view === "correction") return <Correction />;
 	if (view === "translation-target") return <TranslationTarget />;

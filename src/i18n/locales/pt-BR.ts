@@ -9,12 +9,14 @@ export type Messages = {
 	};
 	palette: {
 		placeholder: string;
+		disabledAiHint: string;
 		options: {
 			correction: string;
 			translation: string;
 			saveNote: string;
 			openNotes: string;
 			settings: string;
+			onboardAi: string;
 		};
 	};
 	settings: {
@@ -38,6 +40,7 @@ export type Messages = {
 	};
 	aiSettings: {
 		title: string;
+		description: string;
 		sections: {
 			provider: string;
 			apiKey: string;
@@ -45,6 +48,15 @@ export type Messages = {
 		apiKey: {
 			placeholder: string;
 			placeholderWithSaved: string;
+		};
+	};
+	onboarding: {
+		title: string;
+		options: {
+			localKey: {
+				label: string;
+				description: string;
+			};
 		};
 	};
 	correction: {
@@ -107,12 +119,14 @@ export const ptBR: Messages = {
 	},
 	palette: {
 		placeholder: "Escreva ou cole seu texto...",
+		disabledAiHint: "Configure a IA para usar",
 		options: {
 			correction: "Corrigir texto",
 			translation: "Traduzir",
 			saveNote: "Salvar nota",
 			openNotes: "Abrir notas",
 			settings: "Configurações",
+			onboardAi: "Começar a usar o Polire",
 		},
 	},
 	settings: {
@@ -135,7 +149,9 @@ export const ptBR: Messages = {
 		},
 	},
 	aiSettings: {
-		title: "IA",
+		title: "Usar minha própria chave de API",
+		description:
+			"Escolha um provedor e informe sua chave para corrigir e traduzir textos.",
 		sections: {
 			provider: "Provider",
 			apiKey: "Chave da API",
@@ -143,6 +159,16 @@ export const ptBR: Messages = {
 		apiKey: {
 			placeholder: "Cole sua chave e aperte enter",
 			placeholderWithSaved: "•••••••• (cole uma nova e aperte enter)",
+		},
+	},
+	onboarding: {
+		title: "Começar a usar o Polire",
+		options: {
+			localKey: {
+				label: "Usar com minha chave de API",
+				description:
+					"Conecte um provedor de IA e use sua própria chave, sem custo extra.",
+			},
 		},
 	},
 	correction: {

@@ -3,54 +3,91 @@ import {
 	MagicWandIcon,
 	NotebookIcon,
 	NotePencilIcon,
+	SparkleIcon,
 	TranslateIcon,
 } from "@phosphor-icons/react";
 import type { CommandOption } from "@/types";
 
 type PaletteDestination =
 	| "settings"
+	| "onboarding"
 	| "correction"
 	| "translation-target"
 	| "notes";
 
 type Translate = (key: string) => string;
 
-export function buildPaletteOptions(
-	t: Translate,
-	push: (view: PaletteDestination) => void,
-	correctText: (text: string) => Promise<void>,
-	startTranslation: (text: string) => void,
-	saveAsNote: (text: string) => Promise<void>,
-	openNotes: () => Promise<void>,
-	text: string,
-): CommandOption[] {
-	return [
+type PaletteOptionsInput = {
+	t: Translate;
+	push: (view: PaletteDestination) => void;
+	correctText: (text: string) => Promise<void>;
+	startTranslation: (text: string) => void;
+	saveAsNote: (text: string) => Promise<void>;
+	openNotes: () => Promise<void>;
+	text: string;
+	aiReady: boolean;
+};
+
+const noop = () => undefined;
+
+export function buildPaletteOptions({
+	t,
+	push,
+	correctText,
+	startTranslation,
+	saveAsNote,
+	openNotes,
+	text,
+	aiReady,
+}: PaletteOptionsInput): CommandOption[] {
+	const hasText = text.trim().length > 0;
+	const aiHint = aiReady ? undefined : t("palette.disabledAiHint");
+	const aiDisabled = !aiReady;
+
+	const onboardingOption: CommandOption | null = !aiReady
+		? {
+				id: "onboard-ai",
+				label: t("palette.options.onboardAi"),
+				icon: SparkleIcon,
+				action: () => push("onboarding"),
+			}
+		: null;
+
+	const baseOptions: CommandOption[] = [
 		{
 			id: "correction",
 			label: t("palette.options.correction"),
 			icon: MagicWandIcon,
-			action: () => {
-				if (!text.trim()) return;
-				void correctText(text);
-				push("correction");
-			},
+			disabled: aiDisabled,
+			hint: aiHint,
+			action: aiDisabled
+				? noop
+				: () => {
+						if (!hasText) return;
+						void correctText(text);
+						push("correction");
+					},
 		},
 		{
 			id: "translation",
 			label: t("palette.options.translation"),
 			icon: TranslateIcon,
-			action: () => {
-				if (!text.trim()) return;
-				startTranslation(text);
-				push("translation-target");
-			},
+			disabled: aiDisabled,
+			hint: aiHint,
+			action: aiDisabled
+				? noop
+				: () => {
+						if (!hasText) return;
+						startTranslation(text);
+						push("translation-target");
+					},
 		},
 		{
 			id: "quick-note",
 			label: t("palette.options.saveNote"),
 			icon: NotePencilIcon,
 			action: () => {
-				if (!text.trim()) return;
+				if (!hasText) return;
 				void saveAsNote(text);
 			},
 		},
@@ -67,4 +104,6 @@ export function buildPaletteOptions(
 			action: () => push("settings"),
 		},
 	];
+
+	return onboardingOption ? [onboardingOption, ...baseOptions] : baseOptions;
 }

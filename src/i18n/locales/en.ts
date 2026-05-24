@@ -11,12 +11,14 @@ export const en: Messages = {
 	},
 	palette: {
 		placeholder: "Type or paste your text...",
+		disabledAiHint: "Configure AI to use",
 		options: {
 			correction: "Improve text",
 			translation: "Translate",
 			saveNote: "Save note",
 			openNotes: "Open notes",
 			settings: "Settings",
+			onboardAi: "Get started with Polire",
 		},
 	},
 	settings: {
@@ -39,7 +41,9 @@ export const en: Messages = {
 		},
 	},
 	aiSettings: {
-		title: "AI",
+		title: "Use my own API key",
+		description:
+			"Pick a provider and enter your key to improve and translate text.",
 		sections: {
 			provider: "Provider",
 			apiKey: "API key",
@@ -47,6 +51,16 @@ export const en: Messages = {
 		apiKey: {
 			placeholder: "Paste your key and press enter",
 			placeholderWithSaved: "•••••••• (paste a new one and press enter)",
+		},
+	},
+	onboarding: {
+		title: "Get started with Polire",
+		options: {
+			localKey: {
+				label: "Use my own API key",
+				description:
+					"Connect an AI provider with your own key — no extra cost.",
+			},
 		},
 	},
 	correction: {

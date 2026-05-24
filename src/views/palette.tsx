@@ -4,6 +4,7 @@ import { buildPaletteOptions } from "@/components/palette/palette-options";
 import { SavedNoteFeedback } from "@/components/palette/saved-note-feedback";
 import { SearchInput } from "@/components/palette/search-input";
 import { Footer } from "@/components/ui/footer";
+import { useAiStatus } from "@/hooks/use-ai-status";
 import { useCorrection } from "@/hooks/use-correction";
 import { useI18n } from "@/hooks/use-i18n";
 import { useNav } from "@/hooks/use-nav";
@@ -13,6 +14,7 @@ import { useTranslation } from "@/hooks/use-translation";
 export function Palette() {
 	const { t } = useI18n();
 	const { push, current } = useNav();
+	const { status } = useAiStatus();
 	const { correctText } = useCorrection();
 	const { setDraft } = useTranslation();
 	const { createNote, loadNotes } = useNotes();
@@ -32,15 +34,19 @@ export function Palette() {
 		push("notes");
 	}
 
-	const options = buildPaletteOptions(
+	const options = buildPaletteOptions({
 		t,
 		push,
 		correctText,
-		setDraft,
+		startTranslation: setDraft,
 		saveAsNote,
 		openNotes,
-		query,
-	);
+		text: query,
+		aiReady: status.hasApiKey,
+	});
+
+	const safeSelected =
+		options.length === 0 ? 0 : Math.min(selected, options.length - 1);
 
 	useEffect(() => {
 		if (saveFeedbackSequence === 0) return;
@@ -63,17 +69,25 @@ export function Palette() {
 			}
 			if (event.key === "Enter" && !event.shiftKey) {
 				event.preventDefault();
+				const target = options[safeSelected];
+				if (!target || target.disabled) return;
 				setConfirmation((current) => ({
-					index: selected,
+					index: safeSelected,
 					sequence: current.sequence + 1,
 				}));
-				options[selected].action();
+				target.action();
 				return;
 			}
 		};
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [isActive, selected, options]);
+	}, [isActive, safeSelected, options]);
+
+	function selectByMouse(index: number) {
+		const target = options[index];
+		if (!target || target.disabled) return;
+		target.action();
+	}
 
 	return (
 		<>
@@ -89,10 +103,10 @@ export function Palette() {
 			<div className="flex-1 overflow-y-auto">
 				<OptionList
 					options={options}
-					selectedIndex={selected}
+					selectedIndex={safeSelected}
 					confirmation={confirmation}
 					onHover={setSelected}
-					onSelect={(index) => options[index].action()}
+					onSelect={selectByMouse}
 				/>
 			</div>
 			<Footer />

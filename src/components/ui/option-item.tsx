@@ -8,7 +8,10 @@ type OptionItemProps = {
 	layoutId: string;
 	leading: ReactNode;
 	trailing?: ReactNode;
+	/** Small muted line rendered below the label. */
+	description?: ReactNode;
 	confirmationSequence?: number;
+	disabled?: boolean;
 	onHover: () => void;
 	onSelect: () => void;
 };
@@ -41,7 +44,9 @@ export function OptionItem({
 	layoutId,
 	leading,
 	trailing,
+	description,
 	confirmationSequence,
+	disabled = false,
 	onHover,
 	onSelect,
 }: OptionItemProps) {
@@ -61,18 +66,28 @@ export function OptionItem({
 		buttonRef.current?.scrollIntoView({ block: "nearest" });
 	}, [selected]);
 
+	function handleClick() {
+		if (disabled) return;
+		onSelect();
+	}
+
+	const interactionClass = disabled
+		? "cursor-not-allowed opacity-55"
+		: "cursor-pointer";
+
 	return (
 		<motion.button
 			ref={buttonRef}
 			type="button"
-			onClick={onSelect}
+			onClick={handleClick}
 			onMouseEnter={onHover}
+			aria-disabled={disabled || undefined}
 			animate={confirmationControls}
-			whileTap={{ scale: 0.965 }}
+			whileTap={disabled ? undefined : { scale: 0.965 }}
 			transition={tapTransition}
-			className="relative flex w-full cursor-pointer items-center gap-2 rounded-xl px-3 py-3 text-left text-sm outline-none focus:outline-none focus-visible:outline-none"
+			className={`relative flex w-full items-center gap-2 rounded-xl px-3 py-3 text-left text-sm outline-none focus:outline-none focus-visible:outline-none ${interactionClass}`}
 		>
-			{selected && (
+			{selected && !disabled && (
 				<motion.div
 					layoutId={layoutId}
 					transition={selectionTransition}
@@ -80,14 +95,21 @@ export function OptionItem({
 				/>
 			)}
 			{leading}
-			<span
-				className={`relative flex-1 text-base transition-colors ${
-					selected
-						? "text-zinc-900 dark:text-zinc-50"
-						: "text-zinc-700 dark:text-zinc-200"
-				}`}
-			>
-				{label}
+			<span className="relative flex min-w-0 flex-1 flex-col gap-0.5">
+				<span
+					className={`text-base transition-colors ${
+						selected && !disabled
+							? "text-zinc-900 dark:text-zinc-50"
+							: "text-zinc-700 dark:text-zinc-200"
+					}`}
+				>
+					{label}
+				</span>
+				{description && (
+					<span className="text-xs text-zinc-500 dark:text-zinc-400">
+						{description}
+					</span>
+				)}
 			</span>
 			{trailing}
 		</motion.button>
@@ -129,5 +151,18 @@ export function OptionItemCaret({ selected }: OptionItemCaretProps) {
 					: "text-zinc-400 dark:text-zinc-500"
 			}`}
 		/>
+	);
+}
+
+type OptionItemHintProps = {
+	label: string;
+};
+
+/** Small muted label rendered on the right of an OptionItem — typically a "why is this disabled" hint. */
+export function OptionItemHint({ label }: OptionItemHintProps) {
+	return (
+		<span className="relative text-xs text-zinc-500 dark:text-zinc-400">
+			{label}
+		</span>
 	);
 }

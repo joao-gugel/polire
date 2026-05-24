@@ -6,12 +6,17 @@ export type CommandOption = {
 	label: string;
 	icon: Icon;
 	action: () => void;
+	/** When true, the option is shown but cannot be activated by click or Enter. */
+	disabled?: boolean;
+	/** Small muted text rendered on the right of the row — used to explain why an option is disabled. */
+	hint?: string;
 };
 
 /** Top-level views the window can show. */
 export type View =
 	| "palette"
 	| "settings"
+	| "onboarding"
 	| "ai-settings"
 	| "correction"
 	| "translation-target"

@@ -1,4 +1,8 @@
-import { OptionItem, OptionItemIcon } from "@/components/ui/option-item";
+import {
+	OptionItem,
+	OptionItemHint,
+	OptionItemIcon,
+} from "@/components/ui/option-item";
 import type { CommandOption } from "@/types";
 
 type OptionListProps = {
@@ -24,6 +28,7 @@ export function OptionList({
 					label={option.label}
 					selected={index === selectedIndex}
 					layoutId="palette-selection"
+					disabled={option.disabled}
 					confirmationSequence={
 						confirmation?.index === index ? confirmation.sequence : undefined
 					}
@@ -32,6 +37,9 @@ export function OptionList({
 							icon={option.icon}
 							selected={index === selectedIndex}
 						/>
+					}
+					trailing={
+						option.hint ? <OptionItemHint label={option.hint} /> : undefined
 					}
 					onHover={() => onHover(index)}
 					onSelect={() => onSelect(index)}

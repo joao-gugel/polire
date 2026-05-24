@@ -11,12 +11,14 @@ export const es: Messages = {
 	},
 	palette: {
 		placeholder: "Escribe o pega tu texto...",
+		disabledAiHint: "Configura la IA para usar",
 		options: {
 			correction: "Corregir texto",
 			translation: "Traducir",
 			saveNote: "Guardar nota",
 			openNotes: "Abrir notas",
 			settings: "Ajustes",
+			onboardAi: "Comenzar a usar Polire",
 		},
 	},
 	settings: {
@@ -39,7 +41,9 @@ export const es: Messages = {
 		},
 	},
 	aiSettings: {
-		title: "IA",
+		title: "Usar mi propia clave de API",
+		description:
+			"Elige un proveedor e ingresa tu clave para corregir y traducir textos.",
 		sections: {
 			provider: "Proveedor",
 			apiKey: "Clave de API",
@@ -47,6 +51,16 @@ export const es: Messages = {
 		apiKey: {
 			placeholder: "Pega tu clave y presiona enter",
 			placeholderWithSaved: "•••••••• (pega una nueva y presiona enter)",
+		},
+	},
+	onboarding: {
+		title: "Comenzar a usar Polire",
+		options: {
+			localKey: {
+				label: "Usar con mi propia clave de API",
+				description:
+					"Conecta un proveedor de IA con tu propia clave, sin costo adicional.",
+			},
 		},
 	},
 	correction: {
