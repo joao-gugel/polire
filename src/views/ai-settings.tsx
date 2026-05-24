@@ -7,6 +7,7 @@ import {
 } from "@/components/ai-settings/provider-options";
 import { PageLayout } from "@/components/ui/page-layout";
 import { SectionHeader } from "@/components/ui/section-header";
+import { useI18n } from "@/hooks/use-i18n";
 import { useNav } from "@/hooks/use-nav";
 import type { AiProvider, AiSettingsStatus } from "../../electron/ai/types";
 
@@ -14,6 +15,7 @@ const INPUT_INDEX = PROVIDER_OPTIONS.length;
 const TOTAL_ITEMS = PROVIDER_OPTIONS.length + 1;
 
 export function AiSettings() {
+	const { t } = useI18n();
 	const { current, pop } = useNav();
 	const isActive = current === "ai-settings";
 	const [settings, setSettings] = useState<AiSettingsStatus | null>(null);
@@ -124,10 +126,10 @@ export function AiSettings() {
 	}, [isActive, selected, pop, settings, apiKey, saving]);
 
 	return (
-		<PageLayout title="IA">
-			<div className="flex flex-col gap-4 px-2 py-3">
+		<PageLayout title={t("aiSettings.title")}>
+			<div className="flex h-full flex-col gap-4 overflow-y-auto px-2 py-3">
 				<section>
-					<SectionHeader label="Provider" />
+					<SectionHeader label={t("aiSettings.sections.provider")} />
 					<ProviderList
 						activeProvider={settings?.provider}
 						selected={selected}
@@ -138,7 +140,7 @@ export function AiSettings() {
 				</section>
 
 				<section>
-					<SectionHeader label="Chave da API" />
+					<SectionHeader label={t("aiSettings.sections.apiKey")} />
 					<ApiKeyInput
 						hasSavedKey={settings?.hasApiKey ?? false}
 						value={apiKey}

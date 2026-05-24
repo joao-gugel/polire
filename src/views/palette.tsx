@@ -5,11 +5,13 @@ import { SavedNoteFeedback } from "@/components/palette/saved-note-feedback";
 import { SearchInput } from "@/components/palette/search-input";
 import { Footer } from "@/components/ui/footer";
 import { useCorrection } from "@/hooks/use-correction";
+import { useI18n } from "@/hooks/use-i18n";
 import { useNav } from "@/hooks/use-nav";
 import { useNotes } from "@/hooks/use-notes";
 import { useTranslation } from "@/hooks/use-translation";
 
 export function Palette() {
+	const { t } = useI18n();
 	const { push, current } = useNav();
 	const { correctText } = useCorrection();
 	const { translateToEnglish } = useTranslation();
@@ -31,6 +33,7 @@ export function Palette() {
 	}
 
 	const options = buildPaletteOptions(
+		t,
 		push,
 		correctText,
 		translateToEnglish,
@@ -78,7 +81,7 @@ export function Palette() {
 				<SearchInput
 					value={query}
 					onChange={setQuery}
-					placeholder="Escreva ou cole seu texto..."
+					placeholder={t("palette.placeholder")}
 				/>
 				<SavedNoteFeedback sequence={saveFeedbackSequence} />
 			</div>

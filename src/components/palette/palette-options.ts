@@ -9,7 +9,10 @@ import type { CommandOption } from "@/types";
 
 type PaletteDestination = "settings" | "correction" | "translation" | "notes";
 
+type Translate = (key: string) => string;
+
 export function buildPaletteOptions(
+	t: Translate,
 	push: (view: PaletteDestination) => void,
 	correctText: (text: string) => Promise<void>,
 	translateToEnglish: (text: string) => Promise<void>,
@@ -20,7 +23,7 @@ export function buildPaletteOptions(
 	return [
 		{
 			id: "correction",
-			label: "Corrigir texto",
+			label: t("palette.options.correction"),
 			icon: MagicWandIcon,
 			action: () => {
 				if (!text.trim()) return;
@@ -30,7 +33,7 @@ export function buildPaletteOptions(
 		},
 		{
 			id: "translation",
-			label: "Traduzir para inglês",
+			label: t("palette.options.translation"),
 			icon: TranslateIcon,
 			action: () => {
 				if (!text.trim()) return;
@@ -40,7 +43,7 @@ export function buildPaletteOptions(
 		},
 		{
 			id: "quick-note",
-			label: "Salvar nota",
+			label: t("palette.options.saveNote"),
 			icon: NotePencilIcon,
 			action: () => {
 				if (!text.trim()) return;
@@ -49,13 +52,13 @@ export function buildPaletteOptions(
 		},
 		{
 			id: "notes",
-			label: "Abrir notas",
+			label: t("palette.options.openNotes"),
 			icon: NotebookIcon,
 			action: () => void openNotes(),
 		},
 		{
 			id: "settings",
-			label: "Configurações",
+			label: t("palette.options.settings"),
 			icon: GearIcon,
 			action: () => push("settings"),
 		},

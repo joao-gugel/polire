@@ -1,4 +1,5 @@
 import { createContext, type ReactNode, useState } from "react";
+import { useI18n } from "@/hooks/use-i18n";
 
 type TranslationState = {
 	original: string;
@@ -28,6 +29,7 @@ type TranslationProviderProps = {
 };
 
 export function TranslationProvider({ children }: TranslationProviderProps) {
+	const { t } = useI18n();
 	const [state, setState] = useState<TranslationState>(INITIAL_STATE);
 
 	async function translateToEnglish(text: string) {
@@ -54,7 +56,7 @@ export function TranslationProvider({ children }: TranslationProviderProps) {
 				original: text,
 				translated: "",
 				status: "error",
-				error: "Não foi possível traduzir o texto. Verifique sua API key.",
+				error: t("translation.error"),
 			});
 		}
 	}

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import { CompactRelativeDate } from "@/components/notes/relative-date";
+import { useI18n } from "@/hooks/use-i18n";
 import type { Note } from "../../../electron/notes/types";
 
 const SELECTION_LAYOUT_ID = "notes-selection";
@@ -20,6 +21,7 @@ export function NoteList({
 	onKeyDown,
 	registerItemRef,
 }: NoteListProps) {
+	const { t } = useI18n();
 	return (
 		<div className="flex w-56 shrink-0 flex-col gap-0.5 overflow-y-auto px-2 py-2">
 			<AnimatePresence initial={false}>
@@ -37,7 +39,7 @@ export function NoteList({
 			</AnimatePresence>
 			{notes.length === 0 && (
 				<p className="px-3 py-4 text-xs text-zinc-500 dark:text-zinc-400">
-					Nenhuma nota salva.
+					{t("notes.empty")}
 				</p>
 			)}
 		</div>
@@ -61,6 +63,7 @@ function NoteListItem({
 	onKeyDown,
 	innerRef,
 }: NoteListItemProps) {
+	const { t } = useI18n();
 	const preview = extractPreview(note.content);
 	return (
 		<motion.button
@@ -91,7 +94,7 @@ function NoteListItem({
 							: "text-zinc-700 dark:text-zinc-200"
 					}`}
 				>
-					{preview || "Nova nota"}
+					{preview || t("notes.newNote")}
 				</p>
 				<p className="truncate text-[11px] text-zinc-500 dark:text-zinc-400">
 					<CompactRelativeDate date={new Date(note.updatedAt)} />

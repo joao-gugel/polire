@@ -1,6 +1,6 @@
 import { CaretRightIcon, CheckIcon, type Icon } from "@phosphor-icons/react";
 import { motion, useAnimationControls } from "motion/react";
-import { type ReactNode, useEffect } from "react";
+import { type ReactNode, useEffect, useRef } from "react";
 
 type OptionItemProps = {
 	label: string;
@@ -46,6 +46,7 @@ export function OptionItem({
 	onSelect,
 }: OptionItemProps) {
 	const confirmationControls = useAnimationControls();
+	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	useEffect(() => {
 		if (!confirmationSequence) return;
@@ -55,8 +56,14 @@ export function OptionItem({
 		});
 	}, [confirmationSequence, confirmationControls]);
 
+	useEffect(() => {
+		if (!selected) return;
+		buttonRef.current?.scrollIntoView({ block: "nearest" });
+	}, [selected]);
+
 	return (
 		<motion.button
+			ref={buttonRef}
 			type="button"
 			onClick={onSelect}
 			onMouseEnter={onHover}

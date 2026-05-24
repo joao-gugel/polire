@@ -6,6 +6,7 @@ import {
 	SpinnerIcon,
 } from "@phosphor-icons/react";
 import type { RefObject } from "react";
+import { useI18n } from "@/hooks/use-i18n";
 
 type ApiKeyInputProps = {
 	hasSavedKey: boolean;
@@ -32,6 +33,7 @@ export function ApiKeyInput({
 	onToggleVisibility,
 	onSave,
 }: ApiKeyInputProps) {
+	const { t } = useI18n();
 	return (
 		<div className="relative px-2">
 			<input
@@ -42,8 +44,8 @@ export function ApiKeyInput({
 				onFocus={onFocus}
 				placeholder={
 					hasSavedKey
-						? "•••••••• (cole uma nova e aperte enter)"
-						: "Cole sua chave e aperte enter"
+						? t("aiSettings.apiKey.placeholderWithSaved")
+						: t("aiSettings.apiKey.placeholder")
 				}
 				className={`h-11 w-full rounded-xl pr-16 pl-12 text-base text-zinc-900 outline-none transition-colors placeholder:text-zinc-500 dark:text-zinc-50 dark:placeholder:text-zinc-400 border ${
 					selected

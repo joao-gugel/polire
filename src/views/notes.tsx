@@ -8,12 +8,14 @@ import { NoteEditor } from "@/components/notes/note-editor";
 import { NoteList } from "@/components/notes/note-list";
 import { NotesFooter } from "@/components/notes/notes-footer";
 import { PageLayout } from "@/components/ui/page-layout";
+import { useI18n } from "@/hooks/use-i18n";
 import { useNav } from "@/hooks/use-nav";
 import { useNotes } from "@/hooks/use-notes";
 
 const SAVE_DELAY_MS = 300;
 
 export function Notes() {
+	const { t } = useI18n();
 	const { current, pop } = useNav();
 	const { notes, updateNote, removeNote } = useNotes();
 	const isActive = current === "notes";
@@ -119,7 +121,7 @@ export function Notes() {
 
 	return (
 		<PageLayout
-			title="Notas"
+			title={t("notes.title")}
 			footer={<NotesFooter canRemove={selected !== null} />}
 		>
 			<div className="flex h-full w-full">

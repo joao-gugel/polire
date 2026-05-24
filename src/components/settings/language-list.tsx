@@ -1,55 +1,40 @@
-import {
-	type Icon,
-	MonitorIcon,
-	MoonIcon,
-	SunIcon,
-} from "@phosphor-icons/react";
+import { GlobeIcon } from "@phosphor-icons/react";
 import {
 	OptionItem,
 	OptionItemCheck,
 	OptionItemIcon,
 } from "@/components/ui/option-item";
 import { useI18n } from "@/hooks/use-i18n";
-import type { Theme } from "@/theme";
+import { LOCALES, type Locale } from "@/i18n";
 
-type ThemeOption = {
-	id: Theme;
-	labelKey: "light" | "dark" | "system";
-	icon: Icon;
-};
-
-export const THEME_OPTIONS: ThemeOption[] = [
-	{ id: "light", labelKey: "light", icon: SunIcon },
-	{ id: "dark", labelKey: "dark", icon: MoonIcon },
-	{ id: "system", labelKey: "system", icon: MonitorIcon },
-];
-
-type ThemeListProps = {
-	activeTheme: Theme;
+type LanguageListProps = {
+	activeLocale: Locale;
 	selected: number;
 	confirmation: { index: number; sequence: number };
 	navigationIndexOffset?: number;
 	onHover: (index: number) => void;
-	onSelect: (theme: Theme) => void;
+	onSelect: (locale: Locale) => void;
 };
 
-export function ThemeList({
-	activeTheme,
+export const LANGUAGE_OPTIONS = LOCALES;
+
+export function LanguageList({
+	activeLocale,
 	selected,
 	confirmation,
 	navigationIndexOffset = 0,
 	onHover,
 	onSelect,
-}: ThemeListProps) {
+}: LanguageListProps) {
 	const { t } = useI18n();
 	return (
 		<div className="flex flex-col gap-0.5">
-			{THEME_OPTIONS.map((option, index) => {
+			{LANGUAGE_OPTIONS.map((locale, index) => {
 				const navigationIndex = index + navigationIndexOffset;
 				return (
 					<OptionItem
-						key={option.id}
-						label={t(`settings.theme.${option.labelKey}`)}
+						key={locale}
+						label={t(`settings.language.${locale}`)}
 						selected={navigationIndex === selected}
 						layoutId="settings-selection"
 						confirmationSequence={
@@ -59,15 +44,13 @@ export function ThemeList({
 						}
 						leading={
 							<OptionItemIcon
-								icon={option.icon}
+								icon={GlobeIcon}
 								selected={navigationIndex === selected}
 							/>
 						}
-						trailing={
-							option.id === activeTheme ? <OptionItemCheck /> : undefined
-						}
+						trailing={locale === activeLocale ? <OptionItemCheck /> : undefined}
 						onHover={() => onHover(navigationIndex)}
-						onSelect={() => onSelect(option.id)}
+						onSelect={() => onSelect(locale)}
 					/>
 				);
 			})}

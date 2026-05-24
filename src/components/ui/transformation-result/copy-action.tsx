@@ -1,6 +1,7 @@
 import { CheckIcon, CopyIcon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { HintButton } from "@/components/ui/hint";
+import { useI18n } from "@/hooks/use-i18n";
 
 type CopyActionProps = {
 	copied: boolean;
@@ -16,11 +17,12 @@ type CopySwapLabelProps = {
 };
 
 export function CopyAction({ copied, onCopy }: CopyActionProps) {
+	const { t } = useI18n();
 	return (
 		<HintButton
 			onClick={onCopy}
 			kbd="C"
-			aria-label="Copiar texto"
+			aria-label={t("common.copyText")}
 			leading={<CopyLeading copied={copied} />}
 			label={<CopySwapLabel copied={copied} />}
 		/>
@@ -60,9 +62,10 @@ function CopyLeading({ copied }: CopyLeadingProps) {
 }
 
 function CopySwapLabel({ copied }: CopySwapLabelProps) {
+	const { t } = useI18n();
 	return (
 		<span className="relative inline-block">
-			<span className="invisible">Copiado</span>
+			<span className="invisible">{t("common.copied")}</span>
 			<AnimatePresence mode="wait" initial={false}>
 				<motion.span
 					key={copied ? "copied" : "copy"}
@@ -72,7 +75,7 @@ function CopySwapLabel({ copied }: CopySwapLabelProps) {
 					transition={{ duration: 0.14 }}
 					className="absolute inset-0"
 				>
-					{copied ? "Copiado" : "Copiar"}
+					{copied ? t("common.copied") : t("common.copy")}
 				</motion.span>
 			</AnimatePresence>
 		</span>

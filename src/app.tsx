@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Noise } from "@/components/ui/noise";
 import { useNav } from "@/hooks/use-nav";
 import { CorrectionProvider } from "@/providers/correction";
+import { I18nProvider } from "@/providers/i18n";
 import { NavProvider } from "@/providers/nav";
 import { NotesProvider } from "@/providers/notes";
 import { TranslationProvider } from "@/providers/translation";
@@ -38,15 +39,17 @@ const slideTransition = { duration: 0.28, ease: [0.32, 0.72, 0, 1] } as const;
 
 export default function App() {
 	return (
-		<NotesProvider>
-			<TranslationProvider>
-				<CorrectionProvider>
-					<NavProvider initial="palette">
-						<Shell />
-					</NavProvider>
-				</CorrectionProvider>
-			</TranslationProvider>
-		</NotesProvider>
+		<I18nProvider>
+			<NotesProvider>
+				<TranslationProvider>
+					<CorrectionProvider>
+						<NavProvider initial="palette">
+							<Shell />
+						</NavProvider>
+					</CorrectionProvider>
+				</TranslationProvider>
+			</NotesProvider>
+		</I18nProvider>
 	);
 }
 

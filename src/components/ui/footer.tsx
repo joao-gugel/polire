@@ -1,6 +1,7 @@
 import { ArrowElbowDownLeftIcon } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 import { Hint } from "@/components/ui/hint";
+import { useI18n } from "@/hooks/use-i18n";
 import polireMark from "../../../assets/brand/polire-mark.svg";
 
 type FooterProps = {
@@ -8,6 +9,7 @@ type FooterProps = {
 };
 
 export function Footer({ additionalHint }: FooterProps) {
+	const { t } = useI18n();
 	return (
 		<footer className="flex items-center justify-between border-zinc-900/8 border-t bg-zinc-50/40 px-4 py-3 dark:border-white/10 dark:bg-black/20">
 			<div className="flex items-center gap-1.5">
@@ -19,10 +21,10 @@ export function Footer({ additionalHint }: FooterProps) {
 				{additionalHint && (
 					<span className="text-zinc-300 dark:text-zinc-600">|</span>
 				)}
-				<Hint label="Fechar" kbd="esc" />
+				<Hint label={t("common.close")} kbd="esc" />
 				<span className="text-zinc-300 dark:text-zinc-600">|</span>
 				<Hint
-					label="Enviar"
+					label={t("common.send")}
 					kbd={<ArrowElbowDownLeftIcon size={11} weight="bold" />}
 				/>
 			</div>

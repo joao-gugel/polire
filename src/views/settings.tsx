@@ -1,5 +1,9 @@
 import { SparkleIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
+import {
+	LANGUAGE_OPTIONS,
+	LanguageList,
+} from "@/components/settings/language-list";
 import { THEME_OPTIONS, ThemeList } from "@/components/settings/theme-list";
 import {
 	OptionItem,
@@ -8,15 +12,18 @@ import {
 } from "@/components/ui/option-item";
 import { PageLayout } from "@/components/ui/page-layout";
 import { SectionHeader } from "@/components/ui/section-header";
+import { useI18n } from "@/hooks/use-i18n";
 import { useNav } from "@/hooks/use-nav";
 import { getStoredTheme, setTheme, type Theme } from "@/theme";
 
 const SELECTION_LAYOUT_ID = "settings-selection";
 const NAV_INDEX_AI = 0;
 const THEME_INDEX_OFFSET = 1;
-const TOTAL_ITEMS = THEME_OPTIONS.length + 1;
+const LANGUAGE_INDEX_OFFSET = THEME_INDEX_OFFSET + THEME_OPTIONS.length;
+const TOTAL_ITEMS = 1 + THEME_OPTIONS.length + LANGUAGE_OPTIONS.length;
 
 export function Settings() {
+	const { t, locale, setLocale } = useI18n();
 	const { current, pop, push } = useNav();
 	const isActive = current === "settings";
 	const [activeTheme, setActiveTheme] = useState<Theme>(getStoredTheme);
@@ -55,9 +62,14 @@ export function Settings() {
 					push("ai-settings");
 					return;
 				}
-				const next = THEME_OPTIONS[selected - THEME_INDEX_OFFSET].id;
-				setTheme(next);
-				setActiveTheme(next);
+				if (selected < LANGUAGE_INDEX_OFFSET) {
+					const next = THEME_OPTIONS[selected - THEME_INDEX_OFFSET].id;
+					setTheme(next);
+					setActiveTheme(next);
+					return;
+				}
+				const nextLocale = LANGUAGE_OPTIONS[selected - LANGUAGE_INDEX_OFFSET];
+				setLocale(nextLocale);
 				return;
 			}
 			if (event.key === "Backspace") {
@@ -68,15 +80,15 @@ export function Settings() {
 		};
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [isActive, selected, pop, push]);
+	}, [isActive, selected, pop, push, setLocale]);
 
 	return (
-		<PageLayout title="Configurações">
-			<div className="flex flex-col gap-3 px-2 py-3">
+		<PageLayout title={t("settings.title")}>
+			<div className="flex h-full flex-col gap-3 overflow-y-auto px-2 py-3">
 				<section>
-					<SectionHeader label="Geral" />
+					<SectionHeader label={t("settings.sections.general")} />
 					<OptionItem
-						label="IA"
+						label={t("settings.ai")}
 						selected={selected === NAV_INDEX_AI}
 						layoutId={SELECTION_LAYOUT_ID}
 						confirmationSequence={
@@ -96,7 +108,7 @@ export function Settings() {
 					/>
 				</section>
 				<section>
-					<SectionHeader label="Tema" />
+					<SectionHeader label={t("settings.sections.theme")} />
 					<ThemeList
 						activeTheme={activeTheme}
 						selected={selected}
@@ -104,6 +116,17 @@ export function Settings() {
 						navigationIndexOffset={THEME_INDEX_OFFSET}
 						onHover={setSelected}
 						onSelect={applyTheme}
+					/>
+				</section>
+				<section>
+					<SectionHeader label={t("settings.sections.language")} />
+					<LanguageList
+						activeLocale={locale}
+						selected={selected}
+						confirmation={confirmation}
+						navigationIndexOffset={LANGUAGE_INDEX_OFFSET}
+						onHover={setSelected}
+						onSelect={setLocale}
 					/>
 				</section>
 			</div>

@@ -4,12 +4,14 @@ import { buildPaletteOptions } from "@/components/palette/palette-options";
 type PaletteDestination = "settings" | "correction" | "translation" | "notes";
 
 function createActions(text: string) {
+	const t = (key: string) => key;
 	const push = mock((_view: PaletteDestination) => undefined);
 	const correctText = mock(async (_text: string) => undefined);
 	const translateToEnglish = mock(async (_text: string) => undefined);
 	const saveAsNote = mock(async (_text: string) => undefined);
 	const openNotes = mock(async () => undefined);
 	const options = buildPaletteOptions(
+		t,
 		push,
 		correctText,
 		translateToEnglish,

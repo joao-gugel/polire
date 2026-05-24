@@ -50,10 +50,12 @@ src/
 ├── main.tsx                 # React entry — mounts <App /> into #root
 ├── main.css                 # Tailwind v4 import + dark variant + base styles
 ├── theme.ts                 # theme state: persistence + DOM apply
+├── i18n/                    # local UI translations + locale persistence (en, pt-BR, es)
 ├── types.ts                 # shared types (CommandOption, View, ...)
 ├── global.d.ts              # ambient types (window.api from preload)
 ├── hooks/                   # context consumers + reusable interaction hooks
 ├── providers/
+│   ├── i18n.tsx             # locale context + `t()` translation resolver
 │   ├── nav.tsx              # navigation stack (push/pop) + slide direction
 │   ├── correction.tsx       # correction request/result state
 │   ├── translation.tsx      # translation request/result state
@@ -78,6 +80,14 @@ vite.config.ts     # Vite + plugins (React, Tailwind, Electron)
 `assets/` contains native runtime resources. Any future packaging configuration must include this directory so window and tray icons remain available outside development.
 
 Module-level state in `electron/` is intentional: `win` and `isQuitting` live as `let` bindings inside `window.ts` and are mutated by exported functions. Don't pull them out into a shared store — the encapsulation is the point.
+
+### Internationalization
+
+The renderer uses local translations through `I18nProvider` (`src/providers/i18n.tsx`) and `useI18n()` (`src/hooks/use-i18n.ts`). Message dictionaries live in `src/i18n/locales/` and support English (`en`), Brazilian Portuguese (`pt-BR`), and Spanish (`es`).
+
+- User-facing UI text must be resolved with `t("...")`; do not hardcode labels, placeholders, hints, empty states, or visible error text in React components or views.
+- When adding or changing a UI message, add the same key to all three locale dictionaries: `en.ts`, `pt-BR.ts`, and `es.ts`.
+- Technical strings that are not displayed as localized UI, such as IPC validation errors, provider identifiers, persisted values, or AI prompt instructions, do not need translation keys.
 
 ### Navigation
 

@@ -1,4 +1,5 @@
 import { createContext, type ReactNode, useState } from "react";
+import { useI18n } from "@/hooks/use-i18n";
 import type { TransformHint } from "../../electron/ai/types";
 
 type CorrectionState = {
@@ -31,6 +32,7 @@ type CorrectionProviderProps = {
 };
 
 export function CorrectionProvider({ children }: CorrectionProviderProps) {
+	const { t } = useI18n();
 	const [state, setState] = useState<CorrectionState>(INITIAL_STATE);
 
 	async function correctText(text: string) {
@@ -60,7 +62,7 @@ export function CorrectionProvider({ children }: CorrectionProviderProps) {
 				corrected: "",
 				hints: [],
 				status: "error",
-				error: "Não foi possível corrigir o texto. Verifique sua API key.",
+				error: t("correction.error"),
 			});
 		}
 	}
