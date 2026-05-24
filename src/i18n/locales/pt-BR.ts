@@ -57,6 +57,31 @@ export type Messages = {
 		resultLabel: string;
 		error: string;
 	};
+	translationTarget: {
+		title: string;
+		searchPlaceholder: string;
+		recents: string;
+		all: string;
+		empty: string;
+		languages: {
+			en: string;
+			es: string;
+			pt: string;
+			fr: string;
+			de: string;
+			it: string;
+			nl: string;
+			sv: string;
+			pl: string;
+			tr: string;
+			ru: string;
+			ar: string;
+			zh: string;
+			ja: string;
+			ko: string;
+			hi: string;
+		};
+	};
 	notes: {
 		title: string;
 		placeholder: string;
@@ -84,7 +109,7 @@ export const ptBR: Messages = {
 		placeholder: "Escreva ou cole seu texto...",
 		options: {
 			correction: "Corrigir texto",
-			translation: "Traduzir para inglês",
+			translation: "Traduzir",
 			saveNote: "Salvar nota",
 			openNotes: "Abrir notas",
 			settings: "Configurações",
@@ -126,9 +151,34 @@ export const ptBR: Messages = {
 		error: "Não foi possível corrigir o texto. Verifique sua API key.",
 	},
 	translation: {
-		title: "Traduzir para inglês",
+		title: "Traduzir",
 		resultLabel: "Tradução",
 		error: "Não foi possível traduzir o texto. Verifique sua API key.",
+	},
+	translationTarget: {
+		title: "Traduzir para",
+		searchPlaceholder: "Buscar idioma...",
+		recents: "Recentes",
+		all: "Todos os idiomas",
+		empty: "Nenhum idioma encontrado.",
+		languages: {
+			en: "Inglês",
+			es: "Espanhol",
+			pt: "Português",
+			fr: "Francês",
+			de: "Alemão",
+			it: "Italiano",
+			nl: "Holandês",
+			sv: "Sueco",
+			pl: "Polonês",
+			tr: "Turco",
+			ru: "Russo",
+			ar: "Árabe",
+			zh: "Chinês (Simplificado)",
+			ja: "Japonês",
+			ko: "Coreano",
+			hi: "Hindi",
+		},
 	},
 	notes: {
 		title: "Notas",

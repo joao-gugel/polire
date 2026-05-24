@@ -14,7 +14,7 @@ export function Palette() {
 	const { t } = useI18n();
 	const { push, current } = useNav();
 	const { correctText } = useCorrection();
-	const { translateToEnglish } = useTranslation();
+	const { setDraft } = useTranslation();
 	const { createNote, loadNotes } = useNotes();
 	const isActive = current === "palette";
 	const [query, setQuery] = useState("");
@@ -36,7 +36,7 @@ export function Palette() {
 		t,
 		push,
 		correctText,
-		translateToEnglish,
+		setDraft,
 		saveAsNote,
 		openNotes,
 		query,

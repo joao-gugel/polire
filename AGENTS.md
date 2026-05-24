@@ -165,7 +165,7 @@ Non-negotiable do's and don'ts. These exist to keep the codebase coherent and av
 
 - **Always use Bun.** `bun install`, `bun run <script>`, `bunx <tool>`. Do not introduce `npm`, `pnpm`, `yarn`, or `node` commands unless the user explicitly asks for another runtime/tool.
 
-- **Use scoped Conventional Commits.** Write short commit messages in the form `<type>(<area>): <description>` when the changed area is clear (for example, `chore(docs): update contribution rules` or `feat(settings): reorder sections`). Use `<type>: <description>` when a useful scope does not apply. Do not add `Co-authored-by` trailers unless explicitly requested.
+- **Use scoped Conventional Commits.** Write short commit messages in the form `<type>(<area>): <description>` when the changed area is clear (for example, `chore(docs): update contribution rules` or `feat(settings): reorder sections`). Use `<type>: <description>` when a useful scope does not apply. **Never add a body, paragraph, or bullet summary** — keep the message to a single subject line, even for multi-file or non-trivial changes; the diff carries the context. Do not add `Co-authored-by` trailers unless explicitly requested.
 
 - **Format before finishing.** Run `bun run format` after every task — this executes Biome to format and lint the whole repo. The task isn't done until the formatter passes clean.
 

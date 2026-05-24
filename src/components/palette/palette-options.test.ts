@@ -1,20 +1,24 @@
 import { describe, expect, mock, test } from "bun:test";
 import { buildPaletteOptions } from "@/components/palette/palette-options";
 
-type PaletteDestination = "settings" | "correction" | "translation" | "notes";
+type PaletteDestination =
+	| "settings"
+	| "correction"
+	| "translation-target"
+	| "notes";
 
 function createActions(text: string) {
 	const t = (key: string) => key;
 	const push = mock((_view: PaletteDestination) => undefined);
 	const correctText = mock(async (_text: string) => undefined);
-	const translateToEnglish = mock(async (_text: string) => undefined);
+	const startTranslation = mock((_text: string) => undefined);
 	const saveAsNote = mock(async (_text: string) => undefined);
 	const openNotes = mock(async () => undefined);
 	const options = buildPaletteOptions(
 		t,
 		push,
 		correctText,
-		translateToEnglish,
+		startTranslation,
 		saveAsNote,
 		openNotes,
 		text,
@@ -22,7 +26,7 @@ function createActions(text: string) {
 	return {
 		push,
 		correctText,
-		translateToEnglish,
+		startTranslation,
 		saveAsNote,
 		openNotes,
 		options,
@@ -38,7 +42,7 @@ describe("buildPaletteOptions", () => {
 		actions.options[2].action();
 
 		expect(actions.correctText).not.toHaveBeenCalled();
-		expect(actions.translateToEnglish).not.toHaveBeenCalled();
+		expect(actions.startTranslation).not.toHaveBeenCalled();
 		expect(actions.saveAsNote).not.toHaveBeenCalled();
 		expect(actions.push).not.toHaveBeenCalled();
 	});
@@ -50,6 +54,15 @@ describe("buildPaletteOptions", () => {
 
 		expect(actions.correctText).toHaveBeenCalledWith("Please fix this.");
 		expect(actions.push).toHaveBeenCalledWith("correction");
+	});
+
+	test("opens the language picker with the entered text", () => {
+		const actions = createActions("Olá, tudo bem?");
+
+		actions.options[1].action();
+
+		expect(actions.startTranslation).toHaveBeenCalledWith("Olá, tudo bem?");
+		expect(actions.push).toHaveBeenCalledWith("translation-target");
 	});
 
 	test("opens notes without requiring text", () => {

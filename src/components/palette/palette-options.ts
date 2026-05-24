@@ -7,7 +7,11 @@ import {
 } from "@phosphor-icons/react";
 import type { CommandOption } from "@/types";
 
-type PaletteDestination = "settings" | "correction" | "translation" | "notes";
+type PaletteDestination =
+	| "settings"
+	| "correction"
+	| "translation-target"
+	| "notes";
 
 type Translate = (key: string) => string;
 
@@ -15,7 +19,7 @@ export function buildPaletteOptions(
 	t: Translate,
 	push: (view: PaletteDestination) => void,
 	correctText: (text: string) => Promise<void>,
-	translateToEnglish: (text: string) => Promise<void>,
+	startTranslation: (text: string) => void,
 	saveAsNote: (text: string) => Promise<void>,
 	openNotes: () => Promise<void>,
 	text: string,
@@ -37,8 +41,8 @@ export function buildPaletteOptions(
 			icon: TranslateIcon,
 			action: () => {
 				if (!text.trim()) return;
-				void translateToEnglish(text);
-				push("translation");
+				startTranslation(text);
+				push("translation-target");
 			},
 		},
 		{

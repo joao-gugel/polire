@@ -4,18 +4,22 @@ import { useI18n } from "@/hooks/use-i18n";
 type TranslationState = {
 	original: string;
 	translated: string;
+	targetLanguage: string;
 	status: "idle" | "loading" | "success" | "error";
 	error: string | null;
 };
 
 export type TranslationContextValue = {
 	state: TranslationState;
-	translateToEnglish: (text: string) => Promise<void>;
+	draft: string;
+	setDraft: (text: string) => void;
+	translate: (text: string, targetLanguage: string) => Promise<void>;
 };
 
 const INITIAL_STATE: TranslationState = {
 	original: "",
 	translated: "",
+	targetLanguage: "",
 	status: "idle",
 	error: null,
 };
@@ -31,11 +35,13 @@ type TranslationProviderProps = {
 export function TranslationProvider({ children }: TranslationProviderProps) {
 	const { t } = useI18n();
 	const [state, setState] = useState<TranslationState>(INITIAL_STATE);
+	const [draft, setDraft] = useState("");
 
-	async function translateToEnglish(text: string) {
+	async function translate(text: string, targetLanguage: string) {
 		setState({
 			original: text,
 			translated: "",
+			targetLanguage,
 			status: "loading",
 			error: null,
 		});
@@ -43,11 +49,12 @@ export function TranslationProvider({ children }: TranslationProviderProps) {
 			const result = await window.api.ai.transform({
 				kind: "translate",
 				text,
-				targetLanguage: "English",
+				targetLanguage,
 			});
 			setState({
 				original: text,
 				translated: result.text,
+				targetLanguage,
 				status: "success",
 				error: null,
 			});
@@ -55,6 +62,7 @@ export function TranslationProvider({ children }: TranslationProviderProps) {
 			setState({
 				original: text,
 				translated: "",
+				targetLanguage,
 				status: "error",
 				error: t("translation.error"),
 			});
@@ -62,7 +70,7 @@ export function TranslationProvider({ children }: TranslationProviderProps) {
 	}
 
 	return (
-		<TranslationContext.Provider value={{ state, translateToEnglish }}>
+		<TranslationContext.Provider value={{ state, draft, setDraft, translate }}>
 			{children}
 		</TranslationContext.Provider>
 	);

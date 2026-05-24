@@ -13,6 +13,7 @@ import { Notes } from "@/views/notes";
 import { Palette } from "@/views/palette";
 import { Settings } from "@/views/settings";
 import { Translation } from "@/views/translation";
+import { TranslationTarget } from "@/views/translation-target";
 
 const isLinux = window.api.platform === "linux";
 const isWindows = window.api.platform === "win32";
@@ -83,6 +84,7 @@ function renderView(view: View) {
 	if (view === "settings") return <Settings />;
 	if (view === "ai-settings") return <AiSettings />;
 	if (view === "correction") return <Correction />;
+	if (view === "translation-target") return <TranslationTarget />;
 	if (view === "translation") return <Translation />;
 	if (view === "notes") return <Notes />;
 	return null;
