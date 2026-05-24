@@ -1,0 +1,3 @@
+bun run format
+git update-index --again
+bun run test

@@ -100,6 +100,7 @@ When adding a new view: extend the `View` union in `src/types.ts`, add a branch 
 | `bun run build`    | `tsc -b && vite build` → outputs to `dist/` and `dist-electron/`     |
 | `bun run preview`  | Serve the built renderer (without Electron) — rarely useful here     |
 | `bun run format`   | Run Biome to format and lint the whole repo                          |
+| `bun run test`     | Run unit and component tests with Bun                                |
 
 ## Rules
 
@@ -154,4 +155,12 @@ Non-negotiable do's and don'ts. These exist to keep the codebase coherent and av
 
 - **Always use Bun.** `bun install`, `bun run <script>`, `bunx <tool>`. Do not introduce `npm`, `pnpm`, `yarn`, or `node` commands unless the user explicitly asks for another runtime/tool.
 
+- **Use scoped Conventional Commits.** Write short commit messages in the form `<type>(<area>): <description>` when the changed area is clear (for example, `chore(docs): update contribution rules` or `feat(settings): reorder sections`). Use `<type>: <description>` when a useful scope does not apply. Do not add `Co-authored-by` trailers unless explicitly requested.
+
 - **Format before finishing.** Run `bun run format` after every task — this executes Biome to format and lint the whole repo. The task isn't done until the formatter passes clean.
+
+- **Test behavior, not markup.** Use `bun run test` for changed logic and interactive React flows. Prefer user-visible behavior and persistence rules over assertions about CSS classes, animation details, or presentational components alone.
+
+- **Colocate test files.** Keep each `*.test.ts` or `*.test.tsx` beside the source module it exercises. Reserve `test/` for shared test setup and helpers.
+
+- **Keep pre-commit checks enabled.** Husky runs `bun run format` and `bun run test` before commits, refreshing already-staged files after formatting. Do not bypass the hook unless explicitly requested.

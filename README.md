@@ -62,10 +62,11 @@ bun run dev
 
 ```bash
 bun run format
+bun run test
 bun run build
 ```
 
-`bun run build` type-checks and creates renderer and Electron bundles in `dist/` and `dist-electron/`. Packaging and downloadable installers are not configured yet.
+`bun run test` executes unit and React component tests with Bun. `bun run build` type-checks and creates renderer and Electron bundles in `dist/` and `dist-electron/`. Packaging and downloadable installers are not configured yet.
 
 ## Default Shortcuts
 
