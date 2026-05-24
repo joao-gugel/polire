@@ -3,11 +3,17 @@ import type { ReactNode } from "react";
 
 export type ResultPane = "original" | "result";
 
-type Props = {
+type PaneToggleProps = {
 	pane: ResultPane;
 	onChange: (pane: ResultPane) => void;
 	originalLabel: string;
 	resultLabel: string;
+};
+
+type PaneToggleOptionProps = {
+	active: boolean;
+	onClick: () => void;
+	children: ReactNode;
 };
 
 export function PaneToggle({
@@ -15,7 +21,7 @@ export function PaneToggle({
 	onChange,
 	originalLabel,
 	resultLabel,
-}: Props) {
+}: PaneToggleProps) {
 	return (
 		<div className="relative inline-flex items-center rounded-lg bg-zinc-900/5 p-0.5 dark:bg-white/10">
 			<PaneToggleOption
@@ -38,11 +44,7 @@ function PaneToggleOption({
 	active,
 	onClick,
 	children,
-}: {
-	active: boolean;
-	onClick: () => void;
-	children: ReactNode;
-}) {
+}: PaneToggleOptionProps) {
 	return (
 		<button
 			type="button"

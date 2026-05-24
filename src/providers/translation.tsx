@@ -23,7 +23,11 @@ export const TranslationContext = createContext<TranslationContextValue | null>(
 	null,
 );
 
-export function TranslationProvider({ children }: { children: ReactNode }) {
+type TranslationProviderProps = {
+	children: ReactNode;
+};
+
+export function TranslationProvider({ children }: TranslationProviderProps) {
 	const [state, setState] = useState<TranslationState>(INITIAL_STATE);
 
 	async function translateToEnglish(text: string) {

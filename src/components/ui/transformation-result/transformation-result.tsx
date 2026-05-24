@@ -14,7 +14,7 @@ import { useNav } from "@/hooks/use-nav";
 import type { View } from "@/types";
 import type { TransformHint } from "../../../../electron/ai/types";
 
-type Props = {
+type TransformationResultProps = {
 	activeView: View;
 	title: string;
 	originalLabel: string;
@@ -36,7 +36,7 @@ export function TransformationResult({
 	status,
 	error,
 	hints,
-}: Props) {
+}: TransformationResultProps) {
 	const { current, pop } = useNav();
 	const [pane, setPane] = useState<ResultPane>("result");
 	const [hintsExpanded, setHintsExpanded] = useState(false);

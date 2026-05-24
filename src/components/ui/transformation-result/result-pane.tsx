@@ -10,6 +10,10 @@ type ResultTextPaneProps = {
 	onCopy: () => void;
 };
 
+type ErrorPaneProps = {
+	message: string | null;
+};
+
 export function ResultTextPane({
 	pane,
 	text,
@@ -47,7 +51,7 @@ export function LoadingPane() {
 	);
 }
 
-export function ErrorPane({ message }: { message: string | null }) {
+export function ErrorPane({ message }: ErrorPaneProps) {
 	return (
 		<div className="flex h-full items-center justify-center px-6">
 			<p className="text-center text-sm text-zinc-700 dark:text-zinc-200">

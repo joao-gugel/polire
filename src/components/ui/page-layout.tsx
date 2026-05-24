@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Footer } from "@/components/ui/footer";
 import { useNav } from "@/hooks/use-nav";
 
-type Props = {
+type PageLayoutProps = {
 	title: string;
 	children: ReactNode;
 	/** Optional slot rendered on the right side of the header. */
@@ -17,7 +17,12 @@ type Props = {
  * scrollable content slot, and the shared footer. Back is wired straight to
  * the nav stack so views don't have to thread `onBack` props.
  */
-export function PageLayout({ title, children, actions, footer }: Props) {
+export function PageLayout({
+	title,
+	children,
+	actions,
+	footer,
+}: PageLayoutProps) {
 	const { pop } = useNav();
 	return (
 		<>

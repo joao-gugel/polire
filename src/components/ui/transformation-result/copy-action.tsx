@@ -2,13 +2,20 @@ import { CheckIcon, CopyIcon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { HintButton } from "@/components/ui/hint";
 
-export function CopyAction({
-	copied,
-	onCopy,
-}: {
+type CopyActionProps = {
 	copied: boolean;
 	onCopy: () => void;
-}) {
+};
+
+type CopyLeadingProps = {
+	copied: boolean;
+};
+
+type CopySwapLabelProps = {
+	copied: boolean;
+};
+
+export function CopyAction({ copied, onCopy }: CopyActionProps) {
 	return (
 		<HintButton
 			onClick={onCopy}
@@ -20,7 +27,7 @@ export function CopyAction({
 	);
 }
 
-function CopyLeading({ copied }: { copied: boolean }) {
+function CopyLeading({ copied }: CopyLeadingProps) {
 	return (
 		<span className="relative flex h-3.25 w-3.25 items-center justify-center">
 			<AnimatePresence mode="wait" initial={false}>
@@ -52,7 +59,7 @@ function CopyLeading({ copied }: { copied: boolean }) {
 	);
 }
 
-function CopySwapLabel({ copied }: { copied: boolean }) {
+function CopySwapLabel({ copied }: CopySwapLabelProps) {
 	return (
 		<span className="relative inline-block">
 			<span className="invisible">Copiado</span>

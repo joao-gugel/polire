@@ -2,7 +2,7 @@ import { PROVIDER_OPTIONS } from "@/components/ai-settings/provider-options";
 import { OptionItem, OptionItemCheck } from "@/components/ui/option-item";
 import type { AiProvider } from "../../../electron/ai/types";
 
-type Props = {
+type ProviderListProps = {
 	activeProvider: AiProvider | undefined;
 	selected: number;
 	confirmation: { index: number; sequence: number };
@@ -16,7 +16,7 @@ export function ProviderList({
 	confirmation,
 	onHover,
 	onSelect,
-}: Props) {
+}: ProviderListProps) {
 	return (
 		<div className="flex flex-col gap-0.5">
 			{PROVIDER_OPTIONS.map((option, index) => (

@@ -23,7 +23,7 @@ export const THEME_OPTIONS: ThemeOption[] = [
 	{ id: "system", label: "Sistema", icon: MonitorIcon },
 ];
 
-type Props = {
+type ThemeListProps = {
 	activeTheme: Theme;
 	selected: number;
 	confirmation: { index: number; sequence: number };
@@ -39,7 +39,7 @@ export function ThemeList({
 	navigationIndexOffset = 0,
 	onHover,
 	onSelect,
-}: Props) {
+}: ThemeListProps) {
 	return (
 		<div className="flex flex-col gap-0.5">
 			{THEME_OPTIONS.map((option, index) => {

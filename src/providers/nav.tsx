@@ -20,12 +20,12 @@ export type Nav = {
 
 export const NavContext = createContext<Nav | null>(null);
 
-type ProviderProps = {
+type NavProviderProps = {
 	initial: View;
 	children: ReactNode;
 };
 
-export function NavProvider({ initial, children }: ProviderProps) {
+export function NavProvider({ initial, children }: NavProviderProps) {
 	const [stack, setStack] = useState<View[]>([initial]);
 	const [direction, setDirection] = useState<Direction>(1);
 

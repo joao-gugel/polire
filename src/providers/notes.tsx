@@ -11,7 +11,11 @@ export type NotesContextValue = {
 
 export const NotesContext = createContext<NotesContextValue | null>(null);
 
-export function NotesProvider({ children }: { children: ReactNode }) {
+type NotesProviderProps = {
+	children: ReactNode;
+};
+
+export function NotesProvider({ children }: NotesProviderProps) {
 	const [notes, setNotes] = useState<Note[]>([]);
 
 	async function loadNotes() {

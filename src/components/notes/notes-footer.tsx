@@ -1,7 +1,11 @@
 import { Footer } from "@/components/ui/footer";
 import { Kbd } from "@/components/ui/kbd";
 
-export function NotesFooter({ canRemove }: { canRemove: boolean }) {
+type NotesFooterProps = {
+	canRemove: boolean;
+};
+
+export function NotesFooter({ canRemove }: NotesFooterProps) {
 	return (
 		<Footer
 			additionalHint={

@@ -7,7 +7,7 @@ import {
 } from "@phosphor-icons/react";
 import type { RefObject } from "react";
 
-type Props = {
+type ApiKeyInputProps = {
 	hasSavedKey: boolean;
 	value: string;
 	selected: boolean;
@@ -31,7 +31,7 @@ export function ApiKeyInput({
 	onFocus,
 	onToggleVisibility,
 	onSave,
-}: Props) {
+}: ApiKeyInputProps) {
 	return (
 		<div className="relative px-2">
 			<input

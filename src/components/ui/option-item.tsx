@@ -18,6 +18,10 @@ type OptionItemIconProps = {
 	selected: boolean;
 };
 
+type OptionItemCaretProps = {
+	selected: boolean;
+};
+
 const selectionTransition = { duration: 0.08, ease: "easeOut" } as const;
 const tapTransition = {
 	type: "spring" as const,
@@ -107,7 +111,7 @@ export function OptionItemCheck() {
 	);
 }
 
-export function OptionItemCaret({ selected }: { selected: boolean }) {
+export function OptionItemCaret({ selected }: OptionItemCaretProps) {
 	return (
 		<CaretRightIcon
 			size={14}

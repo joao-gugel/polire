@@ -1,7 +1,15 @@
 import { useDragScroll } from "@/hooks/use-drag-scroll";
 import type { TransformHint } from "../../../../electron/ai/types";
 
-export function HintsScroll({ hints }: { hints: TransformHint[] }) {
+type HintsScrollProps = {
+	hints: TransformHint[];
+};
+
+type HintCardProps = {
+	hint: TransformHint;
+};
+
+export function HintsScroll({ hints }: HintsScrollProps) {
 	const ref = useDragScroll<HTMLDivElement>();
 	return (
 		<div className="border-zinc-900/8 border-b px-3 py-3 dark:border-white/10">
@@ -20,7 +28,7 @@ export function HintsScroll({ hints }: { hints: TransformHint[] }) {
 	);
 }
 
-function HintCard({ hint }: { hint: TransformHint }) {
+function HintCard({ hint }: HintCardProps) {
 	return (
 		<div className="flex w-64 shrink-0 flex-col gap-1.5 rounded-lg border border-zinc-900/8 bg-white/70 px-2.5 py-2 dark:border-white/10 dark:bg-white/5">
 			<div className="flex items-center gap-1.5">

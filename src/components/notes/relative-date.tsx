@@ -5,7 +5,15 @@ function formatRelativeDate(date: Date) {
 	return formatDistanceToNow(date, { addSuffix: true, locale: ptBR });
 }
 
-export function RelativeDate({ date }: { date: Date }) {
+type RelativeDateProps = {
+	date: Date;
+};
+
+type CompactRelativeDateProps = {
+	date: Date;
+};
+
+export function RelativeDate({ date }: RelativeDateProps) {
 	const formatted = formatRelativeDate(date);
 	return (
 		<p className="px-6 pt-4 text-[11px] text-zinc-500 uppercase tracking-wider dark:text-zinc-400">
@@ -14,7 +22,7 @@ export function RelativeDate({ date }: { date: Date }) {
 	);
 }
 
-export function CompactRelativeDate({ date }: { date: Date }) {
+export function CompactRelativeDate({ date }: CompactRelativeDateProps) {
 	const formatted = formatRelativeDate(date);
 	return <>{formatted}</>;
 }

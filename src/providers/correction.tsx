@@ -26,7 +26,11 @@ export const CorrectionContext = createContext<CorrectionContextValue | null>(
 	null,
 );
 
-export function CorrectionProvider({ children }: { children: ReactNode }) {
+type CorrectionProviderProps = {
+	children: ReactNode;
+};
+
+export function CorrectionProvider({ children }: CorrectionProviderProps) {
 	const [state, setState] = useState<CorrectionState>(INITIAL_STATE);
 
 	async function correctText(text: string) {

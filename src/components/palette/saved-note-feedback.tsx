@@ -1,7 +1,11 @@
 import { CheckIcon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 
-export function SavedNoteFeedback({ sequence }: { sequence: number }) {
+type SavedNoteFeedbackProps = {
+	sequence: number;
+};
+
+export function SavedNoteFeedback({ sequence }: SavedNoteFeedbackProps) {
 	return (
 		<AnimatePresence>
 			{sequence > 0 && (

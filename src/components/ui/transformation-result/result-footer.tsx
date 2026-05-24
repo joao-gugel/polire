@@ -3,14 +3,19 @@ import { Hint, HintButton } from "@/components/ui/hint";
 import { HintsScroll } from "@/components/ui/transformation-result/hints-scroll";
 import type { TransformHint } from "../../../../electron/ai/types";
 
-type Props = {
+type ResultFooterProps = {
 	hasDiff: boolean;
 	expanded: boolean;
 	onToggle: () => void;
 	hints: TransformHint[];
 };
 
-export function ResultFooter({ hasDiff, expanded, onToggle, hints }: Props) {
+export function ResultFooter({
+	hasDiff,
+	expanded,
+	onToggle,
+	hints,
+}: ResultFooterProps) {
 	return (
 		<div className="border-zinc-900/8 border-t bg-zinc-50/40 dark:border-white/10 dark:bg-black/20">
 			<AnimatePresence initial={false}>

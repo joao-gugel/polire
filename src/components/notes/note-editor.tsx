@@ -2,7 +2,7 @@ import type { KeyboardEvent as ReactKeyboardEvent, RefObject } from "react";
 import { RelativeDate } from "@/components/notes/relative-date";
 import type { Note } from "../../../electron/notes/types";
 
-type Props = {
+type NoteEditorProps = {
 	note: Note | null;
 	textareaRef: RefObject<HTMLTextAreaElement | null>;
 	onChange: (content: string) => void;
@@ -16,7 +16,7 @@ export function NoteEditor({
 	onChange,
 	onBlur,
 	onKeyDown,
-}: Props) {
+}: NoteEditorProps) {
 	return (
 		<section className="flex flex-1 flex-col overflow-hidden">
 			{note ? (

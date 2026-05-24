@@ -5,7 +5,7 @@ import type { Note } from "../../../electron/notes/types";
 
 const SELECTION_LAYOUT_ID = "notes-selection";
 
-type Props = {
+type NoteListProps = {
 	notes: Note[];
 	selectedId: string | null;
 	onSelect: (id: string) => void;
@@ -19,7 +19,7 @@ export function NoteList({
 	onSelect,
 	onKeyDown,
 	registerItemRef,
-}: Props) {
+}: NoteListProps) {
 	return (
 		<div className="flex w-56 shrink-0 flex-col gap-0.5 overflow-y-auto px-2 py-2">
 			<AnimatePresence initial={false}>
