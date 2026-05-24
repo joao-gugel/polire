@@ -26,6 +26,7 @@ declare global {
 		api: {
 			platform: Platform;
 			hide: () => Promise<void>;
+			resizeForPaletteInput: (extraHeight: number) => Promise<void>;
 			ai: {
 				getSettings: () => Promise<AiSettingsStatus>;
 				saveSettings: (settings: AiSettings) => Promise<AiSettingsStatus>;

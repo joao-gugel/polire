@@ -45,6 +45,15 @@ export function hideWindow() {
 	win?.hide();
 }
 
+/** Adjusts the window height to follow growth of the multiline palette input. */
+export function resizeWindowForPaletteInput(extraHeight: number) {
+	if (!win) return;
+	const additionalHeight = Math.max(0, Math.round(extraHeight));
+	const resizedHeight = WINDOW_HEIGHT + additionalHeight;
+	const shouldAnimateResize = process.platform === "darwin";
+	win.setSize(WINDOW_WIDTH, resizedHeight, shouldAnimateResize);
+}
+
 /** Hide the window if it is visible and focused; otherwise show and focus it. No-op if it hasn't been created yet. */
 export function toggleWindow() {
 	if (!win) return;
@@ -73,7 +82,8 @@ export function createWindow() {
 		show: false,
 		frame: false,
 		backgroundColor: "#00000000",
-		resizable: false,
+		resizable: true,
+		minHeight: WINDOW_HEIGHT,
 		hasShadow: true,
 		...windowsAppearance,
 	});

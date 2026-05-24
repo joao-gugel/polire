@@ -22,6 +22,7 @@ export function CopyAction({ copied, onCopy }: CopyActionProps) {
 		<HintButton
 			onClick={onCopy}
 			kbd="C"
+			variant="solid"
 			aria-label={t("common.copyText")}
 			leading={<CopyLeading copied={copied} />}
 			label={<CopySwapLabel copied={copied} />}

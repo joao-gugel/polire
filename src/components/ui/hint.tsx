@@ -30,7 +30,15 @@ type HintButtonProps = HintProps &
 	Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> & {
 		/** Optional icon rendered before the label. */
 		leading?: ReactNode;
+		/** Visual treatment for inline hints or floating controls over content. */
+		variant?: "ghost" | "solid";
 	};
+
+const HINT_BUTTON_VARIANT_CLASSES = {
+	ghost: "hover:bg-zinc-900/5 dark:hover:bg-white/10",
+	solid:
+		"bg-white shadow-sm hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800",
+} satisfies Record<NonNullable<HintButtonProps["variant"]>, string>;
 
 /** Same look as Hint, but clickable with the ghost hover used across the app. */
 export function HintButton({
@@ -38,6 +46,7 @@ export function HintButton({
 	kbd,
 	keys,
 	leading,
+	variant = "ghost",
 	className,
 	...rest
 }: HintButtonProps) {
@@ -45,7 +54,7 @@ export function HintButton({
 		<button
 			type="button"
 			{...rest}
-			className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-2.5 py-1 text-zinc-700 outline-none transition-colors hover:bg-zinc-900/5 focus:outline-none focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:text-zinc-300 dark:hover:bg-white/10 ${className ?? ""}`}
+			className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-2.5 py-1 text-zinc-700 outline-none transition-colors focus:outline-none focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:text-zinc-300 ${HINT_BUTTON_VARIANT_CLASSES[variant]} ${className ?? ""}`}
 		>
 			{leading}
 			<span className="font-medium text-sm">{label}</span>

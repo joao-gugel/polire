@@ -61,7 +61,7 @@ export function Palette() {
 				setSelected((index) => (index - 1 + options.length) % options.length);
 				return;
 			}
-			if (event.key === "Enter") {
+			if (event.key === "Enter" && !event.shiftKey) {
 				event.preventDefault();
 				setConfirmation((current) => ({
 					index: selected,

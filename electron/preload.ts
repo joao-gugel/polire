@@ -1,6 +1,7 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { AI_CHANNELS } from "./ai/channels";
 import { NOTES_CHANNELS } from "./notes/channels";
+import { WINDOW_CHANNELS } from "./window-channels";
 
 /**
  * Bridge exposed on `window.api` in the renderer. Keep it minimal — anything
@@ -8,7 +9,9 @@ import { NOTES_CHANNELS } from "./notes/channels";
  */
 contextBridge.exposeInMainWorld("api", {
 	platform: process.platform,
-	hide: () => ipcRenderer.invoke("window:hide"),
+	hide: () => ipcRenderer.invoke(WINDOW_CHANNELS.hide),
+	resizeForPaletteInput: (extraHeight: number) =>
+		ipcRenderer.invoke(WINDOW_CHANNELS.resizeForPaletteInput, extraHeight),
 	ai: {
 		getSettings: () => ipcRenderer.invoke(AI_CHANNELS.getSettings),
 		saveSettings: (settings: unknown) =>
