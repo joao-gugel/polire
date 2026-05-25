@@ -91,7 +91,7 @@ export function OptionItem({
 				<motion.div
 					layoutId={layoutId}
 					transition={selectionTransition}
-					className="absolute inset-0 rounded-xl bg-zinc-900/5 dark:bg-white/10"
+					className="absolute inset-0 rounded-xl bg-zinc-900/5 dark:bg-white/3"
 				/>
 			)}
 			{leading}
@@ -99,8 +99,8 @@ export function OptionItem({
 				<span
 					className={`text-base transition-colors ${
 						selected && !disabled
-							? "text-zinc-900 dark:text-zinc-50"
-							: "text-zinc-700 dark:text-zinc-200"
+							? "text-zinc-950 dark:text-zinc-50"
+							: "text-zinc-500 dark:text-zinc-300"
 					}`}
 				>
 					{label}
@@ -123,8 +123,8 @@ export function OptionItemIcon({ icon: Icon, selected }: OptionItemIconProps) {
 			weight="regular"
 			className={`relative transition-colors ${
 				selected
-					? "text-zinc-900 dark:text-zinc-50"
-					: "text-zinc-600 dark:text-zinc-300"
+					? "text-zinc-950 dark:text-zinc-50"
+					: "text-zinc-500 dark:text-zinc-300"
 			}`}
 		/>
 	);

@@ -1,0 +1,37 @@
+appId: com.joaogugel.polire
+productName: Polire
+copyright: Copyright (c) 2026 Joao V Gugel
+asar: true
+directories:
+  output: release
+files:
+  - dist/**/*
+  - dist-electron/**/*
+  - assets/**/*
+  - package.json
+  - LICENSE
+linux:
+  target:
+    - target: deb
+      arch:
+        - x64
+  category: Utility
+  executableName: polire
+  icon: assets/app/linux
+  artifactName: ${productName}-${version}-${arch}.${ext}
+deb:
+  maintainer: Joao V Gugel <gugel@gugelabs.com>
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: assets/app/icon.ico
+  artifactName: ${productName}-Setup-${version}-${arch}.${ext}
+nsis:
+  include: build/installer.nsh
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Polire

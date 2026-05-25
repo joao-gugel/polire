@@ -15,7 +15,7 @@ Polire is a small desktop app for people who write in a non-native language, or 
 
 ## Status
 
-Polire is under active development. The app currently runs from source and is not yet distributed as a downloadable installer.
+Polire is under active development. Release builds are distributed as a Windows installer and a Debian package through GitHub Releases.
 
 ## Features
 
@@ -24,6 +24,7 @@ Polire is under active development. The app currently runs from source and is no
 - Save quick notes locally and edit them inside the app.
 - Bring the palette up from anywhere with `Ctrl+Alt+P`.
 - Keep the app out of the way in the system tray.
+- Start Polire in the system tray when you sign in to Windows.
 - Choose between OpenAI, Anthropic, Google Gemini, and DeepSeek.
 - Configure your own API key locally instead of relying on a hosted Polire account.
 - Use light and dark themes.
@@ -66,7 +67,27 @@ bun run test
 bun run build
 ```
 
-`bun run test` executes unit and React component tests with Bun. `bun run build` type-checks and creates renderer and Electron bundles in `dist/` and `dist-electron/`. Packaging and downloadable installers are not configured yet.
+`bun run test` executes unit and React component tests with Bun. `bun run build` type-checks and creates renderer and Electron bundles in `dist/` and `dist-electron/`.
+
+### Package locally
+
+```bash
+bun run package:linux
+bun run package:win
+```
+
+`package:linux` creates a `.deb` package and `package:win` creates an NSIS `.exe` installer in `release/`. Build the Windows installer on Windows; GitHub Actions handles both operating systems for tagged releases.
+
+### Publish a release
+
+The release workflow builds installers and creates a GitHub Release when a version tag is pushed. The tag must match the version in `package.json`.
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+The first release is not code-signed, so Windows may show an unknown publisher warning until signing is configured.
 
 ## Default Shortcuts
 

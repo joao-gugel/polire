@@ -5,3 +5,4 @@ dist-electron
 *.log
 .env
 release
+build
