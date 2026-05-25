@@ -114,4 +114,7 @@ export const es: Messages = {
 		open: "Abrir",
 		quit: "Salir",
 	},
+	transforming: {
+		messages: ["Puliendo...", "Refinando...", "Pensando...", "Trabajando..."],
+	},
 };

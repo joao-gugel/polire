@@ -110,6 +110,9 @@ export type Messages = {
 		open: string;
 		quit: string;
 	};
+	transforming: {
+		messages: string[];
+	};
 };
 
 export const ptBR: Messages = {
@@ -225,5 +228,8 @@ export const ptBR: Messages = {
 	tray: {
 		open: "Abrir",
 		quit: "Sair",
+	},
+	transforming: {
+		messages: ["Polindo...", "Refinando...", "Pensando...", "Trabalhando..."],
 	},
 };

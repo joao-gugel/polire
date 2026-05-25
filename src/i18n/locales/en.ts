@@ -114,4 +114,7 @@ export const en: Messages = {
 		open: "Open",
 		quit: "Quit",
 	},
+	transforming: {
+		messages: ["Polishing...", "Refining...", "Thinking...", "Working..."],
+	},
 };
