@@ -3,6 +3,20 @@ import { APP_NAME, TRAY_ICON } from "./constants";
 import { quit, showWindow, toggleWindow } from "./window";
 
 let tray: Tray | null = null;
+let labels: TrayLabels = { open: "Open", quit: "Quit" };
+
+export type TrayLabels = { open: string; quit: string };
+
+function applyContextMenu() {
+	if (!tray) return;
+	tray.setContextMenu(
+		Menu.buildFromTemplate([
+			{ label: labels.open, click: showWindow },
+			{ type: "separator" },
+			{ label: labels.quit, click: quit },
+		]),
+	);
+}
 
 /** Create the system tray icon. Left-click toggles the window; menu has Open/Quit. */
 export function createTray() {
@@ -10,12 +24,12 @@ export function createTray() {
 	if (trayIcon.isEmpty()) throw new Error("Tray icon could not be loaded.");
 	tray = new Tray(trayIcon);
 	tray.setToolTip(APP_NAME);
-	tray.setContextMenu(
-		Menu.buildFromTemplate([
-			{ label: "Abrir", click: showWindow },
-			{ type: "separator" },
-			{ label: "Sair", click: quit },
-		]),
-	);
+	applyContextMenu();
 	tray.on("click", toggleWindow);
+}
+
+/** Update the tray menu labels — called from the renderer when the locale changes. */
+export function setTrayLabels(next: TrayLabels) {
+	labels = next;
+	applyContextMenu();
 }

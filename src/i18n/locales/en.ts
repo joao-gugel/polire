@@ -110,4 +110,8 @@ export const en: Messages = {
 		showChanges: "Show changes ({{count}})",
 		hideChanges: "Hide changes",
 	},
+	tray: {
+		open: "Open",
+		quit: "Quit",
+	},
 };

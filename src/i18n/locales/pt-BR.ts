@@ -106,6 +106,10 @@ export type Messages = {
 		showChanges: string;
 		hideChanges: string;
 	};
+	tray: {
+		open: string;
+		quit: string;
+	};
 };
 
 export const ptBR: Messages = {
@@ -217,5 +221,9 @@ export const ptBR: Messages = {
 	result: {
 		showChanges: "Ver mudanças ({{count}})",
 		hideChanges: "Ocultar mudanças",
+	},
+	tray: {
+		open: "Abrir",
+		quit: "Sair",
 	},
 };

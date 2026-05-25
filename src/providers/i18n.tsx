@@ -1,4 +1,10 @@
-import { createContext, type ReactNode, useMemo, useState } from "react";
+import {
+	createContext,
+	type ReactNode,
+	useEffect,
+	useMemo,
+	useState,
+} from "react";
 import {
 	getMessages,
 	getStoredLocale,
@@ -38,6 +44,11 @@ export function I18nProvider({ children }: I18nProviderProps) {
 			t: (key, params) => translate(messages, key, params),
 		};
 	}, [locale]);
+
+	useEffect(() => {
+		const { open, quit } = value.messages.tray;
+		window.api.setTrayLabels({ open, quit });
+	}, [value.messages]);
 
 	return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }

@@ -12,6 +12,8 @@ contextBridge.exposeInMainWorld("api", {
 	hide: () => ipcRenderer.invoke(WINDOW_CHANNELS.hide),
 	resizeForPaletteInput: (extraHeight: number) =>
 		ipcRenderer.invoke(WINDOW_CHANNELS.resizeForPaletteInput, extraHeight),
+	setTrayLabels: (labels: { open: string; quit: string }) =>
+		ipcRenderer.invoke(WINDOW_CHANNELS.setTrayLabels, labels),
 	ai: {
 		getSettings: () => ipcRenderer.invoke(AI_CHANNELS.getSettings),
 		saveSettings: (settings: unknown) =>

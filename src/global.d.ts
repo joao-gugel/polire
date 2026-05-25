@@ -27,6 +27,7 @@ declare global {
 			platform: Platform;
 			hide: () => Promise<void>;
 			resizeForPaletteInput: (extraHeight: number) => Promise<void>;
+			setTrayLabels: (labels: { open: string; quit: string }) => Promise<void>;
 			ai: {
 				getSettings: () => Promise<AiSettingsStatus>;
 				saveSettings: (settings: AiSettings) => Promise<AiSettingsStatus>;
