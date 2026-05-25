@@ -1,4 +1,5 @@
-import { createContext, type ReactNode, use, useState } from "react";
+import { type ReactNode, use, useState } from "react";
+import { AiStatusContext } from "@/providers/ai-status-context";
 import type { AiSettingsStatus } from "../../electron/ai/types";
 
 let initialStatusPromise: Promise<AiSettingsStatus> | null = null;
@@ -9,13 +10,6 @@ function getInitialStatusPromise(): Promise<AiSettingsStatus> {
 	}
 	return initialStatusPromise;
 }
-
-export type AiStatusContextValue = {
-	status: AiSettingsStatus;
-	setStatus: (status: AiSettingsStatus) => void;
-};
-
-export const AiStatusContext = createContext<AiStatusContextValue | null>(null);
 
 type AiStatusProviderProps = {
 	children: ReactNode;

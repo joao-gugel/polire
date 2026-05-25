@@ -2,7 +2,7 @@ import { useContext } from "react";
 import {
 	CorrectionContext,
 	type CorrectionContextValue,
-} from "@/providers/correction";
+} from "@/providers/correction-context";
 
 export function useCorrection(): CorrectionContextValue {
 	const context = useContext(CorrectionContext);

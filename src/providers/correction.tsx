@@ -1,19 +1,9 @@
-import { createContext, type ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 import { useI18n } from "@/hooks/use-i18n";
-import type { TransformHint } from "../../electron/ai/types";
-
-type CorrectionState = {
-	original: string;
-	corrected: string;
-	hints: TransformHint[];
-	status: "idle" | "loading" | "success" | "error";
-	error: string | null;
-};
-
-export type CorrectionContextValue = {
-	state: CorrectionState;
-	correctText: (text: string) => Promise<void>;
-};
+import {
+	CorrectionContext,
+	type CorrectionState,
+} from "@/providers/correction-context";
 
 const INITIAL_STATE: CorrectionState = {
 	original: "",
@@ -22,10 +12,6 @@ const INITIAL_STATE: CorrectionState = {
 	status: "idle",
 	error: null,
 };
-
-export const CorrectionContext = createContext<CorrectionContextValue | null>(
-	null,
-);
 
 type CorrectionProviderProps = {
 	children: ReactNode;

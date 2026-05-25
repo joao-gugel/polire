@@ -2,7 +2,7 @@ import { useContext } from "react";
 import {
 	TranslationContext,
 	type TranslationContextValue,
-} from "@/providers/translation";
+} from "@/providers/translation-context";
 
 export function useTranslation(): TranslationContextValue {
 	const context = useContext(TranslationContext);

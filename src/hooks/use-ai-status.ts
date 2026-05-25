@@ -2,7 +2,7 @@ import { useContext } from "react";
 import {
 	AiStatusContext,
 	type AiStatusContextValue,
-} from "@/providers/ai-status";
+} from "@/providers/ai-status-context";
 
 export function useAiStatus(): AiStatusContextValue {
 	const context = useContext(AiStatusContext);
