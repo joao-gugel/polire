@@ -77,7 +77,7 @@ function NoteListItem({
 			data-selected={selected || undefined}
 			exit={{ opacity: 0, x: -12, height: 0, paddingTop: 0, paddingBottom: 0 }}
 			transition={{ duration: 0.18, ease: "easeOut" }}
-			className="relative w-full cursor-pointer overflow-hidden rounded-xl px-3 py-2.5 text-left outline-none focus:outline-none focus-visible:outline-none"
+			className="relative w-full shrink-0 cursor-pointer overflow-hidden rounded-xl px-3 py-2.5 text-left outline-none focus:outline-none focus-visible:outline-none"
 		>
 			{selected && (
 				<motion.div
