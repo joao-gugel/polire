@@ -7,15 +7,33 @@
 <p align="center">Open-source desktop writing assistant for clearer writing, translation, and quick notes.</p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Status: In development](https://img.shields.io/badge/Status-In%20development-orange.svg)](#status)
+[![Release: v0.1.0](https://img.shields.io/badge/Release-v0.1.0-2ea44f.svg)](https://github.com/joao-gugel/polire/releases/tag/v0.1.0)
+[![Downloads](https://img.shields.io/badge/Download-Windows%20%7C%20Linux-blue.svg)](#download)
 
 Polire is a small desktop app for people who write in a non-native language, or simply want to polish text without breaking their flow. Open it from anywhere with a global shortcut, paste or write text, then correct it, translate it, or save it as a local note.
 
 ![Polire screenshot](docs/screenshot.png)
 
-## Status
+## Download
 
-Polire is under active development. Release builds are distributed as a Windows installer and a Debian package through GitHub Releases.
+Polire `v0.1.0` is available for Windows and Debian-based Linux distributions.
+
+| Platform | Download | Notes |
+| -------- | -------- | ----- |
+| Windows x64 | [Installer `.exe`](https://github.com/joao-gugel/polire/releases/download/v0.1.0/Polire-Setup-0.1.0-x64.exe) | Starts with Windows after installation; currently unsigned. |
+| Linux x64 (Debian/Ubuntu) | [Package `.deb`](https://github.com/joao-gugel/polire/releases/download/v0.1.0/Polire-0.1.0-amd64.deb) | X11 is recommended for reliable global shortcuts. |
+
+All published versions and release notes are available on the [Releases page](https://github.com/joao-gugel/polire/releases).
+
+### Install on Linux
+
+After downloading the Debian package:
+
+```bash
+sudo apt install ./Polire-0.1.0-amd64.deb
+```
+
+The Windows build is not code-signed yet, so Windows may show an unknown publisher warning during installation.
 
 ## Features
 
@@ -83,11 +101,11 @@ bun run package:win
 The release workflow builds installers and creates a GitHub Release when a version tag is pushed. The tag must match the version in `package.json`.
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.1.1
+git push origin v0.1.1
 ```
 
-The first release is not code-signed, so Windows may show an unknown publisher warning until signing is configured.
+Update `package.json` to the matching version before creating a new tag. Windows releases are not code-signed yet.
 
 ## Default Shortcuts
 
@@ -100,9 +118,8 @@ The first release is not code-signed, so Windows may show an unknown publisher w
 
 ## Roadmap
 
-- Package signed desktop releases for supported platforms.
+- Code-sign Windows releases and streamline updates.
 - Polish AI configuration and error handling.
-- Validate the local-first open-source workflow with early users.
 - Explore optional paid sync and online storage separately from the local app.
 
 ## Stack
@@ -111,7 +128,7 @@ Polire is built with Electron, React, TypeScript, Tailwind CSS, Vite, Bun, and t
 
 ## Contributing
 
-The project is early, but bug reports and focused improvements are welcome through GitHub issues and pull requests.
+Bug reports and focused improvements are welcome through GitHub issues and pull requests.
 
 ## License
 
