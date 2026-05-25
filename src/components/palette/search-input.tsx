@@ -67,7 +67,7 @@ export function SearchInput({
 			onKeyDown={handleKeyDown}
 			placeholder={placeholder}
 			spellCheck={false}
-			className="field-sizing-content block max-h-[144px] w-full resize-none overflow-y-auto bg-transparent px-5 py-4 text-lg text-zinc-900 leading-7 outline-none placeholder:text-zinc-500 dark:text-zinc-50 dark:placeholder:text-zinc-400"
+			className="field-sizing-content block max-h-36 w-full resize-none overflow-y-auto bg-transparent px-5 py-4 text-lg text-zinc-900 leading-7 outline-none placeholder:text-zinc-500 dark:text-zinc-50 dark:placeholder:text-zinc-400"
 		/>
 	);
 }
