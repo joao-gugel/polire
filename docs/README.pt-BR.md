@@ -18,7 +18,7 @@
 
 O Polire é um pequeno aplicativo desktop para pessoas que escrevem em um idioma não nativo, ou que simplesmente querem aprimorar um texto sem interromper seu fluxo. Abra-o de qualquer lugar com um atalho global, cole ou escreva um texto e então corrija, traduza ou salve-o como uma nota local.
 
-![Captura de tela do Polire](screenshot.png)
+![Demonstração do Polire](../assets/demo-gif.gif)
 
 ## Download
 
