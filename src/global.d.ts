@@ -36,6 +36,10 @@ declare global {
 			onUpdateAvailable: (cb: (version: string) => void) => () => void;
 			openReleases: () => Promise<void>;
 			openHomepage: () => Promise<void>;
+			settings: {
+				initial: { locale: string | null };
+				setLocale: (locale: string) => Promise<void>;
+			};
 			ai: {
 				getSettings: () => Promise<AiSettingsStatus>;
 				saveSettings: (settings: AiSettings) => Promise<AiSettingsStatus>;

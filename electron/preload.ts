@@ -1,7 +1,12 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { AI_CHANNELS } from "./ai/channels";
 import { NOTES_CHANNELS } from "./notes/channels";
+import { SETTINGS_CHANNELS } from "./settings/channels";
 import { WINDOW_CHANNELS } from "./window-channels";
+
+const initialSettings = ipcRenderer.sendSync(SETTINGS_CHANNELS.get) as {
+	locale: string | null;
+};
 
 /**
  * Bridge exposed on `window.api` in the renderer. Keep it minimal — anything
@@ -30,6 +35,11 @@ contextBridge.exposeInMainWorld("api", {
 	},
 	openReleases: () => ipcRenderer.invoke(WINDOW_CHANNELS.openReleases),
 	openHomepage: () => ipcRenderer.invoke(WINDOW_CHANNELS.openHomepage),
+	settings: {
+		initial: initialSettings,
+		setLocale: (locale: string) =>
+			ipcRenderer.invoke(SETTINGS_CHANNELS.setLocale, locale),
+	},
 	ai: {
 		getSettings: () => ipcRenderer.invoke(AI_CHANNELS.getSettings),
 		saveSettings: (settings: unknown) =>

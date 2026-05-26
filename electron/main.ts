@@ -2,6 +2,7 @@ import { app, globalShortcut, Menu } from "electron";
 import { registerAiIpcHandlers } from "./ai/ipc";
 import { SHORTCUT } from "./constants";
 import { registerNotesIpcHandlers } from "./notes/ipc";
+import { registerSettingsIpcHandlers } from "./settings/ipc";
 import { createTray } from "./tray";
 import { initAutoUpdater } from "./updater";
 import { initVersionCheck } from "./version-check";
@@ -24,6 +25,7 @@ function registerShortcuts() {
 
 app.whenReady().then(() => {
 	Menu.setApplicationMenu(null);
+	registerSettingsIpcHandlers();
 	const mainWindow = createWindow();
 	registerAiIpcHandlers(mainWindow);
 	registerNotesIpcHandlers(mainWindow);
