@@ -6,7 +6,9 @@ export type WritingTone =
 	| "professional"
 	| "casual"
 	| "friendly"
-	| "concise";
+	| "concise"
+	| "persuasive"
+	| "playful";
 
 export type ImproveTextRequest = {
 	kind: "improve";

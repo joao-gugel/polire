@@ -25,7 +25,9 @@ function isWritingTone(value: unknown): value is WritingTone {
 		value === "professional" ||
 		value === "casual" ||
 		value === "friendly" ||
-		value === "concise"
+		value === "concise" ||
+		value === "persuasive" ||
+		value === "playful"
 	);
 }
 

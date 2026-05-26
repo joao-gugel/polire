@@ -4,6 +4,7 @@ export const en: Messages = {
 	common: {
 		close: "Close",
 		send: "Send",
+		back: "Back",
 		copy: "Copy",
 		copied: "Copied",
 		copyText: "Copy text",
@@ -14,6 +15,7 @@ export const en: Messages = {
 		disabledAiHint: "Configure AI to use",
 		options: {
 			correction: "Improve text",
+			tone: "Change tone",
 			translation: "Translate",
 			saveNote: "Save note",
 			openNotes: "Open notes",
@@ -67,6 +69,20 @@ export const en: Messages = {
 		title: "Improve text",
 		resultLabel: "Improved",
 		error: "Could not improve the text. Check your API key.",
+	},
+	tone: {
+		title: "Tone: {{name}}",
+	},
+	toneTarget: {
+		title: "Change tone",
+		tones: {
+			professional: "Professional",
+			casual: "Casual",
+			friendly: "Friendly",
+			concise: "Concise",
+			persuasive: "Persuasive",
+			playful: "Playful",
+		},
 	},
 	translation: {
 		title: "Translate",

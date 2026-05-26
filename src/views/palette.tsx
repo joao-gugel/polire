@@ -15,7 +15,7 @@ export function Palette() {
 	const { t } = useI18n();
 	const { push, current } = useNav();
 	const { status } = useAiStatus();
-	const { correctText } = useCorrection();
+	const { correctText, setDraft: setCorrectionDraft } = useCorrection();
 	const { setDraft } = useTranslation();
 	const { createNote, loadNotes } = useNotes();
 	const isActive = current === "palette";
@@ -38,6 +38,7 @@ export function Palette() {
 		t,
 		push,
 		correctText,
+		startToneChange: setCorrectionDraft,
 		startTranslation: setDraft,
 		saveAsNote,
 		openNotes,

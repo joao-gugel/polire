@@ -15,6 +15,7 @@ import { Notes } from "@/views/notes";
 import { Onboarding } from "@/views/onboarding";
 import { Palette } from "@/views/palette";
 import { Settings } from "@/views/settings";
+import { ToneTarget } from "@/views/tone-target";
 import { Translation } from "@/views/translation";
 import { TranslationTarget } from "@/views/translation-target";
 
@@ -92,6 +93,7 @@ function renderView(view: View) {
 	if (view === "onboarding") return <Onboarding />;
 	if (view === "ai-settings") return <AiSettings />;
 	if (view === "correction") return <Correction />;
+	if (view === "tone-target") return <ToneTarget />;
 	if (view === "translation-target") return <TranslationTarget />;
 	if (view === "translation") return <Translation />;
 	if (view === "notes") return <Notes />;

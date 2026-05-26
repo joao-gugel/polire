@@ -1,6 +1,7 @@
 import {
 	GearIcon,
 	MagicWandIcon,
+	MaskHappyIcon,
 	NotebookIcon,
 	NotePencilIcon,
 	SparkleIcon,
@@ -12,6 +13,7 @@ type PaletteDestination =
 	| "settings"
 	| "onboarding"
 	| "correction"
+	| "tone-target"
 	| "translation-target"
 	| "notes";
 
@@ -21,6 +23,7 @@ type PaletteOptionsInput = {
 	t: Translate;
 	push: (view: PaletteDestination) => void;
 	correctText: (text: string) => Promise<void>;
+	startToneChange: (text: string) => void;
 	startTranslation: (text: string) => void;
 	saveAsNote: (text: string) => Promise<void>;
 	openNotes: () => Promise<void>;
@@ -34,6 +37,7 @@ export function buildPaletteOptions({
 	t,
 	push,
 	correctText,
+	startToneChange,
 	startTranslation,
 	saveAsNote,
 	openNotes,
@@ -66,6 +70,20 @@ export function buildPaletteOptions({
 						if (!hasText) return;
 						void correctText(text);
 						push("correction");
+					},
+		},
+		{
+			id: "tone",
+			label: t("palette.options.tone"),
+			icon: MaskHappyIcon,
+			disabled: aiDisabled,
+			hint: aiHint,
+			action: aiDisabled
+				? noop
+				: () => {
+						if (!hasText) return;
+						startToneChange(text);
+						push("tone-target");
 					},
 		},
 		{

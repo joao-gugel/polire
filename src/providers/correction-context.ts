@@ -1,17 +1,20 @@
 import { createContext } from "react";
-import type { TransformHint } from "../../electron/ai/types";
+import type { TransformHint, WritingTone } from "../../electron/ai/types";
 
 export type CorrectionState = {
 	original: string;
 	corrected: string;
 	hints: TransformHint[];
+	tone: WritingTone;
 	status: "idle" | "loading" | "success" | "error";
 	error: string | null;
 };
 
 export type CorrectionContextValue = {
 	state: CorrectionState;
-	correctText: (text: string) => Promise<void>;
+	draft: string;
+	setDraft: (text: string) => void;
+	correctText: (text: string, tone?: WritingTone) => Promise<void>;
 };
 
 export const CorrectionContext = createContext<CorrectionContextValue | null>(
