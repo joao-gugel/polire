@@ -1,7 +1,7 @@
 import type { BrowserWindow } from "electron";
 import { ipcMain, shell } from "electron";
-import { HOMEPAGE_URL } from "../constants";
-import { assertMainWindowSender } from "../ipc/assert-renderer";
+import { HOMEPAGE_URL } from "../../constants";
+import { assertMainWindowSender } from "../../ipc/assert-renderer";
 import { APP_CHANNELS } from "./channels";
 
 /** Registers renderer requests that target application-level resources. */

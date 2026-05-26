@@ -1,6 +1,6 @@
 import type { BrowserWindow } from "electron";
 import { ipcMain } from "electron";
-import { assertMainWindowSender } from "../ipc/assert-renderer";
+import { assertMainWindowSender } from "../../ipc/assert-renderer";
 import { WINDOW_CHANNELS } from "./channels";
 import { hideWindow, resizeWindowForPaletteInput } from "./manager";
 import { parseExtraHeight } from "./validation";

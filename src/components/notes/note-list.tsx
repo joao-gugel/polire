@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import { CompactRelativeDate } from "@/components/notes/relative-date";
 import { useI18n } from "@/hooks/use-i18n";
-import type { Note } from "../../../electron/notes/types";
+import type { Note } from "../../../electron/modules/notes/types";
 
 const SELECTION_LAYOUT_ID = "notes-selection";
 

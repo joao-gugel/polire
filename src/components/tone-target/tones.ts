@@ -7,7 +7,7 @@ import {
 	MegaphoneIcon,
 	SmileyIcon,
 } from "@phosphor-icons/react";
-import type { WritingTone } from "../../../electron/ai/types";
+import type { WritingTone } from "../../../electron/modules/ai/types";
 
 export type ToneOption = {
 	id: Exclude<WritingTone, "preserve">;

@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { HintButton } from "@/components/ui/hint";
 import { HintsScroll } from "@/components/ui/transformation-result/hints-scroll";
 import { useI18n } from "@/hooks/use-i18n";
-import type { TransformHint } from "../../../../electron/ai/types";
+import type { TransformHint } from "../../../../electron/modules/ai/types";
 
 type ResultFooterProps = {
 	hasDiff: boolean;

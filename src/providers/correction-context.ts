@@ -1,5 +1,8 @@
 import { createContext } from "react";
-import type { TransformHint, WritingTone } from "../../electron/ai/types";
+import type {
+	TransformHint,
+	WritingTone,
+} from "../../electron/modules/ai/types";
 
 export type CorrectionState = {
 	original: string;

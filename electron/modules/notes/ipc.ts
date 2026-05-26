@@ -1,6 +1,6 @@
 import type { BrowserWindow } from "electron";
 import { ipcMain } from "electron";
-import { assertMainWindowSender } from "../ipc/assert-renderer";
+import { assertMainWindowSender } from "../../ipc/assert-renderer";
 import { NOTES_CHANNELS } from "./channels";
 import { createNote, listNotes, removeNote, updateNote } from "./store";
 import { parseNewContent, parseNoteId, parseUpdateInput } from "./validation";

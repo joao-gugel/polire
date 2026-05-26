@@ -1,6 +1,6 @@
 import { type ReactNode, use, useState } from "react";
 import { AiStatusContext } from "@/providers/ai-status-context";
-import type { AiSettingsStatus } from "../../electron/ai/types";
+import type { AiSettingsStatus } from "../../electron/modules/ai/types";
 
 let initialStatusPromise: Promise<AiSettingsStatus> | null = null;
 

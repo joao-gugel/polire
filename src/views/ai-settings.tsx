@@ -10,7 +10,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { useAiStatus } from "@/hooks/use-ai-status";
 import { useI18n } from "@/hooks/use-i18n";
 import { useNav } from "@/hooks/use-nav";
-import type { AiProvider } from "../../electron/ai/types";
+import type { AiProvider } from "../../electron/modules/ai/types";
 
 const INPUT_INDEX = PROVIDER_OPTIONS.length;
 const TOTAL_ITEMS = PROVIDER_OPTIONS.length + 1;

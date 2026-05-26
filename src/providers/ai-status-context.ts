@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { AiSettingsStatus } from "../../electron/ai/types";
+import type { AiSettingsStatus } from "../../electron/modules/ai/types";
 
 export type AiStatusContextValue = {
 	status: AiSettingsStatus;

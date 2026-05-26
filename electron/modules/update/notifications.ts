@@ -1,5 +1,5 @@
 import { Notification, shell } from "electron";
-import { RELEASES_URL } from "../constants";
+import { RELEASES_URL } from "../../constants";
 import type { UpdateLabelSet, UpdateLabels } from "./types";
 
 let labels: UpdateLabels = {

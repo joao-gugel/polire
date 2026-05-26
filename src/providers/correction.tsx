@@ -4,7 +4,7 @@ import {
 	CorrectionContext,
 	type CorrectionState,
 } from "@/providers/correction-context";
-import type { WritingTone } from "../../electron/ai/types";
+import type { WritingTone } from "../../electron/modules/ai/types";
 
 const INITIAL_STATE: CorrectionState = {
 	original: "",

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/transformation-result/result-pane";
 import { useNav } from "@/hooks/use-nav";
 import type { View } from "@/types";
-import type { TransformHint } from "../../../../electron/ai/types";
+import type { TransformHint } from "../../../../electron/modules/ai/types";
 
 type TransformationResultProps = {
 	activeView: View;

@@ -1,7 +1,7 @@
 import type { BrowserWindow } from "electron";
 import { ipcMain, shell } from "electron";
-import { RELEASES_URL } from "../constants";
-import { assertMainWindowSender } from "../ipc/assert-renderer";
+import { RELEASES_URL } from "../../constants";
+import { assertMainWindowSender } from "../../ipc/assert-renderer";
 import { UPDATE_CHANNELS } from "./channels";
 import { setUpdateLabels } from "./notifications";
 import { getAvailableVersion } from "./state";

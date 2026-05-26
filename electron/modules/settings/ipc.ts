@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import { assertTrustedRendererSender } from "../ipc/assert-renderer";
+import { assertTrustedRendererSender } from "../../ipc/assert-renderer";
 import { SETTINGS_CHANNELS } from "./channels";
 import { getSettings, setLocale } from "./store";
 import { parseLocale } from "./validation";

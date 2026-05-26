@@ -1,13 +1,10 @@
-import type {
-	AiProvider,
-	AiSettings,
-	AiSettingsStatus,
-	TransformRequest,
-	TransformResult,
-} from "./ai/types";
-import type { Note } from "./notes/types";
-import type { Locale, Settings } from "./settings/types";
-import type { UpdateLabels } from "./update/types";
+import type { AiApi } from "./modules/ai/api";
+import type { AppApi } from "./modules/app/api";
+import type { NotesApi } from "./modules/notes/api";
+import type { SettingsApi } from "./modules/settings/api";
+import type { TrayApi } from "./modules/tray/api";
+import type { UpdateApi } from "./modules/update/api";
+import type { WindowApi } from "./modules/window/api";
 
 export type Platform =
 	| "aix"
@@ -24,32 +21,10 @@ export type Platform =
 
 export type PreloadApi = {
 	platform: Platform;
-	hide: () => Promise<void>;
-	resizeForPaletteInput: (extraHeight: number) => Promise<void>;
-	setTrayLabels: (labels: { open: string; quit: string }) => Promise<void>;
-	setUpdateLabels: (labels: UpdateLabels) => Promise<void>;
-	getUpdateStatus: () => Promise<string | null>;
-	onUpdateAvailable: (callback: (version: string) => void) => () => void;
-	openReleases: () => Promise<void>;
-	openHomepage: () => Promise<void>;
-	settings: {
-		initial: Settings;
-		setLocale: (locale: Locale) => Promise<void>;
-	};
-	ai: {
-		getSettings: () => Promise<AiSettingsStatus>;
-		saveSettings: (settings: AiSettings) => Promise<AiSettingsStatus>;
-		saveApiKey: (
-			provider: AiProvider,
-			apiKey: string,
-		) => Promise<AiSettingsStatus>;
-		removeApiKey: (provider: AiProvider) => Promise<AiSettingsStatus>;
-		transform: (request: TransformRequest) => Promise<TransformResult>;
-	};
-	notes: {
-		list: () => Promise<Note[]>;
-		create: (content: string) => Promise<Note>;
-		update: (id: string, content: string) => Promise<Note>;
-		remove: (id: string) => Promise<void>;
-	};
-};
+	settings: SettingsApi;
+	ai: AiApi;
+	notes: NotesApi;
+} & WindowApi &
+	TrayApi &
+	UpdateApi &
+	AppApi;

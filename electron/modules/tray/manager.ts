@@ -1,5 +1,5 @@
 import { Menu, nativeImage, Tray } from "electron";
-import { APP_NAME, TRAY_ICON } from "../constants";
+import { APP_NAME, TRAY_ICON } from "../../constants";
 import { quit, showWindow, toggleWindow } from "../window/manager";
 import type { TrayLabels } from "./types";
 

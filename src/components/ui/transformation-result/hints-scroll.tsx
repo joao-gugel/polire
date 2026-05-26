@@ -1,5 +1,5 @@
 import { useDragScroll } from "@/hooks/use-drag-scroll";
-import type { TransformHint } from "../../../../electron/ai/types";
+import type { TransformHint } from "../../../../electron/modules/ai/types";
 
 type HintsScrollProps = {
 	hints: TransformHint[];

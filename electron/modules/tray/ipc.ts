@@ -1,6 +1,6 @@
 import type { BrowserWindow } from "electron";
 import { ipcMain } from "electron";
-import { assertMainWindowSender } from "../ipc/assert-renderer";
+import { assertMainWindowSender } from "../../ipc/assert-renderer";
 import { TRAY_CHANNELS } from "./channels";
 import { setTrayLabels } from "./manager";
 import { parseTrayLabels } from "./validation";

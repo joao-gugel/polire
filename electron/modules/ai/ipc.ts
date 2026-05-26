@@ -1,6 +1,6 @@
 import type { BrowserWindow } from "electron";
 import { ipcMain } from "electron";
-import { assertMainWindowSender } from "../ipc/assert-renderer";
+import { assertMainWindowSender } from "../../ipc/assert-renderer";
 import { AI_CHANNELS } from "./channels";
 import { hasApiKey, removeApiKey, saveApiKey } from "./secret-store";
 import { loadAiSettings, saveAiSettings } from "./settings-store";
