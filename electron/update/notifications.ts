@@ -1,11 +1,6 @@
 import { Notification, shell } from "electron";
-import { RELEASES_URL } from "./constants";
-
-export type UpdateLabelSet = { title: string; body: string };
-export type UpdateLabels = {
-	available: UpdateLabelSet;
-	ready: UpdateLabelSet;
-};
+import { RELEASES_URL } from "../constants";
+import type { UpdateLabelSet, UpdateLabels } from "./types";
 
 let labels: UpdateLabels = {
 	available: {

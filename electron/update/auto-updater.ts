@@ -1,6 +1,6 @@
 import { app } from "electron";
 import pkg from "electron-updater";
-import { notifyUpdateReady } from "./update-notifications";
+import { notifyUpdateReady } from "./notifications";
 
 const { autoUpdater } = pkg;
 

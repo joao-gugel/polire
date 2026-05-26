@@ -1,32 +1,15 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { app } from "electron";
-import type { AiProvider, AiSettings } from "./types";
+import type { AiSettings } from "./types";
+import { isAiSettings } from "./validation";
 
 const SETTINGS_FILE = "ai-settings.json";
-const MAX_MODEL_LENGTH = 128;
 
 const DEFAULT_SETTINGS: AiSettings = {
 	provider: "openai",
 	model: "gpt-5.4",
 };
-
-export function isAiProvider(value: unknown): value is AiProvider {
-	return (
-		value === "openai" ||
-		value === "anthropic" ||
-		value === "google" ||
-		value === "deepseek"
-	);
-}
-
-function isSettings(value: unknown): value is AiSettings {
-	if (!value || typeof value !== "object") return false;
-	if (!("provider" in value) || !isAiProvider(value.provider)) return false;
-	if (!("model" in value) || typeof value.model !== "string") return false;
-	const model = value.model.trim();
-	return model.length > 0 && model.length <= MAX_MODEL_LENGTH;
-}
 
 function getSettingsPath() {
 	return path.join(app.getPath("userData"), SETTINGS_FILE);
@@ -38,7 +21,7 @@ export async function loadAiSettings(): Promise<AiSettings> {
 		const savedSettings = JSON.parse(
 			await readFile(getSettingsPath(), "utf8"),
 		) as unknown;
-		if (isSettings(savedSettings)) return savedSettings;
+		if (isAiSettings(savedSettings)) return savedSettings;
 		return DEFAULT_SETTINGS;
 	} catch {
 		return DEFAULT_SETTINGS;
@@ -47,7 +30,7 @@ export async function loadAiSettings(): Promise<AiSettings> {
 
 /** Saves local provider preferences without storing credentials. */
 export async function saveAiSettings(settings: unknown): Promise<AiSettings> {
-	if (!isSettings(settings)) throw new Error("Invalid AI settings.");
+	if (!isAiSettings(settings)) throw new Error("Invalid AI settings.");
 	await writeFile(
 		getSettingsPath(),
 		JSON.stringify(settings, null, "\t"),

@@ -6,7 +6,7 @@ import {
 	PRELOAD,
 	WINDOW_HEIGHT,
 	WINDOW_WIDTH,
-} from "./constants";
+} from "../constants";
 
 let win: BrowserWindow | null = null;
 let isQuitting = false;

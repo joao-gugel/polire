@@ -37,14 +37,18 @@ assets/
 ├── app/          # native app icon master + Linux size variants
 └── tray/         # compact status-area icons (1x and 2x)
 electron/
-├── ai/            # AI prompts, settings, encrypted keys, execution + IPC
-├── notes/         # Markdown note persistence + IPC
-├── ipc/           # validation shared by main-process IPC handlers
-├── constants.ts   # paths, window size, hotkey, app name
-├── window.ts      # window lifecycle: create, show, toggle, quit, Esc handler
-├── tray.ts        # system tray icon + context menu
-├── main.ts        # entry: whenReady wiring + global shortcuts
-└── preload.ts     # renderer ↔ main bridge (exposes `window.api`)
+├── ai/            # AI prompts, credentials, execution, validation + IPC
+├── app/           # application-level renderer requests (external links)
+├── ipc/           # shared IPC sender authorization
+├── notes/         # Markdown note persistence, validation + IPC
+├── settings/      # persisted application settings + IPC
+├── tray/          # system tray lifecycle, validation + IPC
+├── update/        # update status, notifications, checks + IPC
+├── window/        # window lifecycle, validation + IPC
+├── constants.ts   # shared paths, dimensions, hotkey and URLs
+├── preload-api.ts # renderer-facing bridge contract types
+├── preload.ts     # renderer bridge implementation (exposes `window.api`)
+└── main.ts        # entry: startup wiring + global shortcuts
 src/
 ├── app.tsx                  # shell: wraps NavProvider + AnimatePresence + view renderer
 ├── main.tsx                 # React entry — mounts <App /> into #root
@@ -79,7 +83,7 @@ vite.config.ts     # Vite + plugins (React, Tailwind, Electron)
 
 `assets/` contains native runtime resources. Any future packaging configuration must include this directory so window and tray icons remain available outside development.
 
-Module-level state in `electron/` is intentional: `win` and `isQuitting` live as `let` bindings inside `window.ts` and are mutated by exported functions. Don't pull them out into a shared store — the encapsulation is the point.
+Module-level state in `electron/` is intentional: `win` and `isQuitting` live as `let` bindings inside `window/manager.ts` and are mutated by exported functions. Don't pull them out into a shared store — the encapsulation is the point.
 
 ### Internationalization
 

@@ -1,13 +1,16 @@
 import { app, globalShortcut, Menu } from "electron";
 import { registerAiIpcHandlers } from "./ai/ipc";
+import { registerAppIpcHandlers } from "./app/ipc";
 import { SHORTCUT } from "./constants";
 import { registerNotesIpcHandlers } from "./notes/ipc";
 import { registerSettingsIpcHandlers } from "./settings/ipc";
-import { createTray } from "./tray";
-import { initAutoUpdater } from "./updater";
-import { initVersionCheck } from "./version-check";
-import { createWindow, toggleWindow } from "./window";
-import { registerWindowIpcHandlers } from "./window-ipc";
+import { registerTrayIpcHandlers } from "./tray/ipc";
+import { createTray } from "./tray/manager";
+import { initAutoUpdater } from "./update/auto-updater";
+import { registerUpdateIpcHandlers } from "./update/ipc";
+import { initVersionCheck } from "./update/version-check";
+import { registerWindowIpcHandlers } from "./window/ipc";
+import { createWindow, toggleWindow } from "./window/manager";
 
 /** Enable portal-backed global shortcuts for native Wayland sessions on Linux. */
 function enableLinuxGlobalShortcutsPortal() {
@@ -30,6 +33,9 @@ app.whenReady().then(() => {
 	registerAiIpcHandlers(mainWindow);
 	registerNotesIpcHandlers(mainWindow);
 	registerWindowIpcHandlers(mainWindow);
+	registerTrayIpcHandlers(mainWindow);
+	registerUpdateIpcHandlers(mainWindow);
+	registerAppIpcHandlers(mainWindow);
 	createTray();
 	registerShortcuts();
 	initAutoUpdater();

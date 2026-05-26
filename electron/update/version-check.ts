@@ -1,6 +1,6 @@
 import { app } from "electron";
-import { notifyUpdateAvailable } from "./update-notifications";
-import { setAvailableVersion } from "./update-state";
+import { notifyUpdateAvailable } from "./notifications";
+import { setAvailableVersion } from "./state";
 
 const API_BASE_URL = process.env.POLIRE_API_URL ?? "https://api.polire.app";
 const VERSION_ENDPOINT = `${API_BASE_URL}/api/v1/version`;

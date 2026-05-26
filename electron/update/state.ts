@@ -1,5 +1,5 @@
 import { BrowserWindow } from "electron";
-import { WINDOW_CHANNELS } from "./window-channels";
+import { UPDATE_CHANNELS } from "./channels";
 
 let availableVersion: string | null = null;
 
@@ -11,6 +11,6 @@ export function setAvailableVersion(version: string) {
 	if (availableVersion === version) return;
 	availableVersion = version;
 	for (const win of BrowserWindow.getAllWindows()) {
-		win.webContents.send(WINDOW_CHANNELS.updateAvailable, version);
+		win.webContents.send(UPDATE_CHANNELS.available, version);
 	}
 }
