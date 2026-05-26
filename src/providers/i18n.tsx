@@ -30,8 +30,8 @@ export function I18nProvider({ children }: I18nProviderProps) {
 
 	useEffect(() => {
 		const { open, quit } = value.messages.tray;
-		window.api.setTrayLabels({ open, quit });
-		window.api.setUpdateLabels(value.messages.update);
+		window.api.tray.setTrayLabels({ open, quit });
+		window.api.update.setUpdateLabels(value.messages.update);
 	}, [value.messages]);
 
 	return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;

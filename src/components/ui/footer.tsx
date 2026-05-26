@@ -27,7 +27,7 @@ export function Footer({ additionalHint }: FooterProps) {
 			<div className="flex items-center gap-2.5">
 				<button
 					type="button"
-					onClick={() => void window.api.openHomepage()}
+					onClick={() => void window.api.app.openHomepage()}
 					title="polire.app"
 					className="flex cursor-pointer items-center gap-1.5 rounded-lg px-1.5 py-0.5 outline-none transition-colors hover:bg-zinc-900/5 focus:outline-none focus-visible:outline-none dark:hover:bg-white/10"
 				>
@@ -37,7 +37,7 @@ export function Footer({ additionalHint }: FooterProps) {
 				{availableVersion && (
 					<button
 						type="button"
-						onClick={() => void window.api.openReleases()}
+						onClick={() => void window.api.update.openReleases()}
 						title={`v${availableVersion}`}
 						className="flex cursor-pointer items-center gap-2 rounded-lg px-2.5 py-1 font-medium text-emerald-700 text-sm outline-none transition-colors hover:bg-emerald-500/10 focus:outline-none focus-visible:outline-none dark:text-emerald-400"
 					>
@@ -52,7 +52,7 @@ export function Footer({ additionalHint }: FooterProps) {
 					<span className="px-1 text-zinc-300 dark:text-zinc-600">|</span>
 				)}
 				<HintButton
-					onClick={() => void window.api.hide()}
+					onClick={() => void window.api.window.hide()}
 					label={t("common.close")}
 					kbd="esc"
 				/>

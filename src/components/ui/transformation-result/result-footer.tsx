@@ -50,7 +50,7 @@ export function ResultFooter({
 				</div>
 				<div className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300">
 					<HintButton
-						onClick={() => void window.api.hide()}
+						onClick={() => void window.api.window.hide()}
 						label={t("common.close")}
 						kbd="esc"
 					/>

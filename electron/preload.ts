@@ -14,10 +14,10 @@ import type { PreloadApi } from "./preload-api";
  */
 const api = {
 	platform: process.platform,
-	...windowApi,
-	...trayApi,
-	...updateApi,
-	...appApi,
+	window: windowApi,
+	tray: trayApi,
+	update: updateApi,
+	app: appApi,
 	settings: settingsApi,
 	ai: aiApi,
 	notes: notesApi,

@@ -13,10 +13,13 @@ type SearchInputProps = {
 };
 
 function requestResizeForPaletteInput(extraHeight: number) {
-	if (typeof window === "undefined" || !window.api?.resizeForPaletteInput) {
+	if (
+		typeof window === "undefined" ||
+		!window.api?.window.resizeForPaletteInput
+	) {
 		return;
 	}
-	void window.api.resizeForPaletteInput(extraHeight);
+	void window.api.window.resizeForPaletteInput(extraHeight);
 }
 
 function useWindowResizeForGrowingInput(

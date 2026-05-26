@@ -37,18 +37,19 @@ assets/
 ├── app/          # native app icon master + Linux size variants
 └── tray/         # compact status-area icons (1x and 2x)
 electron/
-├── ai/            # AI prompts, credentials, execution, validation + IPC
-├── app/           # application-level renderer requests (external links)
-├── ipc/           # shared IPC sender authorization
-├── notes/         # Markdown note persistence, validation + IPC
-├── settings/      # persisted application settings + IPC
-├── tray/          # system tray lifecycle, validation + IPC
-├── update/        # update status, notifications, checks + IPC
-├── window/        # window lifecycle, validation + IPC
-├── constants.ts   # shared paths, dimensions, hotkey and URLs
-├── preload-api.ts # renderer-facing bridge contract types
-├── preload.ts     # renderer bridge implementation (exposes `window.api`)
-└── main.ts        # entry: startup wiring + global shortcuts
+├── ipc/                     # shared IPC sender authorization + handler registration
+├── modules/
+│   ├── ai/                  # AI prompts, credentials, execution, validation + bridge API
+│   ├── app/                 # application-level renderer requests (external links)
+│   ├── notes/               # Markdown note persistence, validation + bridge API
+│   ├── settings/            # persisted application settings + bridge API
+│   ├── tray/                # system tray lifecycle, validation + bridge API
+│   ├── update/              # update status, notifications, checks + bridge API
+│   └── window/              # window lifecycle, validation + bridge API
+├── constants.ts             # shared paths, dimensions, hotkey and URLs
+├── preload-api.ts           # composed renderer-facing bridge contract types
+├── preload.ts               # bridge entry: exposes module APIs on `window.api`
+└── main.ts                  # entry: startup wiring + global shortcuts
 src/
 ├── app.tsx                  # shell: wraps NavProvider + AnimatePresence + view renderer
 ├── main.tsx                 # React entry — mounts <App /> into #root
@@ -83,7 +84,7 @@ vite.config.ts     # Vite + plugins (React, Tailwind, Electron)
 
 `assets/` contains native runtime resources. Any future packaging configuration must include this directory so window and tray icons remain available outside development.
 
-Module-level state in `electron/` is intentional: `win` and `isQuitting` live as `let` bindings inside `window/manager.ts` and are mutated by exported functions. Don't pull them out into a shared store — the encapsulation is the point.
+Module-level state in `electron/` is intentional: `win` and `isQuitting` live as `let` bindings inside `modules/window/manager.ts` and are mutated by exported functions. Don't pull them out into a shared store — the encapsulation is the point.
 
 ### Internationalization
 

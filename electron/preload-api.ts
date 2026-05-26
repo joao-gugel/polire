@@ -20,11 +20,12 @@ export type Platform =
 	| "win32";
 
 export type PreloadApi = {
-	platform: Platform;
 	settings: SettingsApi;
-	ai: AiApi;
+	platform: Platform;
+	update: UpdateApi;
+	window: WindowApi;
 	notes: NotesApi;
-} & WindowApi &
-	TrayApi &
-	UpdateApi &
-	AppApi;
+	tray: TrayApi;
+	app: AppApi;
+	ai: AiApi;
+};
