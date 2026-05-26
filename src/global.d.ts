@@ -28,6 +28,14 @@ declare global {
 			hide: () => Promise<void>;
 			resizeForPaletteInput: (extraHeight: number) => Promise<void>;
 			setTrayLabels: (labels: { open: string; quit: string }) => Promise<void>;
+			setUpdateLabels: (labels: {
+				available: { title: string; body: string };
+				ready: { title: string; body: string };
+			}) => Promise<void>;
+			getUpdateStatus: () => Promise<string | null>;
+			onUpdateAvailable: (cb: (version: string) => void) => () => void;
+			openReleases: () => Promise<void>;
+			openHomepage: () => Promise<void>;
 			ai: {
 				getSettings: () => Promise<AiSettingsStatus>;
 				saveSettings: (settings: AiSettings) => Promise<AiSettingsStatus>;

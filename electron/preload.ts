@@ -14,6 +14,22 @@ contextBridge.exposeInMainWorld("api", {
 		ipcRenderer.invoke(WINDOW_CHANNELS.resizeForPaletteInput, extraHeight),
 	setTrayLabels: (labels: { open: string; quit: string }) =>
 		ipcRenderer.invoke(WINDOW_CHANNELS.setTrayLabels, labels),
+	setUpdateLabels: (labels: {
+		available: { title: string; body: string };
+		ready: { title: string; body: string };
+	}) => ipcRenderer.invoke(WINDOW_CHANNELS.setUpdateLabels, labels),
+	getUpdateStatus: () =>
+		ipcRenderer.invoke(WINDOW_CHANNELS.getUpdateStatus) as Promise<
+			string | null
+		>,
+	onUpdateAvailable: (cb: (version: string) => void) => {
+		const listener = (_: unknown, version: string) => cb(version);
+		ipcRenderer.on(WINDOW_CHANNELS.updateAvailable, listener);
+		return () =>
+			ipcRenderer.removeListener(WINDOW_CHANNELS.updateAvailable, listener);
+	},
+	openReleases: () => ipcRenderer.invoke(WINDOW_CHANNELS.openReleases),
+	openHomepage: () => ipcRenderer.invoke(WINDOW_CHANNELS.openHomepage),
 	ai: {
 		getSettings: () => ipcRenderer.invoke(AI_CHANNELS.getSettings),
 		saveSettings: (settings: unknown) =>

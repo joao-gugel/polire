@@ -3,6 +3,8 @@ import { registerAiIpcHandlers } from "./ai/ipc";
 import { SHORTCUT } from "./constants";
 import { registerNotesIpcHandlers } from "./notes/ipc";
 import { createTray } from "./tray";
+import { initAutoUpdater } from "./updater";
+import { initVersionCheck } from "./version-check";
 import { createWindow, toggleWindow } from "./window";
 import { registerWindowIpcHandlers } from "./window-ipc";
 
@@ -28,6 +30,8 @@ app.whenReady().then(() => {
 	registerWindowIpcHandlers(mainWindow);
 	createTray();
 	registerShortcuts();
+	initAutoUpdater();
+	initVersionCheck();
 });
 
 app.on("will-quit", () => globalShortcut.unregisterAll());

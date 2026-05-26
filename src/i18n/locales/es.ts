@@ -130,7 +130,20 @@ export const es: Messages = {
 		open: "Abrir",
 		quit: "Salir",
 	},
+	footer: {
+		downloadUpdate: "Descargar actualización",
+	},
 	transforming: {
 		messages: ["Puliendo...", "Refinando...", "Pensando...", "Trabajando..."],
+	},
+	update: {
+		available: {
+			title: "Nueva versión de Polire disponible",
+			body: "La versión {{version}} ya salió. Haz clic para descargar.",
+		},
+		ready: {
+			title: "Actualización lista",
+			body: "Polire {{version}} se instalará cuando cierres la aplicación.",
+		},
 	},
 };

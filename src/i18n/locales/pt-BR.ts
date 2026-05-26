@@ -126,8 +126,21 @@ export type Messages = {
 		open: string;
 		quit: string;
 	};
+	footer: {
+		downloadUpdate: string;
+	};
 	transforming: {
 		messages: string[];
+	};
+	update: {
+		available: {
+			title: string;
+			body: string;
+		};
+		ready: {
+			title: string;
+			body: string;
+		};
 	};
 };
 
@@ -261,7 +274,20 @@ export const ptBR: Messages = {
 		open: "Abrir",
 		quit: "Sair",
 	},
+	footer: {
+		downloadUpdate: "Baixar atualização",
+	},
 	transforming: {
 		messages: ["Polindo...", "Refinando...", "Pensando...", "Trabalhando..."],
+	},
+	update: {
+		available: {
+			title: "Nova versão do Polire disponível",
+			body: "A versão {{version}} já saiu. Clique para baixar.",
+		},
+		ready: {
+			title: "Atualização pronta",
+			body: "Polire {{version}} será instalado quando você fechar o app.",
+		},
 	},
 };

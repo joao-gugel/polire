@@ -35,3 +35,9 @@ export const WINDOW_WIDTH = 800;
 
 /** Main window height in pixels. */
 export const WINDOW_HEIGHT = 480;
+
+/** Public site shown in the footer logo. */
+export const HOMEPAGE_URL = "https://polire.app";
+
+/** GitHub releases page used by update notifications and the footer button. */
+export const RELEASES_URL = "https://github.com/joao-gugel/polire/releases";
