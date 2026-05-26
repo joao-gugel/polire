@@ -18,7 +18,7 @@
 
 Polire is a small desktop app for people who write in a non-native language, or simply want to polish text without breaking their flow. Open it from anywhere with a global shortcut, paste or write text, then correct it, translate it, or save it as a local note.
 
-![Polire screenshot](docs/screenshot.png)
+![Polire demo](assets/demo-gif.gif)
 
 ## Download
 
