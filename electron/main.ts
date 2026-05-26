@@ -16,7 +16,7 @@ function enableLinuxGlobalShortcutsPortal() {
 
 enableLinuxGlobalShortcutsPortal();
 
-/** Register the global hotkey. Logs an error if the OS refuses the binding (already in use, missing permission, etc). */
+/** Register the global hotkey. */
 function registerShortcuts() {
 	const ok = globalShortcut.register(SHORTCUT, toggleWindow);
 	if (!ok) console.error(`Failed to register global shortcut ${SHORTCUT}`);

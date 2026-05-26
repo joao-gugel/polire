@@ -6,6 +6,12 @@
 
 <p align="center">Open-source desktop writing assistant for clearer writing, translation, and quick notes.</p>
 
+<p align="center">
+  English |
+  <a href="docs/README.pt-BR.md">Português (Brasil)</a> |
+  <a href="docs/README.es.md">Español</a>
+</p>
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Release: v0.1.0](https://img.shields.io/badge/Release-v0.1.0-2ea44f.svg)](https://github.com/joao-gugel/polire/releases/tag/v0.1.0)
 [![Downloads](https://img.shields.io/badge/Download-Windows%20%7C%20Linux-blue.svg)](#download)
