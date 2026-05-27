@@ -12,8 +12,14 @@ describe("AI IPC validation", () => {
 				kind: "improve",
 				text: "Fix this.",
 				tone: "preserve",
+				explanationLocale: "es",
 			}),
-		).toEqual({ kind: "improve", text: "Fix this.", tone: "preserve" });
+		).toEqual({
+			kind: "improve",
+			text: "Fix this.",
+			tone: "preserve",
+			explanationLocale: "es",
+		});
 		expect(
 			parseTransformRequest({
 				kind: "translate",
@@ -33,8 +39,17 @@ describe("AI IPC validation", () => {
 				kind: "improve",
 				text: "Fix this.",
 				tone: "unknown",
+				explanationLocale: "en",
 			}),
 		).toThrow("Invalid writing tone.");
+		expect(() =>
+			parseTransformRequest({
+				kind: "improve",
+				text: "Fix this.",
+				tone: "preserve",
+				explanationLocale: "fr",
+			}),
+		).toThrow("Invalid hint explanation locale.");
 		expect(() =>
 			parseTransformRequest({
 				kind: "translate",

@@ -20,7 +20,7 @@ type CorrectionProviderProps = {
 };
 
 export function CorrectionProvider({ children }: CorrectionProviderProps) {
-	const { t } = useI18n();
+	const { t, locale } = useI18n();
 	const [state, setState] = useState<CorrectionState>(INITIAL_STATE);
 	const [draft, setDraft] = useState("");
 
@@ -38,6 +38,7 @@ export function CorrectionProvider({ children }: CorrectionProviderProps) {
 				kind: "improve",
 				text,
 				tone,
+				explanationLocale: locale,
 			});
 			setState({
 				original: text,

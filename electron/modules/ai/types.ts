@@ -1,3 +1,5 @@
+import type { Locale } from "../settings/types";
+
 /** Text transformations supported by the local AI execution layer. */
 export type TransformRequest = ImproveTextRequest | TranslateTextRequest;
 
@@ -14,6 +16,7 @@ export type ImproveTextRequest = {
 	kind: "improve";
 	text: string;
 	tone: WritingTone;
+	explanationLocale: Locale;
 };
 
 export type TranslateTextRequest = {

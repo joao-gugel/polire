@@ -29,6 +29,7 @@ const improveRequest = {
 	kind: "improve" as const,
 	text: "I has a issue.",
 	tone: "preserve" as const,
+	explanationLocale: "en" as const,
 };
 
 describe("transformText", () => {

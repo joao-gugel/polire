@@ -1,3 +1,4 @@
+import { isLocale } from "../settings/validation";
 import type {
 	AiProvider,
 	AiSettings,
@@ -61,7 +62,15 @@ export function parseTransformRequest(value: unknown): TransformRequest {
 		if (!("tone" in value) || !isWritingTone(value.tone)) {
 			throw new Error("Invalid writing tone.");
 		}
-		return { kind: value.kind, text: value.text, tone: value.tone };
+		if (!("explanationLocale" in value) || !isLocale(value.explanationLocale)) {
+			throw new Error("Invalid hint explanation locale.");
+		}
+		return {
+			kind: value.kind,
+			text: value.text,
+			tone: value.tone,
+			explanationLocale: value.explanationLocale,
+		};
 	}
 	if ("kind" in value && value.kind === "translate") {
 		if (!("targetLanguage" in value) || !isValidText(value.targetLanguage)) {
