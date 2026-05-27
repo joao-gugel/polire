@@ -133,8 +133,7 @@ Para que la actualización automática funcione, cada GitHub Release debe inclui
 | Atajo       | Acción                                     |
 | ----------- | ------------------------------------------ |
 | `Ctrl+Alt+P` | Mostrar u ocultar la paleta globalmente   |
-| `Esc`       | Ocultar la paleta cuando está enfocada     |
-| `Backspace` | Volver fuera de los campos de texto        |
+| `Esc`       | Volver, u ocultar la paleta principal      |
 | `Ctrl+Del`  | Eliminar la nota local seleccionada        |
 
 ## Roadmap

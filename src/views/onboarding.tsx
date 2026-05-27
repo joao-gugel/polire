@@ -33,6 +33,11 @@ export function Onboarding() {
 	useEffect(() => {
 		if (!isActive) return;
 		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") {
+				event.preventDefault();
+				pop();
+				return;
+			}
 			if (event.key === "ArrowDown") {
 				event.preventDefault();
 				setSelected((index) => (index + 1) % optionCount);
@@ -50,11 +55,6 @@ export function Onboarding() {
 					sequence: value.sequence + 1,
 				}));
 				push("ai-settings");
-				return;
-			}
-			if (event.key === "Backspace") {
-				event.preventDefault();
-				pop();
 				return;
 			}
 		};

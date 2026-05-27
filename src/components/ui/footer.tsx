@@ -2,6 +2,7 @@ import { ArrowElbowDownLeftIcon } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 import { HintButton } from "@/components/ui/hint";
 import { useI18n } from "@/hooks/use-i18n";
+import { useNav } from "@/hooks/use-nav";
 import { useUpdateStatus } from "@/hooks/use-update-status";
 import polireMark from "../../../assets/brand/polire-mark.svg";
 
@@ -21,7 +22,12 @@ function dispatchEnter() {
 
 export function Footer({ additionalHint }: FooterProps) {
 	const { t } = useI18n();
+	const { current, pop } = useNav();
 	const availableVersion = useUpdateStatus();
+	const isRootView = current === "palette";
+	const handleEscapeAction = isRootView
+		? () => void window.api.window.hide()
+		: pop;
 	return (
 		<footer className="flex items-center justify-between border-zinc-900/8 border-t bg-zinc-50/40 px-4 py-3 dark:border-white/10 dark:bg-black/20">
 			<div className="flex items-center gap-2.5">
@@ -52,8 +58,8 @@ export function Footer({ additionalHint }: FooterProps) {
 					<span className="px-1 text-zinc-300 dark:text-zinc-600">|</span>
 				)}
 				<HintButton
-					onClick={() => void window.api.window.hide()}
-					label={t("common.close")}
+					onClick={handleEscapeAction}
+					label={t(isRootView ? "common.close" : "common.back")}
 					kbd="esc"
 				/>
 				<span className="px-1 text-zinc-300 dark:text-zinc-600">|</span>

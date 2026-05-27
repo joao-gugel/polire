@@ -58,6 +58,11 @@ export function Palette() {
 	useEffect(() => {
 		if (!isActive) return;
 		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") {
+				event.preventDefault();
+				void window.api.window.hide();
+				return;
+			}
 			if (event.key === "ArrowDown") {
 				event.preventDefault();
 				setSelected((index) => (index + 1) % options.length);

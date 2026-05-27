@@ -71,7 +71,7 @@ export function TransformationResult({
 	useEffect(() => {
 		if (current !== activeView) return;
 		const handler = (event: KeyboardEvent) => {
-			if (event.key === "Backspace") {
+			if (event.key === "Escape") {
 				event.preventDefault();
 				pop();
 				return;

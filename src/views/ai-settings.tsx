@@ -68,9 +68,7 @@ export function AiSettings() {
 			}
 		};
 		const handleKeyDown = async (event: KeyboardEvent) => {
-			const inInput = event.target === inputRef.current;
-
-			if (event.key === "Backspace" && !inInput) {
+			if (event.key === "Escape") {
 				event.preventDefault();
 				pop();
 				return;

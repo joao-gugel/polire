@@ -133,8 +133,7 @@ For auto-update to function, each GitHub Release must include the `latest.yml` (
 | Shortcut     | Action                          |
 | ------------ | ------------------------------- |
 | `Ctrl+Alt+P` | Toggle the palette globally     |
-| `Esc`        | Hide the palette when focused   |
-| `Backspace`  | Go back outside text fields     |
+| `Esc`        | Go back, or hide the root palette |
 | `Ctrl+Del`   | Delete the selected local note  |
 
 ## Roadmap

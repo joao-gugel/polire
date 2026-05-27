@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { SearchInput } from "@/components/palette/search-input";
 import { TONE_OPTIONS, type ToneOption } from "@/components/tone-target/tones";
 import { Footer } from "@/components/ui/footer";
-import { HintButton } from "@/components/ui/hint";
-import { Kbd } from "@/components/ui/kbd";
 import { OptionItem, OptionItemIcon } from "@/components/ui/option-item";
 import { useCorrection } from "@/hooks/use-correction";
 import { useI18n } from "@/hooks/use-i18n";
@@ -32,7 +30,7 @@ export function ToneTarget() {
 	useEffect(() => {
 		if (!isActive) return;
 		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.ctrlKey && event.key.toLowerCase() === "b") {
+			if (event.key === "Escape") {
 				event.preventDefault();
 				pop();
 				return;
@@ -95,21 +93,7 @@ export function ToneTarget() {
 					);
 				})}
 			</div>
-			<Footer
-				additionalHint={
-					<HintButton
-						onClick={pop}
-						label={t("common.back")}
-						keys={
-							<span className="inline-flex items-center gap-0.5">
-								<Kbd>ctrl</Kbd>
-								<span className="text-zinc-400 dark:text-zinc-500">+</span>
-								<Kbd>b</Kbd>
-							</span>
-						}
-					/>
-				}
-			/>
+			<Footer />
 		</>
 	);
 }

@@ -41,6 +41,11 @@ export function Settings() {
 	useEffect(() => {
 		if (!isActive) return;
 		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") {
+				event.preventDefault();
+				pop();
+				return;
+			}
 			if (event.key === "ArrowDown") {
 				event.preventDefault();
 				setSelected((index) => (index + 1) % TOTAL_ITEMS);
@@ -69,11 +74,6 @@ export function Settings() {
 				}
 				const nextLocale = LOCALES[selected - LANGUAGE_INDEX_OFFSET];
 				setLocale(nextLocale);
-				return;
-			}
-			if (event.key === "Backspace") {
-				event.preventDefault();
-				pop();
 				return;
 			}
 		};

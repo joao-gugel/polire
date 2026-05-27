@@ -26,13 +26,6 @@ function loadRenderer(window: BrowserWindow) {
 	return window.loadFile(INDEX_HTML);
 }
 
-/** Hide the window when Esc is pressed while it has focus. */
-function hideOnEscape(_event: Electron.Event, input: Electron.Input) {
-	if (input.type !== "keyDown") return;
-	if (input.key !== "Escape") return;
-	win?.hide();
-}
-
 /** Show and focus the window. No-op if it hasn't been created yet. */
 export function showWindow() {
 	if (!win) return;
@@ -88,7 +81,6 @@ export function createWindow() {
 		...windowsAppearance,
 	});
 	loadRenderer(win);
-	win.webContents.on("before-input-event", hideOnEscape);
 	win.on("close", (event) => {
 		if (isQuitting) return;
 		event.preventDefault();

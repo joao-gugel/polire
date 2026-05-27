@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { HintButton } from "@/components/ui/hint";
 import { HintsScroll } from "@/components/ui/transformation-result/hints-scroll";
 import { useI18n } from "@/hooks/use-i18n";
+import { useNav } from "@/hooks/use-nav";
 import type { TransformHint } from "../../../../electron/modules/ai/types";
 
 type ResultFooterProps = {
@@ -18,6 +19,7 @@ export function ResultFooter({
 	hints,
 }: ResultFooterProps) {
 	const { t } = useI18n();
+	const { pop } = useNav();
 	return (
 		<div className="border-zinc-900/8 border-t bg-zinc-50/40 dark:border-white/10 dark:bg-black/20">
 			<AnimatePresence initial={false}>
@@ -49,11 +51,7 @@ export function ResultFooter({
 					)}
 				</div>
 				<div className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300">
-					<HintButton
-						onClick={() => void window.api.window.hide()}
-						label={t("common.close")}
-						kbd="esc"
-					/>
+					<HintButton onClick={pop} label={t("common.back")} kbd="esc" />
 				</div>
 			</div>
 		</div>
