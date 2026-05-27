@@ -16,8 +16,6 @@ type LanguageListProps = {
 	onSelect: (locale: Locale) => void;
 };
 
-export const LANGUAGE_OPTIONS = LOCALES;
-
 export function LanguageList({
 	activeLocale,
 	selected,
@@ -29,7 +27,7 @@ export function LanguageList({
 	const { t } = useI18n();
 	return (
 		<div className="flex flex-col gap-0.5">
-			{LANGUAGE_OPTIONS.map((locale, index) => {
+			{LOCALES.map((locale, index) => {
 				const navigationIndex = index + navigationIndexOffset;
 				return (
 					<OptionItem

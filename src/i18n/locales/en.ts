@@ -4,6 +4,7 @@ export const en: Messages = {
 	common: {
 		close: "Close",
 		send: "Send",
+		back: "Back",
 		copy: "Copy",
 		copied: "Copied",
 		copyText: "Copy text",
@@ -14,6 +15,7 @@ export const en: Messages = {
 		disabledAiHint: "Configure AI to use",
 		options: {
 			correction: "Improve text",
+			tone: "Change tone",
 			translation: "Translate",
 			saveNote: "Save note",
 			openNotes: "Open notes",
@@ -68,6 +70,20 @@ export const en: Messages = {
 		resultLabel: "Improved",
 		error: "Could not improve the text. Check your API key.",
 	},
+	tone: {
+		title: "Tone: {{name}}",
+	},
+	toneTarget: {
+		title: "Change tone",
+		tones: {
+			professional: "Professional",
+			casual: "Casual",
+			friendly: "Friendly",
+			concise: "Concise",
+			persuasive: "Persuasive",
+			playful: "Playful",
+		},
+	},
 	translation: {
 		title: "Translate",
 		resultLabel: "Translation",
@@ -109,5 +125,25 @@ export const en: Messages = {
 	result: {
 		showChanges: "Show changes ({{count}})",
 		hideChanges: "Hide changes",
+	},
+	tray: {
+		open: "Open",
+		quit: "Quit",
+	},
+	footer: {
+		downloadUpdate: "Download update",
+	},
+	transforming: {
+		messages: ["Polishing...", "Refining...", "Thinking...", "Working..."],
+	},
+	update: {
+		available: {
+			title: "New Polire version available",
+			body: "Version {{version}} is out. Click to download.",
+		},
+		ready: {
+			title: "Update ready",
+			body: "Polire {{version}} will be installed when you quit the app.",
+		},
 	},
 };

@@ -42,16 +42,22 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Linux (.deb)
+          - name: Linux (AppImage + .deb)
             os: ubuntu-latest
             script: package:linux
-            artifact: linux-deb
-            files: release/*.deb
+            artifact: linux
+            files: |
+              release/*.AppImage
+              release/*.deb
+              release/latest-linux.yml
           - name: Windows (.exe)
             os: windows-latest
             script: package:win
-            artifact: windows-exe
-            files: release/*.exe
+            artifact: windows
+            files: |
+              release/*.exe
+              release/*.exe.blockmap
+              release/latest.yml
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout

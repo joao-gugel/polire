@@ -6,8 +6,14 @@
 
 <p align="center">Open-source desktop writing assistant for clearer writing, translation, and quick notes.</p>
 
+<p align="center">
+  English |
+  <a href="docs/README.pt-BR.md">Português (Brasil)</a> |
+  <a href="docs/README.es.md">Español</a>
+</p>
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release: v0.1.0](https://img.shields.io/badge/Release-v0.1.0-2ea44f.svg)](https://github.com/joao-gugel/polire/releases/tag/v0.1.0)
+[![Release: v0.2.0](https://img.shields.io/badge/Release-v0.2.0-2ea44f.svg)](https://github.com/joao-gugel/polire/releases/tag/v0.2.0)
 [![Downloads](https://img.shields.io/badge/Download-Windows%20%7C%20Linux-blue.svg)](#download)
 
 Polire is a small desktop app for people who write in a non-native language, or simply want to polish text without breaking their flow. Open it from anywhere with a global shortcut, paste or write text, then correct it, translate it, or save it as a local note.
@@ -16,12 +22,13 @@ Polire is a small desktop app for people who write in a non-native language, or 
 
 ## Download
 
-Polire `v0.1.0` is available for Windows and Debian-based Linux distributions.
+Polire `v0.2.0` is available for Windows and Linux.
 
-| Platform | Download | Notes |
-| -------- | -------- | ----- |
-| Windows x64 | [Installer `.exe`](https://github.com/joao-gugel/polire/releases/download/v0.1.0/Polire-Setup-0.1.0-x64.exe) | Starts with Windows after installation; currently unsigned. |
-| Linux x64 (Debian/Ubuntu) | [Package `.deb`](https://github.com/joao-gugel/polire/releases/download/v0.1.0/Polire-0.1.0-amd64.deb) | X11 is recommended for reliable global shortcuts. |
+| Platform | Download | Auto-update | Notes |
+| -------- | -------- | ----------- | ----- |
+| Windows x64 | [Installer `.exe`](https://github.com/joao-gugel/polire/releases/download/v0.2.0/Polire-Setup-0.2.0-x64.exe) | Yes | Starts with Windows after installation; currently unsigned. |
+| Linux x64 (AppImage) | [`.AppImage`](https://github.com/joao-gugel/polire/releases) | Yes | Single executable; recommended for receiving updates. |
+| Linux x64 (Debian/Ubuntu) | [Package `.deb`](https://github.com/joao-gugel/polire/releases/download/v0.2.0/Polire-0.2.0-amd64.deb) | No (manual) | Updates must be installed manually with a new `.deb`. |
 
 All published versions and release notes are available on the [Releases page](https://github.com/joao-gugel/polire/releases).
 
@@ -30,7 +37,7 @@ All published versions and release notes are available on the [Releases page](ht
 After downloading the Debian package:
 
 ```bash
-sudo apt install ./Polire-0.1.0-amd64.deb
+sudo apt install ./Polire-0.2.0-amd64.deb
 ```
 
 The Windows build is not code-signed yet, so Windows may show an unknown publisher warning during installation.
@@ -38,13 +45,15 @@ The Windows build is not code-signed yet, so Windows may show an unknown publish
 ## Features
 
 - Improve grammar, spelling, and clarity with a before-and-after result view.
-- Translate text to English using your selected AI provider.
+- Change text tone with professional, casual, friendly, concise, persuasive, and playful options.
+- Translate text to a selected target language using your chosen AI provider.
 - Save quick notes locally and edit them inside the app.
 - Bring the palette up from anywhere with `Ctrl+Alt+P`.
 - Keep the app out of the way in the system tray.
 - Start Polire in the system tray when you sign in to Windows.
 - Choose between OpenAI, Anthropic, Google Gemini, and DeepSeek.
 - Configure your own API key locally instead of relying on a hosted Polire account.
+- Use the interface in English, Portuguese (Brazil), or Spanish.
 - Use light and dark themes.
 
 ## Local-first AI
@@ -90,30 +99,43 @@ bun run build
 ### Package locally
 
 ```bash
-bun run package:linux
-bun run package:win
+bun run package:linux         # AppImage + .deb in release/
+bun run package:win           # NSIS .exe in release/
+bun run package:linux:flatpak # .flatpak (requires flatpak + flatpak-builder)
 ```
 
-`package:linux` creates a `.deb` package and `package:win` creates an NSIS `.exe` installer in `release/`. Build the Windows installer on Windows; GitHub Actions handles both operating systems for tagged releases.
+Build the Windows installer on Windows; GitHub Actions handles both operating systems for tagged releases.
 
 ### Publish a release
 
 The release workflow builds installers and creates a GitHub Release when a version tag is pushed. The tag must match the version in `package.json`.
 
 ```bash
-git tag v0.1.1
-git push origin v0.1.1
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
 Update `package.json` to the matching version before creating a new tag. Windows releases are not code-signed yet.
+
+### Auto-update
+
+Polire ships with [`electron-updater`](https://www.electron.build/auto-update) wired to GitHub Releases. At runtime the app checks the release feed once at launch and every four hours, downloads new versions in background, and applies them on quit (a system notification confirms when the update is ready).
+
+Per platform:
+
+- **Windows (NSIS)**: full support. The new installer is downloaded, hash-verified, and applied silently when the app quits. Unsigned installs trigger SmartScreen on first install, but updates afterwards stay quiet.
+- **Linux AppImage**: full support. The AppImage replaces itself in-place; the user only needs to relaunch.
+- **Linux `.deb`**: no auto-update (limitation of `electron-updater`). Users must download and install new `.deb` releases manually.
+- **Linux Flatpak**: not driven by `electron-updater`. Distribute via Flathub; the Flatpak runtime handles updates on the user's machine.
+
+For auto-update to function, each GitHub Release must include the `latest.yml` (Windows) and `latest-linux.yml` (Linux) metadata files alongside the installers. The release workflow handles this automatically; if publishing manually, run `electron-builder --publish always` with `GH_TOKEN` set.
 
 ## Default Shortcuts
 
 | Shortcut     | Action                          |
 | ------------ | ------------------------------- |
 | `Ctrl+Alt+P` | Toggle the palette globally     |
-| `Esc`        | Hide the palette when focused   |
-| `Backspace`  | Go back outside text fields     |
+| `Esc`        | Go back, or hide the root palette |
 | `Ctrl+Del`   | Delete the selected local note  |
 
 ## Roadmap

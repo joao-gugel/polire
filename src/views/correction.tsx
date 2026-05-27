@@ -6,10 +6,15 @@ export function Correction() {
 	const { t } = useI18n();
 	const { state } = useCorrection();
 
+	const title =
+		state.tone === "preserve"
+			? t("correction.title")
+			: t("tone.title", { name: t(`toneTarget.tones.${state.tone}`) });
+
 	return (
 		<TransformationResult
 			activeView="correction"
-			title={t("correction.title")}
+			title={title}
 			originalLabel={t("common.original")}
 			resultLabel={t("correction.resultLabel")}
 			original={state.original}

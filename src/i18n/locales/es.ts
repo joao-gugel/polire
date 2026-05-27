@@ -4,6 +4,7 @@ export const es: Messages = {
 	common: {
 		close: "Cerrar",
 		send: "Enviar",
+		back: "Volver",
 		copy: "Copiar",
 		copied: "Copiado",
 		copyText: "Copiar texto",
@@ -14,6 +15,7 @@ export const es: Messages = {
 		disabledAiHint: "Configura la IA para usar",
 		options: {
 			correction: "Corregir texto",
+			tone: "Cambiar tono",
 			translation: "Traducir",
 			saveNote: "Guardar nota",
 			openNotes: "Abrir notas",
@@ -68,6 +70,20 @@ export const es: Messages = {
 		resultLabel: "Corregido",
 		error: "No se pudo corregir el texto. Verifica tu clave de API.",
 	},
+	tone: {
+		title: "Tono: {{name}}",
+	},
+	toneTarget: {
+		title: "Cambiar tono",
+		tones: {
+			professional: "Profesional",
+			casual: "Casual",
+			friendly: "Amigable",
+			concise: "Conciso",
+			persuasive: "Persuasivo",
+			playful: "Juguetón",
+		},
+	},
 	translation: {
 		title: "Traducir",
 		resultLabel: "Traducción",
@@ -109,5 +125,25 @@ export const es: Messages = {
 	result: {
 		showChanges: "Ver cambios ({{count}})",
 		hideChanges: "Ocultar cambios",
+	},
+	tray: {
+		open: "Abrir",
+		quit: "Salir",
+	},
+	footer: {
+		downloadUpdate: "Descargar actualización",
+	},
+	transforming: {
+		messages: ["Puliendo...", "Refinando...", "Pensando...", "Trabajando..."],
+	},
+	update: {
+		available: {
+			title: "Nueva versión de Polire disponible",
+			body: "La versión {{version}} ya salió. Haz clic para descargar.",
+		},
+		ready: {
+			title: "Actualización lista",
+			body: "Polire {{version}} se instalará cuando cierres la aplicación.",
+		},
 	},
 };

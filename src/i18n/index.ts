@@ -1,9 +1,9 @@
 /**
  * i18n state — persists the user choice and exposes a `t()` resolver. The
- * initial locale comes from `localStorage` (when the user has picked one) or
- * from the browser/system language, falling back to English when no match is
- * found. The `document.documentElement.lang` attribute is updated whenever the
- * locale changes so the OS spellchecker and other tooling pick up the switch.
+ * initial locale comes from the main-process settings file (loaded sync via
+ * preload) or from the browser/system language, falling back to English when
+ * no match is found. The `document.documentElement.lang` attribute is updated
+ * whenever the locale changes so the OS spellchecker picks up the switch.
  */
 
 import { en } from "@/i18n/locales/en";
@@ -11,8 +11,6 @@ import { es } from "@/i18n/locales/es";
 import { type Messages, ptBR } from "@/i18n/locales/pt-BR";
 
 export type Locale = "pt-BR" | "en" | "es";
-
-const STORAGE_KEY = "polire:locale";
 
 const MESSAGES: Record<Locale, Messages> = {
 	"pt-BR": ptBR,
@@ -51,16 +49,17 @@ function detectSystemLocale(): Locale {
 
 /** Reads the persisted locale, falling back to the detected system locale. */
 export function getStoredLocale(): Locale {
-	if (typeof localStorage === "undefined") return detectSystemLocale();
-	const stored = localStorage.getItem(STORAGE_KEY);
+	const stored = window.api?.settings.initial.locale;
 	if (isLocale(stored)) return stored;
 	return detectSystemLocale();
 }
 
 /** Persists the chosen locale and updates the document root immediately. */
 export function setStoredLocale(locale: Locale) {
-	localStorage.setItem(STORAGE_KEY, locale);
 	applyLocale(locale);
+	window.api?.settings
+		.setLocale(locale)
+		.catch((err) => console.error("Failed to persist locale", err));
 }
 
 function applyLocale(locale: Locale) {

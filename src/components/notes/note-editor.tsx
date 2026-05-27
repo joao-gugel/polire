@@ -1,7 +1,7 @@
 import type { KeyboardEvent as ReactKeyboardEvent, RefObject } from "react";
 import { RelativeDate } from "@/components/notes/relative-date";
 import { useI18n } from "@/hooks/use-i18n";
-import type { Note } from "../../../electron/notes/types";
+import type { Note } from "../../../electron/modules/notes/types";
 
 type NoteEditorProps = {
 	note: Note | null;

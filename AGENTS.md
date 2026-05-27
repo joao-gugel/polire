@@ -6,7 +6,7 @@ Guidance for AI agents (and humans) contributing to this repository.
 
 **Polire** is a desktop typing assistant that helps users write better text — primarily targeted at people writing in a non-native language.
 
-The app is designed to feel ambient: it runs in the system tray, stays out of the way, and is summoned with a global hotkey (`Ctrl+Alt+P`). When dismissed (Esc or hotkey again) it hides back into the tray rather than quitting.
+The app is designed to feel ambient: it runs in the system tray, stays out of the way, and is summoned with a global hotkey (`Ctrl+Alt+P`). From the root palette, `Esc` or the hotkey hides it back into the tray rather than quitting; on secondary views, `Esc` navigates back.
 
 The product name is **Polire**.
 
@@ -37,14 +37,19 @@ assets/
 ├── app/          # native app icon master + Linux size variants
 └── tray/         # compact status-area icons (1x and 2x)
 electron/
-├── ai/            # AI prompts, settings, encrypted keys, execution + IPC
-├── notes/         # Markdown note persistence + IPC
-├── ipc/           # validation shared by main-process IPC handlers
-├── constants.ts   # paths, window size, hotkey, app name
-├── window.ts      # window lifecycle: create, show, toggle, quit, Esc handler
-├── tray.ts        # system tray icon + context menu
-├── main.ts        # entry: whenReady wiring + global shortcuts
-└── preload.ts     # renderer ↔ main bridge (exposes `window.api`)
+├── ipc/                     # shared IPC sender authorization + handler registration
+├── modules/
+│   ├── ai/                  # AI prompts, credentials, execution, validation + bridge API
+│   ├── app/                 # application-level renderer requests (external links)
+│   ├── notes/               # Markdown note persistence, validation + bridge API
+│   ├── settings/            # persisted application settings + bridge API
+│   ├── tray/                # system tray lifecycle, validation + bridge API
+│   ├── update/              # update status, notifications, checks + bridge API
+│   └── window/              # window lifecycle, validation + bridge API
+├── constants.ts             # shared paths, dimensions, hotkey and URLs
+├── preload-api.ts           # composed renderer-facing bridge contract types
+├── preload.ts               # bridge entry: exposes module APIs on `window.api`
+└── main.ts                  # entry: startup wiring + global shortcuts
 src/
 ├── app.tsx                  # shell: wraps NavProvider + AnimatePresence + view renderer
 ├── main.tsx                 # React entry — mounts <App /> into #root
@@ -79,7 +84,7 @@ vite.config.ts     # Vite + plugins (React, Tailwind, Electron)
 
 `assets/` contains native runtime resources. Any future packaging configuration must include this directory so window and tray icons remain available outside development.
 
-Module-level state in `electron/` is intentional: `win` and `isQuitting` live as `let` bindings inside `window.ts` and are mutated by exported functions. Don't pull them out into a shared store — the encapsulation is the point.
+Module-level state in `electron/` is intentional: `win` and `isQuitting` live as `let` bindings inside `modules/window/manager.ts` and are mutated by exported functions. Don't pull them out into a shared store — the encapsulation is the point.
 
 ### Internationalization
 

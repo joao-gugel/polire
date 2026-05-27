@@ -1,5 +1,5 @@
 import { createContext, type ReactNode, useState } from "react";
-import type { Note } from "../../electron/notes/types";
+import type { Note } from "../../electron/modules/notes/types";
 
 export type NotesContextValue = {
 	notes: Note[];

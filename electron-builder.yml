@@ -10,9 +10,19 @@ files:
   - assets/**/*
   - package.json
   - LICENSE
+publish:
+  provider: github
+  owner: joao-gugel
+  repo: polire
 linux:
   target:
+    - target: AppImage
+      arch:
+        - x64
     - target: deb
+      arch:
+        - x64
+    - target: flatpak
       arch:
         - x64
   category: Utility
@@ -21,6 +31,9 @@ linux:
   artifactName: ${productName}-${version}-${arch}.${ext}
 deb:
   maintainer: Joao V Gugel <gugel@gugelabs.com>
+flatpak:
+  runtimeVersion: "23.08"
+  baseVersion: "23.08"
 win:
   target:
     - target: nsis

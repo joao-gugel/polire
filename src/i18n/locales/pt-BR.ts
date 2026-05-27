@@ -2,6 +2,7 @@ export type Messages = {
 	common: {
 		close: string;
 		send: string;
+		back: string;
 		copy: string;
 		copied: string;
 		copyText: string;
@@ -12,6 +13,7 @@ export type Messages = {
 		disabledAiHint: string;
 		options: {
 			correction: string;
+			tone: string;
 			translation: string;
 			saveNote: string;
 			openNotes: string;
@@ -64,6 +66,20 @@ export type Messages = {
 		resultLabel: string;
 		error: string;
 	};
+	tone: {
+		title: string;
+	};
+	toneTarget: {
+		title: string;
+		tones: {
+			professional: string;
+			casual: string;
+			friendly: string;
+			concise: string;
+			persuasive: string;
+			playful: string;
+		};
+	};
 	translation: {
 		title: string;
 		resultLabel: string;
@@ -106,12 +122,33 @@ export type Messages = {
 		showChanges: string;
 		hideChanges: string;
 	};
+	tray: {
+		open: string;
+		quit: string;
+	};
+	footer: {
+		downloadUpdate: string;
+	};
+	transforming: {
+		messages: string[];
+	};
+	update: {
+		available: {
+			title: string;
+			body: string;
+		};
+		ready: {
+			title: string;
+			body: string;
+		};
+	};
 };
 
 export const ptBR: Messages = {
 	common: {
 		close: "Fechar",
 		send: "Enviar",
+		back: "Voltar",
 		copy: "Copiar",
 		copied: "Copiado",
 		copyText: "Copiar texto",
@@ -122,6 +159,7 @@ export const ptBR: Messages = {
 		disabledAiHint: "Configure a IA para usar",
 		options: {
 			correction: "Corrigir texto",
+			tone: "Mudar tonalidade",
 			translation: "Traduzir",
 			saveNote: "Salvar nota",
 			openNotes: "Abrir notas",
@@ -176,6 +214,20 @@ export const ptBR: Messages = {
 		resultLabel: "Corrigido",
 		error: "Não foi possível corrigir o texto. Verifique sua API key.",
 	},
+	tone: {
+		title: "Tom: {{name}}",
+	},
+	toneTarget: {
+		title: "Mudar tonalidade",
+		tones: {
+			professional: "Profissional",
+			casual: "Casual",
+			friendly: "Amigável",
+			concise: "Conciso",
+			persuasive: "Persuasivo",
+			playful: "Brincalhão",
+		},
+	},
 	translation: {
 		title: "Traduzir",
 		resultLabel: "Tradução",
@@ -217,5 +269,25 @@ export const ptBR: Messages = {
 	result: {
 		showChanges: "Ver mudanças ({{count}})",
 		hideChanges: "Ocultar mudanças",
+	},
+	tray: {
+		open: "Abrir",
+		quit: "Sair",
+	},
+	footer: {
+		downloadUpdate: "Baixar atualização",
+	},
+	transforming: {
+		messages: ["Polindo...", "Refinando...", "Pensando...", "Trabalhando..."],
+	},
+	update: {
+		available: {
+			title: "Nova versão do Polire disponível",
+			body: "A versão {{version}} já saiu. Clique para baixar.",
+		},
+		ready: {
+			title: "Atualização pronta",
+			body: "Polire {{version}} será instalado quando você fechar o app.",
+		},
 	},
 };

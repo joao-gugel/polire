@@ -80,7 +80,7 @@ export function OptionItem({
 			ref={buttonRef}
 			type="button"
 			onClick={handleClick}
-			onMouseEnter={onHover}
+			onMouseMove={onHover}
 			aria-disabled={disabled || undefined}
 			animate={confirmationControls}
 			whileTap={disabled ? undefined : { scale: 0.965 }}

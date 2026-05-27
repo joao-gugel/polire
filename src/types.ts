@@ -19,6 +19,7 @@ export type View =
 	| "onboarding"
 	| "ai-settings"
 	| "correction"
+	| "tone-target"
 	| "translation-target"
 	| "translation"
 	| "notes";

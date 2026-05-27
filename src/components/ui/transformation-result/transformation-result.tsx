@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/transformation-result/result-pane";
 import { useNav } from "@/hooks/use-nav";
 import type { View } from "@/types";
-import type { TransformHint } from "../../../../electron/ai/types";
+import type { TransformHint } from "../../../../electron/modules/ai/types";
 
 type TransformationResultProps = {
 	activeView: View;
@@ -71,7 +71,7 @@ export function TransformationResult({
 	useEffect(() => {
 		if (current !== activeView) return;
 		const handler = (event: KeyboardEvent) => {
-			if (event.key === "Backspace") {
+			if (event.key === "Escape") {
 				event.preventDefault();
 				pop();
 				return;

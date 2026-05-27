@@ -68,7 +68,7 @@ export function Notes() {
 	useEffect(() => {
 		if (!isActive) return;
 		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.key === "Backspace" && event.target !== textareaRef.current) {
+			if (event.key === "Escape") {
 				event.preventDefault();
 				pop();
 				return;

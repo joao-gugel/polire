@@ -9,13 +9,17 @@ type SearchInputProps = {
 	value: string;
 	onChange: (value: string) => void;
 	placeholder?: string;
+	autoFocus?: boolean;
 };
 
 function requestResizeForPaletteInput(extraHeight: number) {
-	if (typeof window === "undefined" || !window.api?.resizeForPaletteInput) {
+	if (
+		typeof window === "undefined" ||
+		!window.api?.window.resizeForPaletteInput
+	) {
 		return;
 	}
-	void window.api.resizeForPaletteInput(extraHeight);
+	void window.api.window.resizeForPaletteInput(extraHeight);
 }
 
 function useWindowResizeForGrowingInput(
@@ -47,6 +51,7 @@ export function SearchInput({
 	value,
 	onChange,
 	placeholder,
+	autoFocus = true,
 }: SearchInputProps) {
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 	useWindowResizeForGrowingInput(textareaRef);
@@ -60,7 +65,7 @@ export function SearchInput({
 		<textarea
 			ref={textareaRef}
 			// biome-ignore lint/a11y/noAutofocus: palette is keyboard-first; focus must land on the input on open.
-			autoFocus
+			autoFocus={autoFocus}
 			rows={1}
 			value={value}
 			onChange={(event) => onChange(event.target.value)}

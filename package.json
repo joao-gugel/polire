@@ -1,7 +1,7 @@
 {
 	"name": "polire",
 	"private": true,
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Desktop writing assistant for clearer writing, translation, and quick notes.",
 	"author": {
 		"name": "Joao V Gugel",
@@ -14,8 +14,9 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc -b && vite build",
-		"package:linux": "bun run build && electron-builder --linux deb --x64 --publish never",
+		"package:linux": "bun run build && electron-builder --linux AppImage deb --x64 --publish never",
 		"package:win": "bun run build && electron-builder --win nsis --x64 --publish never",
+		"package:linux:flatpak": "bun run build && electron-builder --linux flatpak --x64 --publish never",
 		"preview": "vite preview",
 		"format": "bunx --bun @biomejs/biome check --write .",
 		"test": "bun test",
@@ -32,6 +33,7 @@
 		"@phosphor-icons/react": "^2.1.10",
 		"ai": "^6.0.191",
 		"date-fns": "^4.3.0",
+		"electron-updater": "^6.8.3",
 		"motion": "^12.40.0",
 		"react": "^19.2.6",
 		"react-dom": "^19.2.6"

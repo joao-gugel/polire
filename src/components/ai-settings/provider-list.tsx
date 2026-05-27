@@ -1,6 +1,6 @@
 import { PROVIDER_OPTIONS } from "@/components/ai-settings/provider-options";
 import { OptionItem, OptionItemCheck } from "@/components/ui/option-item";
-import type { AiProvider } from "../../../electron/ai/types";
+import type { AiProvider } from "../../../electron/modules/ai/types";
 
 type ProviderListProps = {
 	activeProvider: AiProvider | undefined;

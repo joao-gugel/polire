@@ -1,10 +1,8 @@
 import { SparkleIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import {
-	LANGUAGE_OPTIONS,
-	LanguageList,
-} from "@/components/settings/language-list";
-import { THEME_OPTIONS, ThemeList } from "@/components/settings/theme-list";
+import { LanguageList } from "@/components/settings/language-list";
+import { ThemeList } from "@/components/settings/theme-list";
+import { THEME_OPTIONS } from "@/components/settings/theme-options";
 import {
 	OptionItem,
 	OptionItemCaret,
@@ -14,13 +12,14 @@ import { PageLayout } from "@/components/ui/page-layout";
 import { SectionHeader } from "@/components/ui/section-header";
 import { useI18n } from "@/hooks/use-i18n";
 import { useNav } from "@/hooks/use-nav";
+import { LOCALES } from "@/i18n";
 import { getStoredTheme, setTheme, type Theme } from "@/theme";
 
 const SELECTION_LAYOUT_ID = "settings-selection";
 const NAV_INDEX_AI = 0;
 const THEME_INDEX_OFFSET = 1;
 const LANGUAGE_INDEX_OFFSET = THEME_INDEX_OFFSET + THEME_OPTIONS.length;
-const TOTAL_ITEMS = 1 + THEME_OPTIONS.length + LANGUAGE_OPTIONS.length;
+const TOTAL_ITEMS = 1 + THEME_OPTIONS.length + LOCALES.length;
 
 export function Settings() {
 	const { t, locale, setLocale } = useI18n();
@@ -42,6 +41,11 @@ export function Settings() {
 	useEffect(() => {
 		if (!isActive) return;
 		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") {
+				event.preventDefault();
+				pop();
+				return;
+			}
 			if (event.key === "ArrowDown") {
 				event.preventDefault();
 				setSelected((index) => (index + 1) % TOTAL_ITEMS);
@@ -68,13 +72,8 @@ export function Settings() {
 					setActiveTheme(next);
 					return;
 				}
-				const nextLocale = LANGUAGE_OPTIONS[selected - LANGUAGE_INDEX_OFFSET];
+				const nextLocale = LOCALES[selected - LANGUAGE_INDEX_OFFSET];
 				setLocale(nextLocale);
-				return;
-			}
-			if (event.key === "Backspace") {
-				event.preventDefault();
-				pop();
 				return;
 			}
 		};

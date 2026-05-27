@@ -2,7 +2,7 @@ import anthropicLogo from "@/assets/providers/anthropic.png";
 import deepseekLogo from "@/assets/providers/deepseek.png";
 import googleLogo from "@/assets/providers/google-gemini.png";
 import openaiLogo from "@/assets/providers/openai.svg";
-import type { AiProvider } from "../../../electron/ai/types";
+import type { AiProvider } from "../../../electron/modules/ai/types";
 
 export type ProviderOption = {
 	id: AiProvider;
