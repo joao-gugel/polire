@@ -39,6 +39,9 @@ export function Footer({ additionalHint }: FooterProps) {
 				>
 					<img src={polireMark} alt="" className="h-5 w-5" />
 					<p className="text-base text-zinc-700 dark:text-zinc-300">Polire</p>
+					<span className="ml-1 text-xs text-zinc-400 dark:text-zinc-500">
+						v{window.api.app.version}
+					</span>
 				</button>
 				{availableVersion && (
 					<button

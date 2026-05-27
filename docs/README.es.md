@@ -13,7 +13,7 @@
 </p>
 
 [![Licencia: MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg)](../LICENSE)
-[![Versión: v0.1.0](https://img.shields.io/badge/Versi%C3%B3n-v0.1.0-2ea44f.svg)](https://github.com/joao-gugel/polire/releases/tag/v0.1.0)
+[![Versión: v0.2.0](https://img.shields.io/badge/Versi%C3%B3n-v0.2.0-2ea44f.svg)](https://github.com/joao-gugel/polire/releases/tag/v0.2.0)
 [![Descargas](https://img.shields.io/badge/Descarga-Windows%20%7C%20Linux-blue.svg)](#descarga)
 
 Polire es una pequeña aplicación de escritorio para personas que escriben en un idioma no nativo, o que simplemente quieren mejorar un texto sin interrumpir su flujo de trabajo. Ábrela desde cualquier lugar con un atajo global, pega o escribe un texto y luego corrígelo, tradúcelo o guárdalo como una nota local.
@@ -22,13 +22,13 @@ Polire es una pequeña aplicación de escritorio para personas que escriben en u
 
 ## Descarga
 
-Polire `v0.1.0` está disponible para Windows y Linux.
+Polire `v0.2.0` está disponible para Windows y Linux.
 
 | Plataforma | Descarga | Actualización automática | Notas |
 | ---------- | -------- | ------------------------ | ----- |
-| Windows x64 | [Instalador `.exe`](https://github.com/joao-gugel/polire/releases/download/v0.1.0/Polire-Setup-0.1.0-x64.exe) | Sí | Se inicia con Windows después de la instalación; actualmente no está firmado. |
+| Windows x64 | [Instalador `.exe`](https://github.com/joao-gugel/polire/releases/download/v0.2.0/Polire-Setup-0.2.0-x64.exe) | Sí | Se inicia con Windows después de la instalación; actualmente no está firmado. |
 | Linux x64 (AppImage) | [`.AppImage`](https://github.com/joao-gugel/polire/releases) | Sí | Ejecutable único; recomendado para recibir actualizaciones. |
-| Linux x64 (Debian/Ubuntu) | [Paquete `.deb`](https://github.com/joao-gugel/polire/releases/download/v0.1.0/Polire-0.1.0-amd64.deb) | No (manual) | Las actualizaciones deben instalarse manualmente con un nuevo `.deb`. |
+| Linux x64 (Debian/Ubuntu) | [Paquete `.deb`](https://github.com/joao-gugel/polire/releases/download/v0.2.0/Polire-0.2.0-amd64.deb) | No (manual) | Las actualizaciones deben instalarse manualmente con un nuevo `.deb`. |
 
 Todas las versiones publicadas y notas de lanzamiento están disponibles en la [página de Releases](https://github.com/joao-gugel/polire/releases).
 
@@ -37,7 +37,7 @@ Todas las versiones publicadas y notas de lanzamiento están disponibles en la [
 Después de descargar el paquete Debian:
 
 ```bash
-sudo apt install ./Polire-0.1.0-amd64.deb
+sudo apt install ./Polire-0.2.0-amd64.deb
 ```
 
 La versión para Windows aún no está firmada digitalmente, por lo que Windows puede mostrar una advertencia de editor desconocido durante la instalación.
@@ -45,13 +45,15 @@ La versión para Windows aún no está firmada digitalmente, por lo que Windows 
 ## Funciones
 
 - Mejora la gramática, la ortografía y la claridad con una vista de antes y después.
-- Traduce texto al inglés utilizando el proveedor de IA seleccionado.
+- Cambia el tono del texto con opciones profesional, casual, amigable, concisa, persuasiva y divertida.
+- Traduce texto al idioma elegido utilizando el proveedor de IA seleccionado.
 - Guarda notas rápidas localmente y edítalas dentro de la aplicación.
 - Abre la paleta desde cualquier lugar con `Ctrl+Alt+P`.
 - Mantén la aplicación discreta en la bandeja del sistema.
 - Inicia Polire en la bandeja del sistema al iniciar sesión en Windows.
 - Elige entre OpenAI, Anthropic, Google Gemini y DeepSeek.
 - Configura tu propia clave de API localmente, sin depender de una cuenta alojada de Polire.
+- Usa la interfaz en inglés, portugués (Brasil) o español.
 - Usa temas claro y oscuro.
 
 ## IA local-first
@@ -109,8 +111,8 @@ Genera el instalador de Windows en Windows; GitHub Actions se ocupa de ambos sis
 El workflow de releases genera los instaladores y crea una GitHub Release cuando se sube una etiqueta de versión. La etiqueta debe coincidir con la versión de `package.json`.
 
 ```bash
-git tag v0.1.1
-git push origin v0.1.1
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
 Actualiza `package.json` a la versión correspondiente antes de crear una nueva etiqueta. Las versiones de Windows aún no están firmadas digitalmente.

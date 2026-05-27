@@ -13,7 +13,7 @@
 </p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release: v0.1.0](https://img.shields.io/badge/Release-v0.1.0-2ea44f.svg)](https://github.com/joao-gugel/polire/releases/tag/v0.1.0)
+[![Release: v0.2.0](https://img.shields.io/badge/Release-v0.2.0-2ea44f.svg)](https://github.com/joao-gugel/polire/releases/tag/v0.2.0)
 [![Downloads](https://img.shields.io/badge/Download-Windows%20%7C%20Linux-blue.svg)](#download)
 
 Polire is a small desktop app for people who write in a non-native language, or simply want to polish text without breaking their flow. Open it from anywhere with a global shortcut, paste or write text, then correct it, translate it, or save it as a local note.
@@ -22,13 +22,13 @@ Polire is a small desktop app for people who write in a non-native language, or 
 
 ## Download
 
-Polire `v0.1.0` is available for Windows and Linux.
+Polire `v0.2.0` is available for Windows and Linux.
 
 | Platform | Download | Auto-update | Notes |
 | -------- | -------- | ----------- | ----- |
-| Windows x64 | [Installer `.exe`](https://github.com/joao-gugel/polire/releases/download/v0.1.0/Polire-Setup-0.1.0-x64.exe) | Yes | Starts with Windows after installation; currently unsigned. |
+| Windows x64 | [Installer `.exe`](https://github.com/joao-gugel/polire/releases/download/v0.2.0/Polire-Setup-0.2.0-x64.exe) | Yes | Starts with Windows after installation; currently unsigned. |
 | Linux x64 (AppImage) | [`.AppImage`](https://github.com/joao-gugel/polire/releases) | Yes | Single executable; recommended for receiving updates. |
-| Linux x64 (Debian/Ubuntu) | [Package `.deb`](https://github.com/joao-gugel/polire/releases/download/v0.1.0/Polire-0.1.0-amd64.deb) | No (manual) | Updates must be installed manually with a new `.deb`. |
+| Linux x64 (Debian/Ubuntu) | [Package `.deb`](https://github.com/joao-gugel/polire/releases/download/v0.2.0/Polire-0.2.0-amd64.deb) | No (manual) | Updates must be installed manually with a new `.deb`. |
 
 All published versions and release notes are available on the [Releases page](https://github.com/joao-gugel/polire/releases).
 
@@ -37,7 +37,7 @@ All published versions and release notes are available on the [Releases page](ht
 After downloading the Debian package:
 
 ```bash
-sudo apt install ./Polire-0.1.0-amd64.deb
+sudo apt install ./Polire-0.2.0-amd64.deb
 ```
 
 The Windows build is not code-signed yet, so Windows may show an unknown publisher warning during installation.
@@ -45,13 +45,15 @@ The Windows build is not code-signed yet, so Windows may show an unknown publish
 ## Features
 
 - Improve grammar, spelling, and clarity with a before-and-after result view.
-- Translate text to English using your selected AI provider.
+- Change text tone with professional, casual, friendly, concise, persuasive, and playful options.
+- Translate text to a selected target language using your chosen AI provider.
 - Save quick notes locally and edit them inside the app.
 - Bring the palette up from anywhere with `Ctrl+Alt+P`.
 - Keep the app out of the way in the system tray.
 - Start Polire in the system tray when you sign in to Windows.
 - Choose between OpenAI, Anthropic, Google Gemini, and DeepSeek.
 - Configure your own API key locally instead of relying on a hosted Polire account.
+- Use the interface in English, Portuguese (Brazil), or Spanish.
 - Use light and dark themes.
 
 ## Local-first AI
@@ -109,8 +111,8 @@ Build the Windows installer on Windows; GitHub Actions handles both operating sy
 The release workflow builds installers and creates a GitHub Release when a version tag is pushed. The tag must match the version in `package.json`.
 
 ```bash
-git tag v0.1.1
-git push origin v0.1.1
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
 Update `package.json` to the matching version before creating a new tag. Windows releases are not code-signed yet.

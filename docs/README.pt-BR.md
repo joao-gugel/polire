@@ -13,7 +13,7 @@
 </p>
 
 [![Licença: MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-blue.svg)](../LICENSE)
-[![Versão: v0.1.0](https://img.shields.io/badge/Vers%C3%A3o-v0.1.0-2ea44f.svg)](https://github.com/joao-gugel/polire/releases/tag/v0.1.0)
+[![Versão: v0.2.0](https://img.shields.io/badge/Vers%C3%A3o-v0.2.0-2ea44f.svg)](https://github.com/joao-gugel/polire/releases/tag/v0.2.0)
 [![Downloads](https://img.shields.io/badge/Download-Windows%20%7C%20Linux-blue.svg)](#download)
 
 O Polire é um pequeno aplicativo desktop para pessoas que escrevem em um idioma não nativo, ou que simplesmente querem aprimorar um texto sem interromper seu fluxo. Abra-o de qualquer lugar com um atalho global, cole ou escreva um texto e então corrija, traduza ou salve-o como uma nota local.
@@ -22,13 +22,13 @@ O Polire é um pequeno aplicativo desktop para pessoas que escrevem em um idioma
 
 ## Download
 
-O Polire `v0.1.0` está disponível para Windows e Linux.
+O Polire `v0.2.0` está disponível para Windows e Linux.
 
 | Plataforma | Download | Atualização automática | Observações |
 | ---------- | -------- | ---------------------- | ----------- |
-| Windows x64 | [Instalador `.exe`](https://github.com/joao-gugel/polire/releases/download/v0.1.0/Polire-Setup-0.1.0-x64.exe) | Sim | Inicia com o Windows após a instalação; atualmente sem assinatura digital. |
+| Windows x64 | [Instalador `.exe`](https://github.com/joao-gugel/polire/releases/download/v0.2.0/Polire-Setup-0.2.0-x64.exe) | Sim | Inicia com o Windows após a instalação; atualmente sem assinatura digital. |
 | Linux x64 (AppImage) | [`.AppImage`](https://github.com/joao-gugel/polire/releases) | Sim | Executável único; recomendado para receber atualizações. |
-| Linux x64 (Debian/Ubuntu) | [Pacote `.deb`](https://github.com/joao-gugel/polire/releases/download/v0.1.0/Polire-0.1.0-amd64.deb) | Não (manual) | As atualizações devem ser instaladas manualmente com um novo `.deb`. |
+| Linux x64 (Debian/Ubuntu) | [Pacote `.deb`](https://github.com/joao-gugel/polire/releases/download/v0.2.0/Polire-0.2.0-amd64.deb) | Não (manual) | As atualizações devem ser instaladas manualmente com um novo `.deb`. |
 
 Todas as versões publicadas e notas de lançamento estão disponíveis na [página de Releases](https://github.com/joao-gugel/polire/releases).
 
@@ -37,7 +37,7 @@ Todas as versões publicadas e notas de lançamento estão disponíveis na [pág
 Após baixar o pacote Debian:
 
 ```bash
-sudo apt install ./Polire-0.1.0-amd64.deb
+sudo apt install ./Polire-0.2.0-amd64.deb
 ```
 
 A versão para Windows ainda não é assinada digitalmente, portanto o Windows pode exibir um aviso de editor desconhecido durante a instalação.
@@ -45,13 +45,15 @@ A versão para Windows ainda não é assinada digitalmente, portanto o Windows p
 ## Recursos
 
 - Melhore gramática, ortografia e clareza com uma visualização de antes e depois.
-- Traduza textos para inglês usando o provedor de IA selecionado.
+- Mude a tonalidade do texto com opções profissional, casual, amigável, concisa, persuasiva e brincalhona.
+- Traduza textos para o idioma desejado usando o provedor de IA selecionado.
 - Salve notas rápidas localmente e edite-as dentro do aplicativo.
 - Abra a paleta de qualquer lugar com `Ctrl+Alt+P`.
 - Mantenha o aplicativo discreto na bandeja do sistema.
 - Inicie o Polire na bandeja do sistema ao entrar no Windows.
 - Escolha entre OpenAI, Anthropic, Google Gemini e DeepSeek.
 - Configure sua própria chave de API localmente, sem depender de uma conta hospedada do Polire.
+- Use a interface em inglês, português (Brasil) ou espanhol.
 - Use temas claro e escuro.
 
 ## IA local-first
@@ -109,8 +111,8 @@ Gere o instalador do Windows no Windows; o GitHub Actions cuida dos dois sistema
 O workflow de release gera os instaladores e cria uma GitHub Release quando uma tag de versão é enviada. A tag deve corresponder à versão em `package.json`.
 
 ```bash
-git tag v0.1.1
-git push origin v0.1.1
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
 Atualize `package.json` para a versão correspondente antes de criar uma nova tag. As versões para Windows ainda não são assinadas digitalmente.
